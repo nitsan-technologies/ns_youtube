@@ -1,0 +1,347 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	
+	<sheets>
+		<!--
+			################################
+			  SHEET General Settings
+			################################
+		-->
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.sheet_title</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.listType>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.list_type</label>
+							<onChange>reload</onChange>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.list_type.1</numIndex>
+										<numIndex index="1">single</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.list_type.2</numIndex>
+										<numIndex index="1">playlist</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.list_type.3</numIndex>
+										<numIndex index="1">channel</numIndex>
+									</numIndex>
+								</items>
+								<default>single</default>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.listType>
+					
+					<settings.videourl>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.videourl</label>
+							<displayCond>
+							   <and>
+							      <value1>FIELD:settings.listType:!=:channel</value1>
+							      <value2>FIELD:settings.listType:!=:playlist</value2>
+							   </and>
+							</displayCond>
+							<config>
+								<type>input</type>
+								<size>30</size>
+								<eval>trim,required</eval>
+								<placeholder>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.videourl.placeholder</placeholder>
+							</config>
+						</TCEforms>
+					</settings.videourl>
+					
+					<settings.playlisturl>
+						<TCEforms>	
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.videourl</label>
+							<displayCond>FIELD:settings.listType:=:playlist</displayCond>
+							<config>
+								<type>input</type>
+								<size>30</size>
+								<eval>trim,required</eval>
+								<placeholder>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.playlisturl.placeholder</placeholder>
+							</config>
+						</TCEforms>
+					</settings.playlisturl>
+					
+					<settings.channeltype>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.channeltype</label>
+							<displayCond>FIELD:settings.listType:=:channel</displayCond>
+							<onChange>reload</onChange>
+							<config>
+								<type>radio</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.channeltype.1</numIndex>
+										<numIndex index="1">username</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.channeltype.2</numIndex>
+										<numIndex index="1">id</numIndex>
+									</numIndex>
+								</items>
+								<default>username</default>
+							</config>
+						</TCEforms>
+					</settings.channeltype>
+					
+					<settings.channelname>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.channeltype.channelname</label>
+							<displayCond>
+							   <and>
+							      <value1>FIELD:settings.listType:=:channel</value1>
+							      <value2>FIELD:settings.channeltype:!=:id</value2>
+							   </and>
+							</displayCond>
+							<config>
+								<type>input</type>
+								<size>30</size>
+								<eval>trim,required</eval>
+								<placeholder>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.placeholder.channeltype.channelname</placeholder>
+							</config>
+						</TCEforms>
+					</settings.channelname>
+					
+					<settings.channelid>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.channeltype.channelid</label>
+							<displayCond>
+							   <and>
+							      <value1>FIELD:settings.listType:=:channel</value1>
+							      <value2>FIELD:settings.channeltype:=:id</value2>
+							   </and>
+							</displayCond>
+							<config>
+								<type>input</type>
+								<size>30</size>
+								<eval>trim,required</eval>
+								<placeholder>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.placeholder.channeltype.channelid</placeholder>
+							</config>
+						</TCEforms>
+					</settings.channelid>
+					
+					<settings.layout>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.layout</label>
+							<displayCond>FIELD:settings.listType:IN:playlist,channel</displayCond>
+							<onChange>reload</onChange>
+							<config>
+								<type>radio</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.layout.1</numIndex>
+										<numIndex index="1">playlist</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.layout.2</numIndex>
+										<numIndex index="1">gallery</numIndex>
+									</numIndex>
+								</items>
+								<default>playlist</default>
+							</config>
+						</TCEforms>
+					</settings.layout>
+
+					<settings.showtitle>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.showtitle</label>
+							<displayCond>
+								<and>
+									<value1>FIELD:settings.layout:=:gallery</value1>
+									<or>
+								      	<value1>FIELD:settings.listType:=:channel</value1>
+								      	<value2>FIELD:settings.listType:=:playlist</value2>
+							      	</or>
+								</and>
+							</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.showtitle>
+					
+					<settings.titlecrop>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.titlecrop</label>
+							<displayCond>
+								<and>
+									<value1>FIELD:settings.layout:=:gallery</value1>
+									<or>
+								      	<value1>FIELD:settings.listType:=:channel</value1>
+								      	<value2>FIELD:settings.listType:=:playlist</value2>
+							      	</or>
+								</and>
+							</displayCond>
+							<onChange>reload</onChange>
+							<config>
+								<type>input</type>
+								<eval>int</eval>
+								<range>
+									<lower>1</lower>
+									<upper>1000</upper>
+								</range>
+								<default>35</default>
+								<size>5</size>
+							</config>
+						</TCEforms>
+					</settings.titlecrop>
+
+					<settings.thumbplay>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.thumbplay</label>
+							<displayCond>
+								<and>
+									<value1>FIELD:settings.layout:=:gallery</value1>
+									<or>
+								      	<value1>FIELD:settings.listType:=:channel</value1>
+								      	<value2>FIELD:settings.listType:=:playlist</value2>
+							      	</or>
+								</and>
+							</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.thumbplay>
+
+					<settings.pagesize>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.pagesize</label>
+							<displayCond>
+							   <and>
+							      <value1>FIELD:settings.layout:=:gallery</value1>
+							      <or>
+							      	<value1>FIELD:settings.listType:=:channel</value1>
+							      	<value2>FIELD:settings.listType:=:playlist</value2>
+							      </or>
+							   </and>
+							</displayCond>
+							<config>
+								<type>input</type>
+								<size>30</size>
+								<eval>trim,int</eval>
+								<range>
+									<lower>1</lower>
+									<upper>1000</upper>
+								</range>
+								<default>12</default>
+							</config>
+						</TCEforms>
+					</settings.pagesize>
+
+					<settings.columns>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.columns</label>
+							<displayCond>
+							   <and>
+							      <value1>FIELD:settings.layout:=:gallery</value1>
+							      <or>
+							      	<value1>FIELD:settings.listType:=:channel</value1>
+							      	<value2>FIELD:settings.listType:=:playlist</value2>
+							      </or>
+							   </and>
+							</displayCond>
+							<config>
+								<type>input</type>
+								<size>30</size>
+								<eval>trim,int</eval>
+								<range>
+									<lower>2</lower>
+									<upper>20</upper>
+								</range>
+								<default>4</default>
+							</config>
+						</TCEforms>
+					</settings.columns>
+
+					<settings.showpaging>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.showpaging</label>
+							<displayCond>
+								<and>
+									<value1>FIELD:settings.layout:=:gallery</value1>
+									<or>
+								      	<value1>FIELD:settings.listType:=:channel</value1>
+								      	<value2>FIELD:settings.listType:=:playlist</value2>
+							      	</or>
+								</and>
+							</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.showpaging>
+
+					<settings.insertAbove>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.insert_above</label>
+							<displayCond>
+								<and>
+									<value1>FIELD:settings.layout:=:gallery</value1>
+									<or>
+								      	<value1>FIELD:settings.listType:=:channel</value1>
+								      	<value2>FIELD:settings.listType:=:playlist</value2>
+							      	</or>
+								</and>
+							</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.insertAbove>
+
+					<settings.insertBelow>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.insert_below</label>
+							<displayCond>
+								<and>
+									<value1>FIELD:settings.layout:=:gallery</value1>
+									<or>
+								      	<value1>FIELD:settings.listType:=:channel</value1>
+								      	<value2>FIELD:settings.listType:=:playlist</value2>
+							      	</or>
+								</and>
+							</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.insertBelow>
+
+					<settings.channelsubtext>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.channelsubtext</label>
+							<displayCond>
+							   <and>
+							      <value1>FIELD:settings.layout:=:gallery</value1>
+							      <or>
+							      	<value1>FIELD:settings.listType:=:channel</value1>
+							      	<value2>FIELD:settings.listType:=:playlist</value2>
+							      </or>
+							   </and>
+							</displayCond>
+							<config>
+								<type>input</type>
+								<size>30</size>
+								<eval>trim</eval>
+								<default>Subscribe to my channel</default>
+							</config>
+						</TCEforms>
+					</settings.channelsubtext>
+
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

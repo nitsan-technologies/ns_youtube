@@ -1,0 +1,15 @@
+mod.wizards.newContentElement.wizardItems.plugins {
+	elements {
+		youtube {
+			icon = ../typo3conf/ext/ns_youtube/Resources/Public/Icons/user_plugin_youtube.svg
+			iconIdentifier = ext-ns-youtube-icon
+			title = LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:tx_ns_youtube_domain_model_youtube
+			description = LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:tx_ns_youtube_domain_model_youtube.description
+			tt_content_defValues {
+				CType = list
+				list_type = nsyoutube_youtube
+			}
+		}
+	}
+	show = *
+}

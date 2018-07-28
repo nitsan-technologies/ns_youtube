@@ -1,0 +1,97 @@
+<!-- Main Partial section Starts -->
+<f:if condition="{settings.insertAbove}">
+	<f:render section="Pagination" arguments="{_all}"/>
+</f:if>
+
+<div class="yt-gallery-allthumbs yt-cols-{settings.columns}">
+	<f:for each="{jsonResult.items}" as="item" iteration="i">
+		
+		<f:render section="GalleryListing" arguments="{_all}"/>
+
+		<f:if condition="{settings.columns}">
+			<f:if condition="{i.cycle}%{settings.columns}">
+				<f:else>
+					<f:if condition="{i.isLast}" then="" else="<div class='yt-gallery-rowbreak'></div>" />
+				</f:else>
+			</f:if>
+		</f:if>
+	</f:for>
+</div>
+
+<f:if condition="{settings.insertBelow}">
+	<f:render section="Pagination" arguments="{_all}"/>
+</f:if>
+<!-- Main Partial section Ends -->
+
+
+<!-- Pagination Section-->
+<f:section name="Pagination">
+	<div class="yt-pagination {f:if(condition:'{settings.showpaging}==0', then:'hide')}">
+		<div tabindex="0" role="button" class="yt-pagebutton yt-prev {f:if(condition:prevPageToken,then:'',else:'hide')}" 
+		data-playlistid="{options.playlistId}" 
+		data-pagesize="{options.pageSize}" 
+		data-pagetoken="{prevPageToken}" 
+		data-columns="{settings.columns}" 
+		data-showtitle="{settings.showtitle}" 
+		data-showpaging="{settings.showpaging}" 
+		data-thumbplay="{settings.thumbplay}">
+			<div class="arrow">&laquo;</div> 
+			<div><f:translate key='LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:prev' /></div>
+		</div>
+		<div class="yt-current">1</div><div class="yt-pageseparator"> / </div><div class="yt-totalpages">{totalPages}</div>
+		<div tabindex="0" role="button" class="yt-pagebutton yt-next {f:if(condition:nextPageToken,then:'',else:'hide')}" 
+		data-playlistid="{options.playlistId}" 
+		data-pagesize="{options.pageSize}" 
+		data-pagetoken="{nextPageToken}" 
+		data-columns="{settings.columns}" 
+		data-showtitle="{settings.showtitle}" 
+		data-showpaging="{settings.showpaging}" 
+		data-thumbplay="{settings.thumbplay}">
+			<div><f:translate key='LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:next' /></div>
+			<div class="arrow">&raquo;</div> 
+		</div>
+	</div>
+</f:section>
+
+<!-- Gallery Listing Section-->
+<f:section name="GalleryListing">
+	<div tabindex="0" role="button" 
+			data-videoid="{item.snippet.datavideoid}" class="yt-gallery-thumb">
+		<div class="yt-gallery-img-box">
+			<f:if condition="{item.status.privacyStatus} == 'private'">
+				<f:then>
+					<div class="yt-gallery-img" style="background-image: url('typo3conf/ext/ns_youtube/Resources/Public/Images/private.png')">	
+				</f:then>
+				<f:else>
+					<f:if condition="{item.snippet.thumbnails.high.url}">
+						<f:then>
+							<div class="yt-gallery-img" style="background-image: url('{item.snippet.thumbnails.high.url}')">	
+						</f:then>
+						<f:else>
+							<f:if condition="{item.snippet.thumbnails.default.url}">
+								<div class="yt-gallery-img" style="background-image: url('{item.snippet.thumbnails.default.url}')">
+							</f:if>
+							<f:else>
+								<f:if condition="{item.snippet.thumbnails.medium.url}">
+									<f:then>
+										<div class="yt-gallery-img" style="background-image: url('{item.snippet.thumbnails.medium.url}')">
+									</f:then>
+									<f:else>
+										<div class="yt-gallery-img" style="background-image: url('typo3conf/ext/ns_youtube/Resources/Public/Images/deleted-video-thumb.png')">
+									</f:else>
+								</f:if>
+							</f:else>
+						</f:else>
+					</f:if>
+				</f:else>
+			</f:if>
+				<div class="yt-gallery-playhover">
+					<div class="yt-gallery-playcrutch"></div>
+				</div>
+			</div>
+		</div>
+		<f:if condition="{settings.showtitle}">
+			<div class="yt-gallery-title"><f:format.crop maxCharacters="{settings.titlecrop}">{item.snippet.title}</f:format.crop></div>
+		</f:if>
+	</div>
+</f:section>

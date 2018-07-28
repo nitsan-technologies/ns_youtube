@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-08-03T12:31:30Z" product-name="ns_youtube">
+		<header/>
+		<body>
+			<trans-unit id="add_api_key">
+				<source>Please add YouTube API key from Google at constant.</source>
+			</trans-unit>
+			<trans-unit id="pi1_title">
+				<source>Ns Youtube</source>
+			</trans-unit>
+			<trans-unit id="backend.yes">
+				<source>Yes</source>
+			</trans-unit>
+			<trans-unit id="backend.no">
+				<source>No</source>
+			</trans-unit>
+			<trans-unit id="backend.video_type">
+				<source>Video Types</source>
+			</trans-unit>
+			<trans-unit id="backend.embed_single_video">
+				<source>Embed a single video</source>
+			</trans-unit>
+			<trans-unit id="backend.embed_playlist">
+				<source>Embed a playlist</source>
+			</trans-unit>
+			<trans-unit id="backend.embed_channel">
+				<source>Embed a channel</source>
+			</trans-unit>
+			<trans-unit id="backend.URL">
+				<source>URL</source>
+			</trans-unit>
+			<trans-unit id="backend.layout">
+				<source>Layout</source>
+			</trans-unit>
+			<trans-unit id="backend.subscribation_button">
+				<source>Subscribe Button</source>
+			</trans-unit>
+			<trans-unit id="backend.subscribation_button_text">
+				<source>Subscribe Button Text</source>
+			</trans-unit>
+			<trans-unit id="backend.channel_type">
+				<source>Channel Type</source>
+			</trans-unit>
+			<trans-unit id="backend.user_name">
+				<source>User Name</source>
+			</trans-unit>
+			<trans-unit id="backend.channel_id">
+				<source>Channel ID</source>
+			</trans-unit>
+			<trans-unit id="backend.titlecrop" xml:space="preserve">
+				<source>Length of title (in chars)</source>
+			</trans-unit>
+			<trans-unit id="backend.pagesize">
+				<source>Items per page</source>
+			</trans-unit>
+			<trans-unit id="backend.columns">
+				<source>Columns per row</source>
+			</trans-unit>
+			<trans-unit id="backend.showtitle">
+				<source>Show Title</source>
+			</trans-unit>
+			<trans-unit id="backend.thumbplay">
+				<source>Thumbnail Click Plays Video</source>
+			</trans-unit>
+			<trans-unit id="backend.showpaging">
+				<source>Show Pagination</source>
+			</trans-unit>
+			<trans-unit id="backend.insertAbove">
+				<source>Insert Pagination Above Thumbnails</source>
+			</trans-unit>
+			<trans-unit id="backend.insertBelow">
+				<source>Insert Pagination Below Thumbnails</source>
+			</trans-unit>
+
+			<trans-unit id="tx_ns_youtube_domain_model_youtube">
+				<source>Youtube</source>
+			</trans-unit>
+			<trans-unit id="tx_ns_youtube_domain_model_youtube.description">
+				<source></source>
+			</trans-unit>
+			<trans-unit id="tx_nsyoutube_domain_model_youtube">
+				<source>Youtube</source>
+			</trans-unit>
+			<trans-unit id="video_error">
+				<source>Add proper youtube video URL.</source>
+			</trans-unit>
+			<trans-unit id="gallery_error">
+				<source>Gallery view is not working for given URL</source>
+			</trans-unit>
+			<trans-unit id="playlist_error">
+				<source>Playlist view is not working for given URL</source>
+			</trans-unit>
+			<trans-unit id="prev">
+				<source>Previous</source>
+			</trans-unit>
+			<trans-unit id="next">
+				<source>Next</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

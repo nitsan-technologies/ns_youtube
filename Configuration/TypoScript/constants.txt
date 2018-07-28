@@ -1,0 +1,29 @@
+
+############################
+### CUSTOM SUBCATEGORIES ###
+###########################
+# customsubcategory=100=Main Configuration
+# customsubcategory=110=Gallery Cofiguration
+
+plugin.tx_nsyoutube {
+  view {
+    # cat=plugin.tx_nsyoutube/file; type=string; label=Path to template root (FE)
+    templateRootPath = EXT:ns_youtube/Resources/Private/Templates/
+    # cat=plugin.tx_nsyoutube/file; type=string; label=Path to template partials (FE)
+    partialRootPath = EXT:ns_youtube/Resources/Private/Partials/
+    # cat=plugin.tx_nsyoutube/file; type=string; label=Path to template layouts (FE)
+    layoutRootPath = EXT:ns_youtube/Resources/Private/Layouts/
+  }
+  
+  settings {
+
+    javascript{
+      # cat=plugin.tx_nsyoutube/a; type=boolean; label= LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.jquery
+      jquery = 0
+    }
+
+    # cat=plugin.tx_nsyoutube/100/1; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.api_key
+    apiKey = 
+  }
+
+}

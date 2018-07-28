@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-08-03T12:31:30Z" product-name="ns_youtube">
+		<header/>
+		<body>
+			<trans-unit id="tx_ns_youtube_domain_model_youtube" xml:space="preserve">
+				<source>Youtube</source>
+			</trans-unit>
+			<trans-unit id="tx_ns_youtube_domain_model_youtube.description" xml:space="preserve">
+				<source>Show youtube videos from your TYPO3 site.</source>
+			</trans-unit>
+			<trans-unit id="tx_nsyoutube_domain_model_youtube" xml:space="preserve">
+				<source>Youtube</source>
+			</trans-unit>
+			<trans-unit id="flexform.sheet_title" xml:space="preserve">
+				<source>Settings</source>
+			</trans-unit>
+			<trans-unit id="flexform.apikey" xml:space="preserve">
+				<source>Youtube API Key</source>
+			</trans-unit>
+			<trans-unit id="flexform.list_type" xml:space="preserve">
+				<source>Select video types</source>
+			</trans-unit>
+			<trans-unit id="flexform.list_type.0" xml:space="preserve">
+				<source>Select video types</source>
+			</trans-unit>
+			<trans-unit id="flexform.list_type.1" xml:space="preserve">
+				<source>Embed a single video</source>
+			</trans-unit>
+			<trans-unit id="flexform.list_type.2" xml:space="preserve">
+				<source>Embed a playlist</source>
+			</trans-unit>
+			<trans-unit id="flexform.list_type.3" xml:space="preserve">
+				<source>Embed a channel</source>
+			</trans-unit>
+			<trans-unit id="flexform.list_type.4" xml:space="preserve">
+				<source>Embed a live stream</source>
+			</trans-unit>
+			<trans-unit id="flexform.videourl" xml:space="preserve">
+				<source>Youtube URL</source>
+			</trans-unit>
+			<trans-unit id="flexform.channelname" xml:space="preserve">
+				<source>Add Username</source>
+			</trans-unit>
+			<trans-unit id="flexform.videourl.placeholder" xml:space="preserve">
+				<source>E.g : https://www.youtube.com/watch?v=eXTbnMbnEfU</source>
+			</trans-unit>
+			<trans-unit id="flexform.playlisturl.placeholder" xml:space="preserve">
+				<source>E.g : https://www.youtube.com/watch?v=eXTbnMbnEfU&amp;list=PL-sDBIrOKGOaUXKe3n8w6_N6HaOpRcoiC</source>
+			</trans-unit>
+			<trans-unit id="flexform.layout" xml:space="preserve">
+				<source>Select layout</source>
+			</trans-unit>
+			<trans-unit id="flexform.layout.1" xml:space="preserve">
+				<source>Insert as Playlist</source>
+			</trans-unit>
+			<trans-unit id="flexform.layout.2" xml:space="preserve">
+				<source>Insert as Gallery</source>
+			</trans-unit>
+			<trans-unit id="flexform.channeltype" xml:space="preserve">
+				<source>Select channel type</source>
+			</trans-unit>
+			<trans-unit id="flexform.channeltype.1" xml:space="preserve">
+				<source>By User (e.g. TEDtalksDirector)</source>
+			</trans-unit>
+			<trans-unit id="flexform.channeltype.2" xml:space="preserve">
+				<source>By Channel Id (e.g. UC6riU7xaRItrH_8_P6rYsfQ)</source>
+			</trans-unit>
+			<trans-unit id="flexform.channeltype.channelname" xml:space="preserve">
+				<source>Add username</source>
+			</trans-unit>
+			<trans-unit id="flexform.placeholder.channeltype.channelname" xml:space="preserve">
+				<source>E.g : TEDtalksDirector </source>
+			</trans-unit>
+			<trans-unit id="flexform.placeholder.channeltype.channelid" xml:space="preserve">
+				<source>E.g : UC6riU7xaRItrH_8_P6rYsfQ </source>
+			</trans-unit>
+			<trans-unit id="flexform.channeltype.channelid" xml:space="preserve">
+				<source>Add channel-id </source>
+			</trans-unit>
+			<trans-unit id="settings.jquery" xml:space="preserve">
+				<source>Enable Jquery : If this option is set, then it will add jquery in this site!</source>
+			</trans-unit>
+			<trans-unit id="settings.api_key" xml:space="preserve">
+				<source>API Key (Required): YouTube API key from Google. : https://developers.google.com/youtube/v3/getting-started </source>
+			</trans-unit>
+			<trans-unit id="settings.max_result" xml:space="preserve">
+				<source>maxResults :  Maximum number of items that should be returned in the result set. Acceptable values are 1 to 50, inclusive. The default value is 5.</source>
+			</trans-unit>
+			<trans-unit id="settings.pagesize" xml:space="preserve">
+				<source>Gallery Page Size :  Enter how many thumbnails per page should be shown at once (YouTube allows a maximum of 50 per page).</source>
+			</trans-unit>
+			<trans-unit id="settings.columns" xml:space="preserve">
+				<source>Number of Columns : Enter how many thumbnails can fit per row.</source>
+			</trans-unit>
+			<trans-unit id="settings.showtitle" xml:space="preserve">
+				<source>Show Thumbnail Title : Show titles with each thumbnail.</source>
+			</trans-unit>
+			<trans-unit id="settings.thumbplay" xml:space="preserve">
+				<source>Thumbnail Click Plays Video : Clicking on a gallery thumbnail autoplays the video. Uncheck this and visitors must also click the video's play button after clicking the thumbnail.</source>
+			</trans-unit>
+			<trans-unit id="settings.autonext" xml:space="preserve">
+				<source>Automatic Continuous Play : Automatically play the next video in the gallery as soon as the current video finished.</source>
+			</trans-unit>
+			<trans-unit id="settings.showpaging" xml:space="preserve">
+				<source>Show Pagination : Show the Next/Previous buttons and page numbering.</source>
+			</trans-unit>
+			<trans-unit id="settings.insert_above" xml:space="preserve">
+				<source>Insert Pagination Above Thumbnails</source>
+			</trans-unit>
+			<trans-unit id="settings.insert_below" xml:space="preserve">
+				<source>Insert Pagination Below Thumbnails</source>
+			</trans-unit>
+			<trans-unit id="settings.customarrows" xml:space="preserve">
+				<source>Custom Next/Previous Text :  If you want your gallery viewers to see something besides "Next" and "Prev" when browsing through thumbnails, enter your replacement text here.</source>
+			</trans-unit>
+			<trans-unit id="settings.customprev" xml:space="preserve">
+				<source>Previous Page Text</source>
+			</trans-unit>
+			<trans-unit id="settings.customnext" xml:space="preserve">
+				<source>Next Page Text</source>
+			</trans-unit>
+			<trans-unit id="settings.channelsub" xml:space="preserve">
+				<source>Show Subscribe button</source>
+			</trans-unit>
+			<trans-unit id="settings.channelsublink" xml:space="preserve">
+				<source>Subscribe button link</source>
+			</trans-unit>
+			<trans-unit id="settings.channelsubtext" xml:space="preserve">
+				<source>Subscribe button link text</source>
+			</trans-unit>
+			<trans-unit id="settings.autoplay" xml:space="preserve">
+				<source>Autoplay : Automatically start playing your videos.</source>
+			</trans-unit>
+			<trans-unit id="settings.center" xml:space="preserve">
+				<source>Centering : Automatically center all your videos (not necessary if all your videos span the whole width of your blog).</source>
+			</trans-unit>
+			<trans-unit id="settings.width" xml:space="preserve">
+				<source>Width of iframe : (Without using percentage sign and pixel)</source>
+			</trans-unit>
+			<trans-unit id="settings.height" xml:space="preserve">
+				<source>Height of iframe : (Without using percentage sign and pixel)</source>
+			</trans-unit>
+			<trans-unit id="settings.titlecrop" xml:space="preserve">
+				<source>Length of Thumbnail title (in chars)</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

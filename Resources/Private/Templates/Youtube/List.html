@@ -1,0 +1,75 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+	{namespace m=NS\NsYoutube\ViewHelpers}
+
+	<f:layout name="Default" />
+
+	<f:section name="main">
+
+		<div class="error">
+			<f:flashMessages />
+		</div>
+
+		<div class="yt-gallery" data-currpage="1">
+			<f:if condition="{settings.listType}!='single'">
+				<f:then>
+					<f:if condition="{settings.layout}=='gallery'">
+						<f:then>
+							<f:format.raw>{iframe}</f:format.raw>
+							<f:if condition="{jsonResult.items}">
+								<f:then>
+									<f:if condition="{settings.channelsubtext}">
+										<div class="yt-gallery-subscribe">
+											<f:link.external uri="https://www.youtube.com/channel/{subscibe}?sub_confirmation=1" target="_blank" class="yt-gallery-subbutton">
+												<f:image src="typo3conf/ext/ns_youtube/Resources/Public/Images/play-subscribe.png" alt="subscribe" />{settings.channelsubtext}
+											</f:link.external>
+										</div>
+									</f:if>
+									<div class="yt-gallery-list">
+										<f:render partial="Youtube/Gallery" arguments="{_all}" />
+									</div>
+								</f:then>
+								<f:else>
+									<div class="error">
+										<ul>
+											<li><f:translate key='gallery_error'/></li>
+										</ul>
+									</div>
+								</f:else>
+							</f:if>
+							<input type="hidden" value="{f:uri.action(action: 'ajax', controller: 'Youtube')}" class="ajaxURL" />
+						</f:then>
+						<f:else>
+							<f:if condition="{iframe}">
+								<f:then>
+									<f:format.raw>{iframe}</f:format.raw>
+								</f:then>
+								<f:else>
+									<div class="error">
+										<ul>
+											<li><f:translate key='playlist_error' /></li>
+										</ul>
+									</div>
+								</f:else>
+							</f:if>
+						</f:else>
+					</f:if>
+				</f:then>
+				<f:else>
+					<f:if condition="{iframe}">
+						<f:then>
+							<f:format.raw>{iframe}</f:format.raw>
+						</f:then>
+						<f:else>
+							<div class="error">
+								<ul>
+									<li><f:translate key='video_error' /></li>
+								</ul>
+							</div>
+						</f:else>
+					</f:if>
+				</f:else>	
+			</f:if>
+		</div>
+
+	</f:section>
+</html>

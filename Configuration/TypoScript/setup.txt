@@ -1,0 +1,27 @@
+
+plugin.tx_nsyoutube {
+  view {
+    templateRootPaths.0 = EXT:ns_youtube/Resources/Private/Templates/
+    templateRootPaths.1 = {$plugin.tx_nsyoutube.view.templateRootPath}
+    partialRootPaths.0 = EXT:ns_youtube/Resources/Private/Partials/
+    partialRootPaths.1 = {$plugin.tx_nsyoutube.view.partialRootPath}
+    layoutRootPaths.0 = EXT:ns_youtube/Resources/Private/Layouts/
+    layoutRootPaths.1 = {$plugin.tx_nsyoutube.view.layoutRootPath}
+  }
+ 
+    settings {
+        javascript{
+          jquery = 0
+        }
+        apiKey = {$plugin.tx_nsyoutube.settings.apiKey}
+    }
+}
+page.includeCSS{
+    youtube = EXT:ns_youtube/Resources/Public/Css/style.css
+}
+page.includeJSFooter{
+    youtube = EXT:ns_youtube/Resources/Public/Js/script.js
+}
+[globalVar = LIT:1 = {$plugin.tx_nsyoutube.settings.javascript.jquery}]
+  page.includeJS.youtubejs = http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
+[global]
