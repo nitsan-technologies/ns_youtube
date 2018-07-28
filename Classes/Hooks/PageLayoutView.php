@@ -1,5 +1,5 @@
 <?php
-namespace NS\NsYoutube\Hooks;
+namespace Nitsan\NsYoutube\Hooks;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;

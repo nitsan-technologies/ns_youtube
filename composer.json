@@ -1,5 +1,5 @@
 {
-  "name": "ns/ns-youtube",
+  "name": "nitsan/ns-youtube",
   "type": "typo3-cms-extension",
   "description": "One of the only TYPO3 extension which provides to integrate all the features of Youtube.com like Simple Video, Channel, Playlist and Live-stream to your TYPO3 site.",
   "homepage": "https://extensions.typo3.org/extension/ns_youtube/",
@@ -17,12 +17,12 @@
   },
   "autoload": {
     "psr-4": {
-      "NS\\NsYoutube\\": "Classes/"
+      "Nitsan\\NsYoutube\\": "Classes/"
     }
   },
   "replace": {
       "ns_youtube": "self.version",
-      "ns/ns_youtube": "self.version"
+      "nitsan/ns_youtube": "self.version"
   },
   "extra": {
       "typo3/cms": {

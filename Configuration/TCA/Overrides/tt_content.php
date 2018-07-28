@@ -5,7 +5,7 @@ defined('TYPO3_MODE') or die();
  * Plugin
  */
  \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
- 	'NS.ns_youtube',
+ 	'Nitsan.ns_youtube',
  	'Youtube',
  	'Youtube'
  );

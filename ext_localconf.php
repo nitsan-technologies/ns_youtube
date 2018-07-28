@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'NS.NsYoutube',
+    'Nitsan.NsYoutube',
     'Youtube',
     [
         'Youtube' => 'list,ajax'
@@ -32,4 +32,4 @@ if (version_compare(TYPO3_branch, '7.0', '>')) {
 }
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem']['ns_youtube']
-        = \NS\NsYoutube\Hooks\PageLayoutView::class;
+        = \Nitsan\NsYoutube\Hooks\PageLayoutView::class;

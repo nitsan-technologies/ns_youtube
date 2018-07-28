@@ -1,5 +1,5 @@
 <?php
-namespace NS\NsYoutube\Controller;
+namespace Nitsan\NsYoutube\Controller;
 
 /***
  *
