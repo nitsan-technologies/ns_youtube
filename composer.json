@@ -22,7 +22,7 @@
   },
   "replace": {
       "ns_youtube": "self.version",
-      "nitsan/ns_youtube": "self.version"
+      "nitsan/ns-youtube": "self.version"
   },
   "extra": {
       "typo3/cms": {
