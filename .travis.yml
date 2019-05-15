@@ -25,3 +25,4 @@ before_script:
 
 script:
   - .Build/bin/phpcs --standard=PSR2 --extensions=php *
+  - vendor/bin/typoscript-lint Configuration/
