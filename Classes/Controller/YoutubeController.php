@@ -1,5 +1,6 @@
 <?php
 namespace Nitsan\NsYoutube\Controller;
+use TYPO3\CMS\Extbase\Annotation\Inject as inject;
 
 /***
  *

@@ -22,6 +22,7 @@
 							<onChange>reload</onChange>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.list_type.1</numIndex>
