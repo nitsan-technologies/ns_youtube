@@ -40,7 +40,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     public function listAction()
     {
         if (empty($this->settings['videourl'])) {
-            $youtubebaseurl = 'https://www.youtube.com';
+            $youtubebaseurl = 'https://www.youtube';
         } else {
             $youtubebaseurl = explode('.com', $this->settings['videourl'])[0];
         }
