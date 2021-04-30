@@ -30,6 +30,24 @@
 			<trans-unit id="backend.URL">
 				<source>URL</source>
 			</trans-unit>
+			<trans-unit id="backend.control">
+				<source>Show Control</source>
+			</trans-unit>
+			<trans-unit id="backend.hidelogo">
+				<source>Hide Logo</source>
+			</trans-unit>
+			<trans-unit id="backend.showrelatedvideo">
+				<source>Show Related video</source>
+			</trans-unit>
+			<trans-unit id="backend.nocookie">
+				<source>No Cookie URL</source>
+			</trans-unit>
+			<trans-unit id="backend.videotype">
+				<source>Video Variation Type</source>
+			</trans-unit>
+			<trans-unit id="backend.splashimage">
+				<source>Splash image</source>
+			</trans-unit>
 			<trans-unit id="backend.layout">
 				<source>Layout</source>
 			</trans-unit>

@@ -39,14 +39,15 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction()
     {
-        if (empty($this->settings['videourl'])) {
-            $youtubebaseurl = 'https://www.youtube';
-        } else {
-            $youtubebaseurl = explode('.com', $this->settings['videourl'])[0];
-        }
+        $youtubebaseurl = 'youtube';
         // Get link
         if ($this->settings['listType'] == 'single') {
             $link = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['videourl']));
+            $showcontrol = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['showcontrol']));
+            $hidelogo = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['hidelogo']));
+            $showrelatedvideo = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['showrelatedvideo']));
+            $showtopbar = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['showtopbar']));
+            $usenocookie = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['nocookie']));
         } else {
             if ($this->settings['listType'] == 'playlist') {
                 $link = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['playlisturl']));
@@ -60,6 +61,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         if (count($linkparamstemp) > 1) {
             $linkparams = $this->keyvalue($linkparamstemp[1], true);
         }
+
         if ($this->settings['listType'] == 'single') {
             if ($linkparams['v'] != '' && isset($linkparams['v'])) {
                 $videoid = $linkparams['v'];
@@ -139,8 +141,10 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         }
 
         $centercode = '';
+        $youtubebaseurl = ($usenocookie == 1) ? 'youtube-nocookie' : 'youtube';
+
         if (!empty($videoid) || isset($finalsrc)) {
-            $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" src="' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $this->settings['thumbplay'] . '&';
+            $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $this->settings['thumbplay'] . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
             $code2 = '" class="__youtube_prefs__' . $autoplay . '" allowfullscreen ' . $centercode . '"></iframe>';
             $code  = $code1 . $finalsrc . $code2;
         }

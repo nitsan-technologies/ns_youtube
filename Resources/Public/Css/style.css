@@ -10,7 +10,7 @@
 }
 
 .tx-ns-youtube iframe {
-    margin-bottom: 25px!important;
+    margin-bottom: 25px !important;
     height: 400px;
     max-width: 100%;
     width: 100%;
@@ -41,7 +41,7 @@
 .yt-gallery-list {
     margin: 20px auto;
     position: relative;
-    transition: opacity ease-out .3s;
+    transition: opacity ease-out 0.3s;
     display: block;
     color: #888888;
 }
@@ -55,8 +55,8 @@
 }
 
 .yt-gallery-list.yt-loading {
-    opacity: .5;
-    transition: opacity ease-out .3s;
+    opacity: 0.5;
+    transition: opacity ease-out 0.3s;
 }
 
 .yt-gallery-thumb {
@@ -72,7 +72,7 @@
 .yt-gallery-thumb.hover {
     position: relative;
     opacity: 1;
-    transition: opacity ease-out .3s;
+    transition: opacity ease-out 0.3s;
 }
 
 .yt-gallery-img-box {
@@ -98,14 +98,14 @@
     height: 100%;
     vertical-align: middle;
     text-align: center;
-    transition: opacity ease-out .3s;
+    transition: opacity ease-out 0.3s;
 }
 
 .yt-gallery-thumb.hover .yt-gallery-playhover,
 .yt-gallery-thumb.yt-current-video .yt-gallery-playhover {
     opacity: 1;
     top: 0;
-    transition: all ease-out .3s;
+    transition: all ease-out 0.3s;
 }
 
 .yt-gallery-thumb .yt-gallery-playcrutch {
@@ -157,7 +157,7 @@
 
 .yt-gallery-rowtitle.hover {
     opacity: 1;
-    transition: opacity linear .2s;
+    transition: opacity linear 0.2s;
 }
 
 .yt-gallery-rowbreak {
@@ -170,8 +170,8 @@
     padding: 10px 8px 10px 8px;
 }
 
-.yt-pagination>div,
-.yt-pagenumbers>div {
+.yt-pagination > div,
+.yt-pagenumbers > div {
     display: inline-block;
     padding: 0 2px 0 2px;
     vertical-align: middle;
@@ -196,7 +196,7 @@
     padding: 0 10px 0 10px;
 }
 
-.yt-pagebutton>div {
+.yt-pagebutton > div {
     display: inline;
 }
 
@@ -207,7 +207,7 @@
 .yt-gallery-list.yt-loading .yt-pagination .yt-loader {
     display: inline-block;
 }
-.yt-gallery-list .arrow{
+.yt-gallery-list .arrow {
     vertical-align: initial;
 }
 body .lity-container {
@@ -217,13 +217,13 @@ body .lity-container {
 
 .yt-curtain .lity-opened iframe {
     opacity: 0;
-    transition: opacity .3s linear .5s;
+    transition: opacity 0.3s linear 0.5s;
 }
 
 /*
 columns
 */
-.yt-gallery-allthumbs.yt-cols- .yt-gallery-thumb{
+.yt-gallery-allthumbs.yt-cols- .yt-gallery-thumb {
     width: 100%;
 }
 
@@ -268,7 +268,7 @@ columns
 }
 
 .yt-gallery-allthumbs.yt-cols-11 .yt-gallery-thumb {
-    width: 9.090%;
+    width: 9.09%;
 }
 
 .yt-gallery-allthumbs.yt-cols-12 .yt-gallery-thumb {
@@ -307,7 +307,6 @@ columns
     width: 5%;
 }
 
-
 .yt-pagebutton.hide,
 .yt-pagenumbers.hide {
     display: none !important;
@@ -325,7 +324,7 @@ columns
 .yt-gallery-subscribe a.yt-gallery-subbutton:hover {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #E62117 !important;
+    background-color: #e62117 !important;
     color: #ffffff !important;
     text-decoration: none !important;
     border-radius: 3px;
@@ -356,16 +355,15 @@ columns
     padding-left: 0px;
 }
 
-.yt-gallery-img-box .yt-gallery-img{
+.yt-gallery-img-box .yt-gallery-img {
     position: relative;
 }
 .yt-gallery-img-box .yt-gallery-img:after {
-
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     display: inline-block;
     opacity: 0;
     background-image: url(../Images/playhover.png);
@@ -377,8 +375,12 @@ columns
     -webkit-transition: all 0.3s ease-in-out 0s;
     transition: all 0.3s ease-in-out 0s;
 }
-.yt-gallery-img-box .yt-gallery-img:hover:after{
+.yt-gallery-img-box .yt-gallery-img:hover:after {
     opacity: 1;
+}
+
+.tx-ns-youtube img {
+    max-width: 100%;
 }
 
 .tx-ns-youtube ul {
@@ -400,7 +402,97 @@ columns
 
 .tx-ns-youtube .alert {
     padding: 0px 0px 0px 15px;
-    margin-bottom: 0px; 
-    border: 0px; 
-    border-radius: 0px; 
+    margin-bottom: 0px;
+    border: 0px;
+    border-radius: 0px;
+}
+
+.yt-hide-topbar .ytp-chrome-top.ytp-show-cards-title {
+    display: none;
+}
+
+.tx-ns-youtube .bg-image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.tx-ns-youtube .video-block {
+    position: relative;
+    padding-bottom: 42.257%;
+    padding-top: 35px;
+    height: 0;
+    overflow: hidden;
+}
+.tx-ns-youtube .video-block iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s ease 0s;
+    -moz-transition: opacity 0.3s ease 0s;
+    -o-transition: opacity 0.3s ease 0s;
+    transition: opacity 0.3s ease 0s;
+}
+.tx-ns-youtube .play-button {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    background-color:#fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transition: opacity 0.3s ease 0s;
+    -moz-transition: opacity 0.3s ease 0s;
+    -o-transition: opacity 0.3s ease 0s;
+    transition: opacity 0.3s ease 0s;
+    z-index: 2;
+}
+.tx-ns-youtube .cover-image {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    color: inherit;
+    position: relative;
+}
+.tx-ns-youtube .cover-image:before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.25);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    -webkit-transition: opacity 0.3s ease 0s;
+    -moz-transition: opacity 0.3s ease 0s;
+    -o-transition: opacity 0.3s ease 0s;
+    transition: opacity 0.3s ease 0s;
+}
+.tx-ns-youtube .cover-image.video-played iframe {
+    opacity: 1;
+}
+.tx-ns-youtube .cover-image.video-played .play-button,
+.tx-ns-youtube .cover-image.video-played:before {
+    opacity: 0;
+    pointer-events: none;
 }

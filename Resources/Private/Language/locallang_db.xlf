@@ -39,6 +39,9 @@
 			<trans-unit id="flexform.videourl" xml:space="preserve">
 				<source>Youtube URL</source>
 			</trans-unit>
+			<trans-unit id="flexform.video_type" xml:space="preserve">
+				<source>Select video variation</source>
+			</trans-unit>
 			<trans-unit id="flexform.channelname" xml:space="preserve">
 				<source>Add Username</source>
 			</trans-unit>
@@ -143,6 +146,33 @@
 			</trans-unit>
 			<trans-unit id="settings.titlecrop" xml:space="preserve">
 				<source>Length of Thumbnail title (in chars)</source>
+			</trans-unit>
+			<trans-unit id="settings.showcontrol" xml:space="preserve">
+				<source>Show Controls</source>
+			</trans-unit>
+			<trans-unit id="settings.hidelogo" xml:space="preserve">
+				<source>Hide Logo</source>
+			</trans-unit>
+			<trans-unit id="settings.showrelatedvideo" xml:space="preserve">
+				<source>Show Related videos</source>
+			</trans-unit>
+			<trans-unit id="settings.showtopbar" xml:space="preserve">
+				<source>Show Top bar</source>
+			</trans-unit>
+			<trans-unit id="settings.nocookie" xml:space="preserve">
+				<source>Use the Youtube-nocookie.com domain</source>
+			</trans-unit>
+			<trans-unit id="flexform.default" xml:space="preserve">
+				<source>Default</source>
+			</trans-unit>
+			<trans-unit id="flexform.lightbox" xml:space="preserve">
+				<source>Use YouTube in lightbox</source>
+			</trans-unit>
+			<trans-unit id="flexform.splash" xml:space="preserve">
+				<source>Splash Image</source>
+			</trans-unit>
+			<trans-unit id="flexform.image" xml:space="preserve">
+				<source>YouTube Image</source>
 			</trans-unit>
 		</body>
 	</file>

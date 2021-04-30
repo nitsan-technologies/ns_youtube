@@ -62,7 +62,6 @@
                 $(this).removeClass('hover');
             });
 
-
              $container.on('click', '.yt-pagebutton', function () {
                 var forward = $(this).hasClass('yt-next');
                 var currpage = parseInt($container.data('currpage') + "");
@@ -107,6 +106,14 @@
                         alert('Sorry, there was an error loading the next page.');
                     }
                     });
+            });
+
+            //Video Element
+            $('.splash-button').on('click', function (ev) {
+                $(this).parent('.cover-image').addClass('video-played');
+                var autoplay = $(".video-block iframe");
+                    autoplay.prop("src", autoplay.prop("src").replace("autoplay=", "autoplay=1"));
+                ev.preventDefault();
             });
         });
     });

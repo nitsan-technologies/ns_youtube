@@ -55,21 +55,56 @@
 					</f:if>
 				</f:then>
 				<f:else>
-					<f:if condition="{iframe}">
+					<f:if condition="{settings.image}">
+						<f:variable name="img" value="{f:uri.image(src: '{settings.image}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+					</f:if>
+					<f:if condition="{settings.videotype}!='default'">
 						<f:then>
-							<f:format.raw>{iframe}</f:format.raw>
+							<f:if condition="{settings.videotype}='lightbox' || {settings.videotype}='splash'">
+								<div class="video">
+									<div class="cover-image {f:if(condition: '{img}', then: 'bg-image')}" style="{f:if(condition: '{img}', then: 'background-image: url({img})')}">
+										<f:if condition="{settings.videotype}!='splash'">
+											<f:then>
+												<f:link.typolink parameter="{settings.videourl}" additionalAttributes="{data-fancybox:'fancybox{settings.image}'}" class="play-button">
+													<svg enable-background="new 0 0 512 512" height="80" viewBox="0 0 512 512" width="80" xmlns="http://www.w3.org/2000/svg">
+														<path d="m437.02 74.98c-48.353-48.351-112.64-74.98-181.02-74.98s-132.667 26.629-181.02 74.98c-48.351 48.353-74.98 112.64-74.98 181.02s26.629 132.667 74.98 181.02c48.353 48.351 112.64 74.98 181.02 74.98s132.667-26.629 181.02-74.98c48.351-48.353 74.98-112.64 74.98-181.02s-26.629-132.667-74.98-181.02zm-181.02 407.02c-124.617 0-226-101.383-226-226s101.383-226 226-226 226 101.383 226 226-101.383 226-226 226z" />
+														<path d="m374.782 243.84-180-130c-4.566-3.298-10.596-3.759-15.611-1.195s-8.171 7.722-8.171 13.355v260c0 5.633 3.156 10.791 8.171 13.355 2.154 1.102 4.495 1.645 6.827 1.645 3.097 0 6.179-.958 8.784-2.84l180-130c3.904-2.82 6.218-7.344 6.218-12.16s-2.312-9.34-6.218-12.16zm-173.782 112.824v-201.328l139.381 100.664z" />
+													</svg>
+												</f:link.typolink>
+											</f:then>
+											<f:else>
+												<a href="javascript:;" class="play-button splash-button">
+													<svg enable-background="new 0 0 512 512" height="80" viewBox="0 0 512 512" width="80" xmlns="http://www.w3.org/2000/svg">
+														<path d="m437.02 74.98c-48.353-48.351-112.64-74.98-181.02-74.98s-132.667 26.629-181.02 74.98c-48.351 48.353-74.98 112.64-74.98 181.02s26.629 132.667 74.98 181.02c48.353 48.351 112.64 74.98 181.02 74.98s132.667-26.629 181.02-74.98c48.351-48.353 74.98-112.64 74.98-181.02s-26.629-132.667-74.98-181.02zm-181.02 407.02c-124.617 0-226-101.383-226-226s101.383-226 226-226 226 101.383 226 226-101.383 226-226 226z" />
+														<path d="m374.782 243.84-180-130c-4.566-3.298-10.596-3.759-15.611-1.195s-8.171 7.722-8.171 13.355v260c0 5.633 3.156 10.791 8.171 13.355 2.154 1.102 4.495 1.645 6.827 1.645 3.097 0 6.179-.958 8.784-2.84l180-130c3.904-2.82 6.218-7.344 6.218-12.16s-2.312-9.34-6.218-12.16zm-173.782 112.824v-201.328l139.381 100.664z" />
+													</svg>
+												</a>
+											</f:else>
+										</f:if>
+										<div class="video-block">
+											<f:format.raw>{iframe}</f:format.raw>
+										</div>
+									</div>
+								</div>
+							</f:if>
 						</f:then>
 						<f:else>
-							<div class="error">
-								<ul>
-									<li><f:translate key='video_error' /></li>
-								</ul>
-							</div>
+							<f:if condition="{iframe}">
+								<f:then>
+									<f:format.raw>{iframe}</f:format.raw>
+								</f:then>
+								<f:else>
+									<div class="error">
+										<ul>
+											<li><f:translate key='video_error' /></li>
+										</ul>
+									</div>
+								</f:else>
+							</f:if>
 						</f:else>
 					</f:if>
 				</f:else>	
 			</f:if>
 		</div>
-
 	</f:section>
 </html>

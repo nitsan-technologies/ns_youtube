@@ -42,7 +42,7 @@
 							</config>
 						</TCEforms>
 					</settings.listType>
-					
+
 					<settings.videourl>
 						<TCEforms>
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.videourl</label>
@@ -60,6 +60,171 @@
 							</config>
 						</TCEforms>
 					</settings.videourl>
+
+					<settings.videotype>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.video_type</label>
+							<onChange>reload</onChange>
+							<displayCond>
+							   <and>
+							      <value1>FIELD:settings.listType:!=:channel</value1>
+							      <value2>FIELD:settings.listType:!=:playlist</value2>
+							   </and>
+							</displayCond>
+							<config>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.default</numIndex>
+										<numIndex index="1">default</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.lightbox</numIndex>
+										<numIndex index="1">lightbox</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.splash</numIndex>
+										<numIndex index="1">splash</numIndex>
+									</numIndex>
+								</items>
+								<default>default</default>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.videotype>
+					
+					<settings.image>
+						<TCEforms>
+							 <label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.image</label>
+							 <displayCond>
+								<and>
+									<value1>FIELD:settings.videotype:!=:default</value1>
+									<or>
+										<value1>FIELD:settings.listType:=:single</value1>
+									</or>
+								</and>
+							</displayCond>
+							<config>
+								<type>inline</type>
+								<maxitems>1</maxitems>
+								<foreign_table>sys_file_reference</foreign_table>
+								<foreign_table_field>tablenames</foreign_table_field>
+								<foreign_label>uid_local</foreign_label>
+								<foreign_sortby>sorting_foreign</foreign_sortby>
+								<foreign_selector>uid_local</foreign_selector>
+								<foreign_selector_fieldTcaOverride type="array">
+									<config>
+										<appearance>
+											<elementBrowserType>file</elementBrowserType>
+											<elementBrowserAllowed>jpg,png,svg,jpeg,gif</elementBrowserAllowed>
+										</appearance>
+									</config>
+								</foreign_selector_fieldTcaOverride>
+								<foreign_types type="array">
+									<numIndex index="2">
+										<showitem>--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,--palette--;;filePalette</showitem>
+									</numIndex>
+								</foreign_types>
+								<foreign_match_fields type="array">
+									<fieldname>image</fieldname>
+								</foreign_match_fields>
+								<appearance type="array">
+									<newRecordLinkAddTitle>1</newRecordLinkAddTitle>
+									<headerThumbnail>
+										<field>uid_local</field>
+										<height>64</height>
+										<width>64</width>
+									</headerThumbnail>
+									<enabledControls>
+										<info>1</info>
+										<new>0</new>
+										<dragdrop>0</dragdrop>
+										<sort>1</sort>
+										<hide>0</hide>
+										<delete>1</delete>
+										<localize>1</localize>
+									</enabledControls>
+								</appearance>
+								<overrideChildTca>
+									<columns type="array">
+										<uid_local type="array">
+											<config type="array">
+												<appearance type="array">
+													<elementBrowserType>file</elementBrowserType>
+													<elementBrowserAllowed>gif,jpg,jpeg,tif,tiff,bmp,pcx,tga,png,pdf,ai</elementBrowserAllowed>
+												</appearance>
+											</config>
+										</uid_local>
+									</columns>
+								</overrideChildTca>
+							</config>
+						</TCEforms>
+					</settings.image>
+
+					<settings.showcontrol>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.showcontrol</label>
+							<displayCond>
+								<and>
+									<or>
+								      	<value1>FIELD:settings.listType:=:single</value1>
+							      	</or>
+								</and>
+							</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.showcontrol>
+
+					<settings.hidelogo>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.hidelogo</label>
+							<displayCond>
+								<and>
+									<or>
+								      	<value1>FIELD:settings.listType:=:single</value1>
+							      	</or>
+								</and>
+							</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.hidelogo>
+
+					<settings.showrelatedvideo>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.showrelatedvideo</label>
+							<displayCond>
+								<and>
+									<or>
+								      	<value1>FIELD:settings.listType:=:single</value1>
+							      	</or>
+								</and>
+							</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.showrelatedvideo>
+
+					<settings.nocookie>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.nocookie</label>
+							<displayCond>
+								<and>
+									<or>
+								      	<value1>FIELD:settings.listType:=:single</value1>
+							      	</or>
+								</and>
+							</displayCond>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.nocookie>
 					
 					<settings.playlisturl>
 						<TCEforms>	

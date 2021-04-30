@@ -10,11 +10,11 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
         if ($row['CType'] == 'list' && $row['list_type'] == 'nsyoutube_youtube') {
             $drawItem = false;
 
-            $headerContent =
+            $itemContent =
                 "<table class='table table-striped table-hover typo3-extension-list no-footer'><thead><tr><th colspan='2'>" . LocalizationUtility::translate('pi1_title', 'ns_youtube') . '</th></tr></thead>';
 
             $ffXml = \TYPO3\CMS\Core\Utility\GeneralUtility::xml2array($row['pi_flexform']);
-            $itemContent= '<tbody>';
+            $itemContent .= '<tbody>';
 
             if ($ffXml['data']['sDEF']['lDEF']['settings.listType']['vDEF']=='single') {
                 $itemContent .= "<tr>
@@ -25,6 +25,41 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
                 $itemContent .= "<tr>
                                     <th style='text-align:left'>" . LocalizationUtility::translate('backend.URL', 'ns_youtube') . "</th>
                                     <td style='padding-left: 10px;'>" . $ffXml['data']['sDEF']['lDEF']['settings.videourl']['vDEF'] . '</td>
+                                </tr>';
+
+                $itemContent .= "<tr>
+                                    <th style='text-align:left'>" . LocalizationUtility::translate('backend.videotype', 'ns_youtube') . "</th>
+                                    <td style='padding-left: 10px;'>" . $ffXml['data']['sDEF']['lDEF']['settings.videotype']['vDEF'] . '</td>
+                                </tr>';
+
+                $imagestatus = ($ffXml['data']['sDEF']['lDEF']['settings.image']['vDEF']==null) ? 'No' : 'Yes';
+                $itemContent .= "<tr>
+                                    <th style='text-align:left'>" . LocalizationUtility::translate('backend.splashimage', 'ns_youtube') . "</th>
+                                        <td style='padding-left: 10px;'>" . $imagestatus . '</td>
+                                    </tr>';
+
+                $showcontrol = ($ffXml['data']['sDEF']['lDEF']['settings.showcontrol']['vDEF'] == 1) ? 'Yes' : 'No';
+                $itemContent .= "<tr>
+                                    <th style='text-align:left'>" . LocalizationUtility::translate('backend.control', 'ns_youtube') . "</th>
+                                    <td style='padding-left: 10px;'>" . $showcontrol . '</td>
+                                </tr>';
+
+                $hidelogo = ($ffXml['data']['sDEF']['lDEF']['settings.hidelogo']['vDEF'] == 1) ? 'Yes' : 'No';
+                $itemContent .= "<tr>
+                                    <th style='text-align:left'>" . LocalizationUtility::translate('backend.hidelogo', 'ns_youtube') . "</th>
+                                    <td style='padding-left: 10px;'>" . $hidelogo . '</td>
+                                </tr>';
+
+                $showrelatedvideo = ($ffXml['data']['sDEF']['lDEF']['settings.showrelatedvideo']['vDEF'] == 1) ? 'Yes' : 'No';
+                $itemContent .= "<tr>
+                                    <th style='text-align:left'>" . LocalizationUtility::translate('backend.showrelatedvideo', 'ns_youtube') . "</th>
+                                    <td style='padding-left: 10px;'>" . $showrelatedvideo . '</td>
+                                </tr>';
+
+                $nocookie = ($ffXml['data']['sDEF']['lDEF']['settings.nocookie']['vDEF'] == 1) ? 'Yes' : 'No';
+                $itemContent .= "<tr>
+                                    <th style='text-align:left'>" . LocalizationUtility::translate('backend.nocookie', 'ns_youtube') . "</th>
+                                    <td style='padding-left: 10px;'>" . $nocookie . '</td>
                                 </tr>';
             } elseif ($ffXml['data']['sDEF']['lDEF']['settings.listType']['vDEF']=='playlist') {
                 $itemContent .= "<tr>
