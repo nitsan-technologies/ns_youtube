@@ -109,12 +109,27 @@
             });
 
             //Video Element
-            $('.splash-button').on('click', function (ev) {
-                $(this).parent('.cover-image').addClass('video-played');
-                var autoplay = $(".video-block iframe");
-                    autoplay.prop("src", autoplay.prop("src").replace("autoplay=", "autoplay=1"));
-                ev.preventDefault();
-            });
+            if($('.splash-button').length) {
+                $('.splash-button').on('click', function () {
+                    $(this).parent('.cover-image').addClass('video-played');
+                    var autoplay = $(this).siblings(".video-block").find('iframe').attr('src');
+                    var iframeautoplay = autoplay.replace('autoplay=','autoplay=1');
+                    setTimeout(() => {
+                        $(this).siblings(".video-block").find('iframe').attr('src', iframeautoplay);
+                    }, 100);
+                });
+            }
+
+            //For Lightbox
+            if ($('.lightbox-button').length) {
+                $('.lightbox-button').on('click', function () {
+                    var iframeUrl = $(this).siblings('.video-block').find('iframe').attr('src');
+                    var iframePlayurl = iframeUrl.replace('autoplay=','autoplay=1');
+                    setTimeout(() => {
+                        $('.fancybox-iframe').attr('src', iframePlayurl);
+                    }, 100);
+                });   
+            }
         });
     });
 })(window, jQuery);
