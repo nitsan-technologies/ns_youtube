@@ -416,14 +416,36 @@ columns
     background-repeat: no-repeat;
     background-size: cover;
 }
-.tx-ns-youtube .video-block {
+.tx-ns-youtube .ns_video-block {
     position: relative;
-    padding-bottom: 42.257%;
-    padding-top: 35px;
+    padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
 }
-.tx-ns-youtube .video-block iframe {
+
+.tx-ns-youtube .ns_video-block.ns-ratio__1-1 {
+    padding-bottom: 100%;
+}
+.tx-ns-youtube .ns_video-block.ns-ratio__1-2 {
+    padding-bottom: 200%;
+}
+.tx-ns-youtube .ns_video-block.ns-ratio__2-1 {
+    padding-bottom: 50%;
+}
+.tx-ns-youtube .ns_video-block.ns-ratio__3-2 {
+    padding-bottom: 66.6666%;
+}
+.tx-ns-youtube .ns_video-block.ns-ratio__4-3 {
+    padding-bottom: 75%;
+}
+.tx-ns-youtube .ns_video-block.ns-ratio__5-4 {
+    padding-bottom: 80%;
+}
+.tx-ns-youtube .ns_video-block.ns-ratio__21-9 {
+    padding-bottom: 42.8571%;
+}
+
+.tx-ns-youtube .ns_video-block iframe {
     position: absolute;
     top: 0;
     left: 0;
@@ -436,7 +458,11 @@ columns
     -o-transition: opacity 0.3s ease 0s;
     transition: opacity 0.3s ease 0s;
 }
-.tx-ns-youtube .play-button {
+.tx-ns-youtube .ns_video-block.ns_simple-video iframe {
+    opacity: 1;
+}
+
+.tx-ns-youtube .ns_play-button {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -467,14 +493,16 @@ columns
     transition: opacity 0.3s ease 0s;
     z-index: 2;
 }
-.tx-ns-youtube .cover-image {
+
+.tx-ns-youtube .ns_cover-image {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     color: inherit;
     position: relative;
 }
-.tx-ns-youtube .cover-image:before {
+
+.tx-ns-youtube .ns_cover-image:before {
     content: "";
     background-color: rgba(0, 0, 0, 0.25);
     height: 100%;
@@ -488,11 +516,11 @@ columns
     -o-transition: opacity 0.3s ease 0s;
     transition: opacity 0.3s ease 0s;
 }
-.tx-ns-youtube .cover-image.video-played iframe {
+.tx-ns-youtube .ns_cover-image.video-played iframe {
     opacity: 1;
 }
-.tx-ns-youtube .cover-image.video-played .play-button,
-.tx-ns-youtube .cover-image.video-played:before {
+.tx-ns-youtube .ns_cover-image.video-played .ns_play-button,
+.tx-ns-youtube .ns_cover-image.video-played:before {
     opacity: 0;
     pointer-events: none;
 }

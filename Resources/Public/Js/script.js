@@ -2,6 +2,29 @@
     var ajaxURL = $(this).attr('action');
     $(document).ready(function() {
         $('.yt-gallery').each(function() {
+            //Video Element
+            if($('.splash-button').length) {
+                $('.splash-button').on('click', function () {
+                    $(this).parent('.ns_cover-image').addClass('video-played');
+                    var autoplay = $(this).attr('data-url');
+                    var iframeautoplay = autoplay.replace('autoplay=','autoplay=1');
+                    setTimeout(() => {
+                        $(this).siblings(".ns_video-block").find('iframe').attr('src', iframeautoplay);
+                    }, 100);
+                });
+            }
+
+            //For Lightbox
+            if ($('.ns_lightbox-button').length) {
+                $('.ns_lightbox-button').on('click', function () {
+                    var iframeUrl = $(this).attr('data-url');
+                    var iframePlayurl = iframeUrl.replace('autoplay=','autoplay=1');
+                    setTimeout(() => {
+                        $('.fancybox-iframe').attr('src', iframePlayurl);
+                    }, 100);
+                });   
+            }
+
             var $container = $(this);
 
             var $iframe = $(this).find('iframe').first();
@@ -107,29 +130,6 @@
                     }
                     });
             });
-
-            //Video Element
-            if($('.splash-button').length) {
-                $('.splash-button').on('click', function () {
-                    $(this).parent('.cover-image').addClass('video-played');
-                    var autoplay = $(this).siblings(".video-block").find('iframe').attr('src');
-                    var iframeautoplay = autoplay.replace('autoplay=','autoplay=1');
-                    setTimeout(() => {
-                        $(this).siblings(".video-block").find('iframe').attr('src', iframeautoplay);
-                    }, 100);
-                });
-            }
-
-            //For Lightbox
-            if ($('.lightbox-button').length) {
-                $('.lightbox-button').on('click', function () {
-                    var iframeUrl = $(this).siblings('.video-block').find('iframe').attr('src');
-                    var iframePlayurl = iframeUrl.replace('autoplay=','autoplay=1');
-                    setTimeout(() => {
-                        $('.fancybox-iframe').attr('src', iframePlayurl);
-                    }, 100);
-                });   
-            }
         });
     });
 })(window, jQuery);

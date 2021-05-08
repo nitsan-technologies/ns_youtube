@@ -29,14 +29,31 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
 
                 $itemContent .= "<tr>
                                     <th style='text-align:left'>" . LocalizationUtility::translate('backend.videotype', 'ns_youtube') . "</th>
-                                    <td style='padding-left: 10px;'>" . $ffXml['data']['sDEF']['lDEF']['settings.videotype']['vDEF'] . '</td>
+                                    <td style='padding-left: 10px;'>" . LocalizationUtility::translate('backend.'.$ffXml['data']['sDEF']['lDEF']['settings.videotype']['vDEF'], 'ns_youtube') . '</td>
                                 </tr>';
 
-                $imagestatus = ($ffXml['data']['sDEF']['lDEF']['settings.image']['vDEF']==null) ? 'No' : 'Yes';
-                $itemContent .= "<tr>
-                                    <th style='text-align:left'>" . LocalizationUtility::translate('backend.splashimage', 'ns_youtube') . "</th>
-                                        <td style='padding-left: 10px;'>" . $imagestatus . '</td>
+                if ($ffXml['data']['sDEF']['lDEF']['settings.videotype']['vDEF']!=='text') {
+                    $itemContent .= "<tr>
+                                        <th style='text-align:left'>" . LocalizationUtility::translate('backend.widthtype', 'ns_youtube') . "</th>
+                                        <td style='padding-left: 10px;'>" . LocalizationUtility::translate('backend.width_type.'.$ffXml['data']['sDEF']['lDEF']['settings.widthtype']['vDEF'], 'ns_youtube') . '</td>
                                     </tr>';
+                }
+                
+                if ($ffXml['data']['sDEF']['lDEF']['settings.videotype']['vDEF']=='text') {
+                    $itemContent .= "<tr>
+                                        <th style='text-align:left'>" . LocalizationUtility::translate('backend.lightboxtext', 'ns_youtube') . "</th>
+                                        <td style='padding-left: 10px;'>" . $ffXml['data']['sDEF']['lDEF']['settings.lightboxtext']['vDEF'] . '</td>
+                                    </tr>';
+                }
+
+                if ($ffXml['data']['sDEF']['lDEF']['settings.videotype']['vDEF']!=='text') {
+                    $imagestatus = ($ffXml['data']['sDEF']['lDEF']['settings.image']['vDEF']==null) ? 'No' : 'Yes';
+                    $itemContent .= "<tr>
+                                        <th style='text-align:left'>" . LocalizationUtility::translate('backend.splashimage', 'ns_youtube') . "</th>
+                                            <td style='padding-left: 10px;'>" . $imagestatus . '</td>
+                                        </tr>';
+
+                }
 
                 $showcontrol = ($ffXml['data']['sDEF']['lDEF']['settings.showcontrol']['vDEF'] == 1) ? 'Yes' : 'No';
                 $itemContent .= "<tr>

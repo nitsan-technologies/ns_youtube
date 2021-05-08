@@ -45,6 +45,9 @@
 			<trans-unit id="backend.videotype">
 				<source>Video Variation Type</source>
 			</trans-unit>
+			<trans-unit id="backend.widthtype">
+				<source>Media width type</source>
+			</trans-unit>
 			<trans-unit id="backend.splashimage">
 				<source>Splash image</source>
 			</trans-unit>
@@ -89,6 +92,47 @@
 			</trans-unit>
 			<trans-unit id="backend.insertBelow">
 				<source>Insert Pagination Below Thumbnails</source>
+			</trans-unit>
+
+			<trans-unit id="backend.lightboxtext" xml:space="preserve">
+				<source>Lightbox link text</source>
+			</trans-unit>
+			<trans-unit id="backend.width_type.0" xml:space="preserve">
+				<source>Default Width 16:9 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="backend.width_type.1" xml:space="preserve">
+				<source>Width 1:1 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="backend.width_type.2" xml:space="preserve">
+				<source>Width 1:2 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="backend.width_type.3" xml:space="preserve">
+				<source>Width 2:1 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="backend.width_type.4" xml:space="preserve">
+				<source>Width 3:2 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="backend.width_type.5" xml:space="preserve">
+				<source>Width 4:3 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="backend.width_type.6" xml:space="preserve">
+				<source>Width 5:4 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="backend.width_type.7" xml:space="preserve">
+				<source>Width 21:9 Aspect Ratio</source>
+			</trans-unit>
+
+			<trans-unit id="backend.default" xml:space="preserve">
+				<source>Default</source>
+			</trans-unit>
+			<trans-unit id="backend.lightbox" xml:space="preserve">
+				<source>Use YouTube in lightbox</source>
+			</trans-unit>
+			<trans-unit id="backend.splash" xml:space="preserve">
+				<source>Splash Image</source>
+			</trans-unit>
+			<trans-unit id="backend.text" xml:space="preserve">
+				<source>Text Popup Video</source>
 			</trans-unit>
 
 			<trans-unit id="tx_ns_youtube_domain_model_youtube">

@@ -147,6 +147,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $this->settings['thumbplay'] . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
             $code2 = '" class="__youtube_prefs__' . $autoplay . '" allowfullscreen ' . $centercode . '"></iframe>';
             $code  = $code1 . $finalsrc . $code2;
+            $popupLink = 'https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $this->settings['thumbplay'] . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
         }
 
         if (empty($this->settings['apiKey'])) {
@@ -162,6 +163,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->view->assign('iframe', $code);
         $this->view->assign('error', $error);
         $this->view->assign('jsonResult', $jsonResult);
+        $this->view->assign('popupLink', $popupLink);
     }
 
     /**

@@ -18,6 +18,33 @@
 			<trans-unit id="flexform.apikey" xml:space="preserve">
 				<source>Youtube API Key</source>
 			</trans-unit>
+			<trans-unit id="flexform.width_type" xml:space="preserve">
+				<source>Select Width</source>
+			</trans-unit>
+			<trans-unit id="flexform.width_type.0" xml:space="preserve">
+				<source>Default Width 16:9 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="flexform.width_type.1" xml:space="preserve">
+				<source>Width 1:1 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="flexform.width_type.2" xml:space="preserve">
+				<source>Width 1:2 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="flexform.width_type.3" xml:space="preserve">
+				<source>Width 2:1 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="flexform.width_type.4" xml:space="preserve">
+				<source>Width 3:2 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="flexform.width_type.5" xml:space="preserve">
+				<source>Width 4:3 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="flexform.width_type.6" xml:space="preserve">
+				<source>Width 5:4 Aspect Ratio</source>
+			</trans-unit>
+			<trans-unit id="flexform.width_type.7" xml:space="preserve">
+				<source>Width 21:9 Aspect Ratio</source>
+			</trans-unit>
 			<trans-unit id="flexform.list_type" xml:space="preserve">
 				<source>Select video types</source>
 			</trans-unit>
@@ -41,6 +68,9 @@
 			</trans-unit>
 			<trans-unit id="flexform.video_type" xml:space="preserve">
 				<source>Select video variation</source>
+			</trans-unit>
+			<trans-unit id="flexform.lightboxtext" xml:space="preserve">
+				<source>Add text for lightbox link</source>
 			</trans-unit>
 			<trans-unit id="flexform.channelname" xml:space="preserve">
 				<source>Add Username</source>
@@ -170,6 +200,9 @@
 			</trans-unit>
 			<trans-unit id="flexform.splash" xml:space="preserve">
 				<source>Splash Image</source>
+			</trans-unit>
+			<trans-unit id="flexform.text" xml:space="preserve">
+				<source>Text Popup Video</source>
 			</trans-unit>
 			<trans-unit id="flexform.image" xml:space="preserve">
 				<source>YouTube Image</source>
