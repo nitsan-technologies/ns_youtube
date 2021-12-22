@@ -3,17 +3,24 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
+if (version_compare(TYPO3_branch, '11.0', '>=')) {
+    $moduleClass = \Nitsan\NsYoutube\Controller\YoutubeController::class;
+} else {
+    $moduleClass = 'Youtube';
+}
+
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'Nitsan.NsYoutube',
     'Youtube',
     [
-        'Youtube' => 'list,ajax'
+        $moduleClass => 'list,ajax'
     ],
     // non-cacheable actions
     [
-        'Youtube' => 'list,ajax'
+        $moduleClass => 'list,ajax'
     ]
 );
+
 
 if (version_compare(TYPO3_branch, '7.0', '>')) {
     if (TYPO3_MODE === 'BE') {
