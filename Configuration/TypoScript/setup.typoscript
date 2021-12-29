@@ -24,6 +24,6 @@ page.includeJSFooter{
     youtube = EXT:ns_youtube/Resources/Public/Js/jquery.fancybox.min.js
     youtube1 = EXT:ns_youtube/Resources/Public/Js/script.js
 }
-[globalVar = LIT:1 = {$plugin.tx_nsyoutube.settings.javascript.jquery}]
+[{$plugin.tx_nsyoutube.settings.javascript.jquery} == 1]
   page.includeJS.youtubejs = http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
 [global]
