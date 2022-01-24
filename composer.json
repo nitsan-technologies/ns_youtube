@@ -21,7 +21,7 @@
     }
   },
   "replace": {
-      "nitsan/ns-youtube": "self.version"
+      "typo3-ter/ns-youtube": "self.version"
   },
   "config": {
     "vendor-dir": ".Build/vendor/",
