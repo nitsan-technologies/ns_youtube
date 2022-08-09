@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = [
   'title' => '[NITSAN] YouTube Plugin',
-  'description' => 'One of the only TYPO3 extension which provides to integrate all the features of Youtube.com like Simple Video, Channel, Playlist and Live-stream to your TYPO3 site. Live-Demo: https://demo.t3terminal.com/t3t-extensions/youtube/ You can download PRO version for more-features & free-support at https://t3terminal.com/typo3-youtube-plugin-free/',
+  'description' => 'One of the only TYPO3 extension which provides to integrate all the features of Youtube.com like Simple Video, Channel, Playlist and Live-stream to your TYPO3 site. Live-Demo: https://demo.t3planet.com/t3t-extensions/youtube/ You can download PRO version for more-features & free-support at https://t3planet.com/typo3-youtube-extension',
   'category' => 'plugin',
   'author' => 'NITSAN Technologies Pvt Ltd',
   'author_email' => 'sanjay@nitsan.in',
