@@ -34,7 +34,7 @@
             if (!initSrc) {
                 initSrc = $iframe.data('ep-src');
             }
-
+            console.log(initSrc);
             // var firstId = $(this).find('.yt-gallery-list .yt-gallery-thumb').first().data('videoid');
             var src = initSrc.match(/[^/]*$/)[0];
             var firstId = src.split('?')[0];
