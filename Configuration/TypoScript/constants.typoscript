@@ -22,20 +22,23 @@ plugin.tx_nsyoutube {
       jquery = 0
     }
 
+    # cat=plugin.tx_nsyoutube/100/0; type=boolean; label= LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.enableGdpr
+    enableGdpr = 0
+
     # cat=plugin.tx_nsyoutube/100/1; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.api_key
     apiKey = 
 
     # cat=plugin.tx_nsyoutube/100/2; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeDescription
-		description = GDPR Consent
+		description = We've embedded content from YouTube here. As YouTube may collect personal data and track your viewing behaviour, we'll only load the video after you consent to their use of cookies and similar technologies as described in their privacy policy.
 
     # cat=plugin.tx_nsyoutube/100/3; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeColor
-		noticeColor = 
+		noticeColor = #000000
 
     # cat=plugin.tx_nsyoutube/100/4; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgImage
 		bgImage = 
 
     # cat=plugin.tx_nsyoutube/100/5; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgColor
-		bgColor = 
+		bgColor = #cfcfcf
 
     # cat=plugin.tx_nsyoutube/100/6; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonText
 		buttonText = Active
@@ -44,10 +47,10 @@ plugin.tx_nsyoutube {
 		activeAllButtonText = Active All 
 
     # cat=plugin.tx_nsyoutube/100/8; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonTextColor
-		buttonTextColor = 
+		buttonTextColor = #ffffff
 
     # cat=plugin.tx_nsyoutube/100/9; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonColor
-		buttonColor = 
+		buttonColor = #333030
   }
 
 }

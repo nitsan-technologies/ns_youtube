@@ -16,7 +16,7 @@
 						<f:then>
 							<div class="ns_video-gdpr ns_video-gdpr--play-list">
 								<f:format.raw>{iframe}</f:format.raw>
-								<f:if condition="{settings.enableGdpr}">
+								<f:if condition="{settings.enableGdpr} == '1' || {constant.enableGdpr} == '1'">
 									<f:then>
 										<f:if condition="{settings.bgImage}">
 											<f:then>
@@ -26,7 +26,8 @@
 												<f:variable name="bgimg" value="{constant.bgImage}" />
 											</f:else>
 										</f:if>
-										<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {settings.bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+										<f:variable name="bgColor">{f:if(condition: '{settings.bgColor}', then: '{settings.bgColor}', else: '{constant.bgColor}')};</f:variable>
+										<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
 											<div class="ns_video-gdpr__notice-inner">
 												<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
 												<div class="ns_video-gdpr__notice-btn-wrap">
@@ -66,7 +67,7 @@
 								<f:then>
 									<div class="ns_video-gdpr ">
 										<f:format.raw>{iframe}</f:format.raw>
-										<f:if condition="{settings.enableGdpr}">
+										<f:if condition="{settings.enableGdpr} == '1' || {constant.enableGdpr} == '1'">
 											<f:then>
 												<f:if condition="{settings.bgImage}">
 													<f:then>
@@ -76,7 +77,8 @@
 														<f:variable name="bgimg" value="{constant.bgImage}" />
 													</f:else>
 												</f:if>
-												<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {settings.bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+												<f:variable name="bgColor">{f:if(condition: '{settings.bgColor}', then: '{settings.bgColor}', else: '{constant.bgColor}')};</f:variable>
+												<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
 													<div class="ns_video-gdpr__notice-inner">
 														<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
 														<div class="ns_video-gdpr__notice-btn-wrap">
@@ -154,7 +156,7 @@
 											</f:switch>
 												<f:format.raw>{iframe}</f:format.raw>
 												
-												<f:if condition="{settings.enableGdpr}">
+												<f:if condition="{settings.enableGdpr} == '1' || {constant.enableGdpr} == '1'">
 													<f:then>
 														<f:if condition="{settings.bgImage}">
 															<f:then>
@@ -164,7 +166,8 @@
 																<f:variable name="bgimg" value="{constant.bgImage}" />
 															</f:else>
 														</f:if>
-														<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {settings.bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+														<f:variable name="bgColor">{f:if(condition: '{settings.bgColor}', then: '{settings.bgColor}', else: '{constant.bgColor}')};</f:variable>
+														<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
 															<div class="ns_video-gdpr__notice-inner">
 																<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
 																<div class="ns_video-gdpr__notice-btn-wrap">
@@ -227,7 +230,7 @@
 										<f:defaultCase><div class="ns_video-gdpr ns_video-gdpr ns_video-block ns_simple-video"></div></f:defaultCase>
 									</f:switch>
 										<f:format.raw>{iframe}</f:format.raw>
-										<f:if condition="{settings.enableGdpr}">
+										<f:if condition="{settings.enableGdpr} == '1' || {constant.enableGdpr} == '1'">
 											<f:then>
 												<f:if condition="{settings.bgImage}">
 													<f:then>
@@ -237,7 +240,8 @@
 														<f:variable name="bgimg" value="{constant.bgImage}" />
 													</f:else>
 												</f:if>
-												<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {settings.bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+												<f:variable name="bgColor">{f:if(condition: '{settings.bgColor}', then: '{settings.bgColor}', else: '{constant.bgColor}')};</f:variable>
+												<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
 													<div class="ns_video-gdpr__notice-inner">
 														<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
 														<div class="ns_video-gdpr__notice-btn-wrap">
