@@ -207,6 +207,48 @@
 			<trans-unit id="flexform.image" xml:space="preserve">
 				<source>YouTube Image</source>
 			</trans-unit>
+			<trans-unit id="flexform.setting_feuser" xml:space="preserve">
+				<source>GDPR Options</source>
+			</trans-unit>
+			<trans-unit id="settings.enableGdpr" xml:space="preserve">
+				<source>Enable GDPR</source>
+			</trans-unit>
+			<trans-unit id="settings.noticeDescription" xml:space="preserve">
+				<source>GDPR-Box Description</source>
+			</trans-unit>
+			<trans-unit id="settings.noticeColor" xml:space="preserve">
+				<source>GDPR-Box Description Font Color</source>
+			</trans-unit>
+			<trans-unit id="settings.bgColor" xml:space="preserve">
+				<source>Background Color For GDPR-Box</source>
+			</trans-unit>
+			<trans-unit id="settings.wantBgImage" xml:space="preserve">
+				<source>Want Background Image</source>
+			</trans-unit>
+			<trans-unit id="settings.bgImage" xml:space="preserve">
+				<source>Background Image</source>
+			</trans-unit>
+			<trans-unit id="settings.buttonText" xml:space="preserve">
+				<source>Active Button Text</source>
+			</trans-unit>
+			<trans-unit id="settings.buttonTextColor" xml:space="preserve">
+				<source>Button Font Color</source>
+			</trans-unit>
+			<trans-unit id="settings.buttonColor" xml:space="preserve">
+				<source>Button Background Color</source>
+			</trans-unit>
+			<trans-unit id="settings.wantHover" xml:space="preserve">
+				<source>Want Button Hover Effect</source>
+			</trans-unit>
+			<trans-unit id="settings.buttonHoverTextColor" xml:space="preserve">
+				<source>Button Font Color On Hover</source>
+			</trans-unit>
+			<trans-unit id="settings.buttonHoverColor" xml:space="preserve">
+				<source>Button Background Color On Hover</source>
+			</trans-unit>
+			<trans-unit id="settings.activeAllButtonText" xml:space="preserve">
+				<source>ActiveAll Button Text</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

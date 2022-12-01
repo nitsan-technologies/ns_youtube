@@ -1,0 +1,73 @@
+.ns_video-gdpr iframe.__youtube_prefs__:not([src]) {
+  display: none;
+}
+
+.ns_video-gdpr iframe.__youtube_prefs__[src] + .ns_video-gdpr__notice {
+  display: none;
+}
+
+.ns_video-gdpr__notice {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ns_video-gdpr__notice > * {
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ns_video-gdpr__notice button {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  background-color: #000;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ns_video-gdpr__notice.ns_video-gdpr__notice-bg-img {
+  background-color: transparent;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.ns_video-gdpr--play-list {
+  position: relative;
+  height: 400px;
+  max-width: 100%;
+}
+
+.ns_video-gdpr--play-list iframe {
+  height: 100%;
+}
+
+.ns_video-gdpr__notice-inner p {
+  margin-bottom: 35px;
+}
+
+@media (min-width: 576px) { 
+  .ns_video-gdpr__notice-btn-wrap .ns_video-gdpr__notice-btn {
+    margin-right: 15px;
+  }
+}
+@media (max-width: 575px) {
+  .ns_video-gdpr__notice-btn-wrap {
+    display: inline-flex;
+    flex-direction: column;
+  }
+
+  .ns_video-gdpr__notice-btn {
+    margin-bottom: 15px;
+  }
+}

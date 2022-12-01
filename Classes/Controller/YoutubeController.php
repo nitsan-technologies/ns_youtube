@@ -145,6 +145,9 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         if (!empty($videoid) || isset($finalsrc)) {
             $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $this->settings['thumbplay'] . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
+            if($this->settings['enableGdpr']){
+                $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" data-src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $this->settings['thumbplay'] . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
+            }
             $code2 = '" class="__youtube_prefs__' . $autoplay . '" allowfullscreen ' . $centercode . '"></iframe>';
             $code  = $code1 . $finalsrc . $code2;
             $popupLink = 'https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $this->settings['thumbplay'] . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
@@ -155,6 +158,8 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 $this->addFlashMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('add_api_key', 'ns_youtube'), '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
             }
         }
+        $constant = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_nsyoutube.']['settings.'];
+        $this->view->assign('constant', $constant);
         $this->view->assign('totalPages', $video->totalPages);
         $this->view->assign('options', $options);
         $this->view->assign('nextPageToken', $video->nextPageToken);

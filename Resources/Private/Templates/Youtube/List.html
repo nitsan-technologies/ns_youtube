@@ -14,7 +14,30 @@
 				<f:then>
 					<f:if condition="{settings.layout}=='gallery'">
 						<f:then>
-							<f:format.raw>{iframe}</f:format.raw>
+							<div class="ns_video-gdpr ns_video-gdpr--play-list">
+								<f:format.raw>{iframe}</f:format.raw>
+								<f:if condition="{settings.enableGdpr}">
+									<f:then>
+										<f:if condition="{settings.bgImage}">
+											<f:then>
+												<f:variable name="bgimg" value="{f:uri.image(src: '{settings.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+											</f:then>
+											<f:else>
+												<f:variable name="bgimg" value="{constant.bgImage}" />
+											</f:else>
+										</f:if>
+										<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {settings.bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+											<div class="ns_video-gdpr__notice-inner">
+												<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
+												<div class="ns_video-gdpr__notice-btn-wrap">
+													<button class="ns_video-gdpr__notice-btn" style="background-color: {f:if(condition: '{settings.buttonColor}', then: '{settings.buttonColor}', else: '{constant.buttonColor}')};color:{f:if(condition: '{settings.buttonTextColor}', then: '{settings.buttonTextColor}', else: '{constant.buttonTextColor}')}">{f:if(condition: '{settings.buttonText}', then: '{settings.buttonText}', else: '{constant.buttonText}')}</button>
+													<button class="agreeToAll" style="background-color: {f:if(condition: '{settings.buttonColor}', then: '{settings.buttonColor}', else: '{constant.buttonColor}')};color:{f:if(condition: '{settings.buttonTextColor}', then: '{settings.buttonTextColor}', else: '{constant.buttonTextColor}')}">{f:if(condition: '{settings.activeAllButtonText}', then: '{settings.activeAllButtonText}', else: '{constant.activeAllButtonText}')}</button>
+												</div>
+											</div>
+										</div>
+									</f:then>
+								</f:if>
+							</div>
 							<f:if condition="{jsonResult.items}">
 								<f:then>
 									<f:if condition="{settings.channelsubtext}">
@@ -41,7 +64,31 @@
 						<f:else>
 							<f:if condition="{iframe}">
 								<f:then>
-									<f:format.raw>{iframe}</f:format.raw>
+									<div class="ns_video-gdpr ">
+										<f:format.raw>{iframe}</f:format.raw>
+										<f:if condition="{settings.enableGdpr}">
+											<f:then>
+												<f:if condition="{settings.bgImage}">
+													<f:then>
+														<f:variable name="bgimg" value="{f:uri.image(src: '{settings.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+													</f:then>
+													<f:else>
+														<f:variable name="bgimg" value="{constant.bgImage}" />
+													</f:else>
+												</f:if>
+												<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {settings.bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+													<div class="ns_video-gdpr__notice-inner">
+														<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
+														<div class="ns_video-gdpr__notice-btn-wrap">
+															<button class="ns_video-gdpr__notice-btn" style="background-color: {f:if(condition: '{settings.buttonColor}', then: '{settings.buttonColor}', else: '{constant.buttonColor}')};color:{f:if(condition: '{settings.buttonTextColor}', then: '{settings.buttonTextColor}', else: '{constant.buttonTextColor}')}">{f:if(condition: '{settings.buttonText}', then: '{settings.buttonText}', else: '{constant.buttonText}')}</button>
+															<button class="agreeToAll" style="background-color: {f:if(condition: '{settings.buttonColor}', then: '{settings.buttonColor}', else: '{constant.buttonColor}')};color:{f:if(condition: '{settings.buttonTextColor}', then: '{settings.buttonTextColor}', else: '{constant.buttonTextColor}')}">{f:if(condition: '{settings.activeAllButtonText}', then: '{settings.activeAllButtonText}', else: '{constant.activeAllButtonText}')}</button>
+														</div>
+													</div>
+												</div>
+											</f:then>
+										</f:if>
+									</div>
+									
 								</f:then>
 								<f:else>
 									<div class="error">
@@ -95,17 +142,39 @@
 												</svg>
 											</a>
 											<f:switch expression="{settings.widthtype}">
-												<f:case value="0"><div class="ns_video-block"></f:case>
-												<f:case value="1"><div class="ns_video-block ns-ratio__1-1"></f:case>
-												<f:case value="2"><div class="ns_video-block ns-ratio__1-2"></f:case>
-												<f:case value="3"><div class="ns_video-block ns-ratio__2-1"></f:case>
-												<f:case value="4"><div class="ns_video-block ns-ratio__3-2"></f:case>
-												<f:case value="5"><div class="ns_video-block ns-ratio__4-3"></f:case>
-												<f:case value="6"><div class="ns_video-block ns-ratio__5-4"></f:case>
-												<f:case value="7"><div class="ns_video-block ns-ratio__21-9"></f:case>
-												<f:defaultCase><div class="ns_video-block"></f:defaultCase>
+												<f:case value="0"><div class="ns_video-gdpr ns_video-block"></f:case>
+												<f:case value="1"><div class="ns_video-gdpr ns_video-block ns-ratio__1-1"></f:case>
+												<f:case value="2"><div class="ns_video-gdpr ns_video-block ns-ratio__1-2"></f:case>
+												<f:case value="3"><div class="ns_video-gdpr ns_video-block ns-ratio__2-1"></f:case>
+												<f:case value="4"><div class="ns_video-gdpr ns_video-block ns-ratio__3-2"></f:case>
+												<f:case value="5"><div class="ns_video-gdpr ns_video-block ns-ratio__4-3"></f:case>
+												<f:case value="6"><div class="ns_video-gdpr ns_video-block ns-ratio__5-4"></f:case>
+												<f:case value="7"><div class="ns_video-gdpr ns_video-block ns-ratio__21-9"></f:case>
+												<f:defaultCase><div class="ns_video-gdpr ns_video-block"></f:defaultCase>
 											</f:switch>
 												<f:format.raw>{iframe}</f:format.raw>
+												
+												<f:if condition="{settings.enableGdpr}">
+													<f:then>
+														<f:if condition="{settings.bgImage}">
+															<f:then>
+																<f:variable name="bgimg" value="{f:uri.image(src: '{settings.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+															</f:then>
+															<f:else>
+																<f:variable name="bgimg" value="{constant.bgImage}" />
+															</f:else>
+														</f:if>
+														<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {settings.bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+															<div class="ns_video-gdpr__notice-inner">
+																<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
+																<div class="ns_video-gdpr__notice-btn-wrap">
+																	<button class="ns_video-gdpr__notice-btn" style="background-color: {f:if(condition: '{settings.buttonColor}', then: '{settings.buttonColor}', else: '{constant.buttonColor}')};color:{f:if(condition: '{settings.buttonTextColor}', then: '{settings.buttonTextColor}', else: '{constant.buttonTextColor}')}">{f:if(condition: '{settings.buttonText}', then: '{settings.buttonText}', else: '{constant.buttonText}')}</button>
+																	<button class="agreeToAll" style="background-color: {f:if(condition: '{settings.buttonColor}', then: '{settings.buttonColor}', else: '{constant.buttonColor}')};color:{f:if(condition: '{settings.buttonTextColor}', then: '{settings.buttonTextColor}', else: '{constant.buttonTextColor}')}">{f:if(condition: '{settings.activeAllButtonText}', then: '{settings.activeAllButtonText}', else: '{constant.activeAllButtonText}')}</button>
+																</div>
+															</div>
+														</div>
+													</f:then>
+												</f:if>
 											</div>
 										</div>
 									</div>
@@ -147,17 +216,38 @@
 							<f:if condition="{iframe}">
 								<f:then>
 									<f:switch expression="{settings.widthtype}">
-										<f:case value="0"><div class="ns_video-block ns_simple-video"></f:case>
-										<f:case value="1"><div class="ns_video-block ns_simple-video ns-ratio__1-1"></f:case>
-										<f:case value="2"><div class="ns_video-block ns_simple-video ns-ratio__1-2"></f:case>
-										<f:case value="3"><div class="ns_video-block ns_simple-video ns-ratio__2-1"></f:case>
-										<f:case value="4"><div class="ns_video-block ns_simple-video ns-ratio__3-2"></f:case>
-										<f:case value="5"><div class="ns_video-block ns_simple-video ns-ratio__4-3"></f:case>
-										<f:case value="6"><div class="ns_video-block ns_simple-video ns-ratio__5-4"></f:case>
-										<f:case value="7"><div class="ns_video-block ns_simple-video ns-ratio__21-9"></f:case>
-										<f:defaultCase><div class="ns_video-block ns_simple-video"></div></f:defaultCase>
+										<f:case value="0"><div class="ns_video-gdpr ns_video-block ns_simple-video"></f:case>
+										<f:case value="1"><div class="ns_video-gdpr ns_video-block ns_simple-video ns-ratio__1-1"></f:case>
+										<f:case value="2"><div class="ns_video-gdpr ns_video-block ns_simple-video ns-ratio__1-2"></f:case>
+										<f:case value="3"><div class="ns_video-gdpr ns_video-block ns_simple-video ns-ratio__2-1"></f:case>
+										<f:case value="4"><div class="ns_video-gdpr ns_video-block ns_simple-video ns-ratio__3-2"></f:case>
+										<f:case value="5"><div class="ns_video-gdpr ns_video-block ns_simple-video ns-ratio__4-3"></f:case>
+										<f:case value="6"><div class="ns_video-gdpr ns_video-block ns_simple-video ns-ratio__5-4"></f:case>
+										<f:case value="7"><div class="ns_video-gdpr ns_video-block ns_simple-video ns-ratio__21-9"></f:case>
+										<f:defaultCase><div class="ns_video-gdpr ns_video-gdpr ns_video-block ns_simple-video"></div></f:defaultCase>
 									</f:switch>
 										<f:format.raw>{iframe}</f:format.raw>
+										<f:if condition="{settings.enableGdpr}">
+											<f:then>
+												<f:if condition="{settings.bgImage}">
+													<f:then>
+														<f:variable name="bgimg" value="{f:uri.image(src: '{settings.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+													</f:then>
+													<f:else>
+														<f:variable name="bgimg" value="{constant.bgImage}" />
+													</f:else>
+												</f:if>
+												<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {settings.bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+													<div class="ns_video-gdpr__notice-inner">
+														<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
+														<div class="ns_video-gdpr__notice-btn-wrap">
+															<button class="ns_video-gdpr__notice-btn" style="background-color: {f:if(condition: '{settings.buttonColor}', then: '{settings.buttonColor}', else: '{constant.buttonColor}')};color:{f:if(condition: '{settings.buttonTextColor}', then: '{settings.buttonTextColor}', else: '{constant.buttonTextColor}')}">{f:if(condition: '{settings.buttonText}', then: '{settings.buttonText}', else: '{constant.buttonText}')}</button>
+															<button class="agreeToAll" style="background-color: {f:if(condition: '{settings.buttonColor}', then: '{settings.buttonColor}', else: '{constant.buttonColor}')};color:{f:if(condition: '{settings.buttonTextColor}', then: '{settings.buttonTextColor}', else: '{constant.buttonTextColor}')}">{f:if(condition: '{settings.activeAllButtonText}', then: '{settings.activeAllButtonText}', else: '{constant.activeAllButtonText}')}</button>
+														</div>
+													</div>
+												</div>
+											</f:then>
+										</f:if>
 									</div>
 								</f:then>
 								<f:else>

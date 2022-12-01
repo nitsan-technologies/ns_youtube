@@ -24,6 +24,30 @@ plugin.tx_nsyoutube {
 
     # cat=plugin.tx_nsyoutube/100/1; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.api_key
     apiKey = 
+
+    # cat=plugin.tx_nsyoutube/100/2; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeDescription
+		description = GDPR Consent
+
+    # cat=plugin.tx_nsyoutube/100/3; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeColor
+		noticeColor = 
+
+    # cat=plugin.tx_nsyoutube/100/4; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgImage
+		bgImage = 
+
+    # cat=plugin.tx_nsyoutube/100/5; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgColor
+		bgColor = 
+
+    # cat=plugin.tx_nsyoutube/100/6; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonText
+		buttonText = Active
+
+    # cat=plugin.tx_nsyoutube/100/7; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.activeAllButtonText
+		activeAllButtonText = Active All 
+
+    # cat=plugin.tx_nsyoutube/100/8; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonTextColor
+		buttonTextColor = 
+
+    # cat=plugin.tx_nsyoutube/100/9; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonColor
+		buttonColor = 
   }
 
 }

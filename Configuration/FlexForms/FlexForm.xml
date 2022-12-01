@@ -564,5 +564,185 @@
 				</el>
 			</ROOT>
 		</sDEF>
+		<userSettings>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.setting_feuser</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.enableGdpr>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.enableGdpr</label>
+							<onChange>reload</onChange>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.enableGdpr>
+
+					<settings.noticeDescription>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeDescription</label>
+							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
+							<config>
+								<type>text</type>
+								<rows>5</rows>
+								<cols>30</cols>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.noticeDescription>
+
+					<settings.noticeColor>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeColor</label>
+							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
+							<config>
+								<type>input</type>
+								<renderType>colorpicker</renderType>
+							</config>
+						</TCEforms>
+					</settings.noticeColor>
+
+					<settings.wantBgImage>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.wantBgImage</label>
+							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
+							<onChange>reload</onChange>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.wantBgImage>
+
+					<settings.bgImage>
+						<TCEforms>
+							 <label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgImage</label>
+							 <displayCond>
+								<and>
+									<value1>FIELD:settings.enableGdpr:=:1</value1>
+									<value2>FIELD:settings.wantBgImage:=:1</value2>
+								</and>
+							</displayCond>
+							<config>
+								<type>inline</type>
+								<maxitems>1</maxitems>
+								<foreign_table>sys_file_reference</foreign_table>
+								<foreign_table_field>tablenames</foreign_table_field>
+								<foreign_label>uid_local</foreign_label>
+								<foreign_sortby>sorting_foreign</foreign_sortby>
+								<foreign_selector>uid_local</foreign_selector>
+								<foreign_selector_fieldTcaOverride type="array">
+									<config>
+										<appearance>
+											<elementBrowserType>file</elementBrowserType>
+											<elementBrowserAllowed>jpg,png,svg,jpeg,gif</elementBrowserAllowed>
+										</appearance>
+									</config>
+								</foreign_selector_fieldTcaOverride>
+								<foreign_types type="array">
+									<numIndex index="2">
+										<showitem>--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,--palette--;;filePalette</showitem>
+									</numIndex>
+								</foreign_types>
+								<foreign_match_fields type="array">
+									<fieldname>image</fieldname>
+								</foreign_match_fields>
+								<appearance type="array">
+									<newRecordLinkAddTitle>1</newRecordLinkAddTitle>
+									<headerThumbnail>
+										<field>uid_local</field>
+										<height>64</height>
+										<width>64</width>
+									</headerThumbnail>
+									<enabledControls>
+										<info>1</info>
+										<new>0</new>
+										<dragdrop>0</dragdrop>
+										<sort>1</sort>
+										<hide>0</hide>
+										<delete>1</delete>
+										<localize>1</localize>
+									</enabledControls>
+								</appearance>
+								<overrideChildTca>
+									<columns type="array">
+										<uid_local type="array">
+											<config type="array">
+												<appearance type="array">
+													<elementBrowserType>file</elementBrowserType>
+													<elementBrowserAllowed>gif,jpg,jpeg,tif,tiff,bmp,pcx,tga,png,pdf,ai</elementBrowserAllowed>
+												</appearance>
+											</config>
+										</uid_local>
+									</columns>
+								</overrideChildTca>
+							</config>
+						</TCEforms>
+					</settings.bgImage>
+
+					<settings.bgColor>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgColor</label>
+							<displayCond>
+								<and>
+									<value1>FIELD:settings.enableGdpr:=:1</value1>
+									<value2>FIELD:settings.wantBgImage:=:0</value2>
+								</and>
+							</displayCond>
+							<config>
+								<type>input</type>
+								<renderType>colorpicker</renderType>
+							</config>
+						</TCEforms>
+					</settings.bgColor>
+
+					<settings.buttonText>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonText</label>
+							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
+							<config>
+								<type>input</type>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.buttonText>
+
+					<settings.activeAllButtonText>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.activeAllButtonText</label>
+							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
+							<config>
+								<type>input</type>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.activeAllButtonText>
+
+					<settings.buttonTextColor>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonTextColor</label>
+							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
+							<config>
+								<type>input</type>
+								<renderType>colorpicker</renderType>
+							</config>
+						</TCEforms>
+					</settings.buttonTextColor>
+
+					<settings.buttonColor>
+						<TCEforms>
+							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonColor</label>
+							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
+							<config>
+								<type>input</type>
+								<renderType>colorpicker</renderType>
+							</config>
+						</TCEforms>
+					</settings.buttonColor>
+				</el>
+			</ROOT>
+		</userSettings>
 	</sheets>
 </T3DataStructure>
