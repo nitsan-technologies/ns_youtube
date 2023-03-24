@@ -35,6 +35,7 @@ page.includeJSFooter{
     youtube1 = EXT:ns_youtube/Resources/Public/Js/script.js
     youtubegdpr = EXT:ns_youtube/Resources/Public/Js/youtube-gdpr.js
 }
-[{$plugin.tx_nsyoutube.settings.javascript.jquery} == 1]
-  page.includeJS.youtubejs = http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
-[global]
+page.includeJSLibs {
+    nsfjquery = EXT:ns_youtube/Resources/Public/Js/jquery.min.js
+    nsfjquery.if.isTrue = {$plugin.tx_nsguestbook_form.settings.jQuery}
+}
