@@ -30,8 +30,8 @@
             var $iframe = $(this).find('iframe').first();
             var pageId = $('.pId').val();
 
-            var initSrc = $iframe[0].dataset.src;
-            // var initSrc = $iframe.attr('src');
+            // var initSrc = $iframe[0].dataset.src;
+            var initSrc = $iframe.attr('src');
             if (!initSrc) {
                 initSrc = $iframe.data('ep-src');
             }

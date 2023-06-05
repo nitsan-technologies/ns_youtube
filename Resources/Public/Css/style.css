@@ -190,10 +190,18 @@
 .yt-pagenumbers .active {
     color: #181818;
 }
-
+.tx-ns-youtube .yt-pagination .yt-pagebutton {
+    padding: 4px 10px 2px;
+}
 .yt-pagination .yt-pagebutton {
     display: inline-block;
     padding: 0 10px 0 10px;
+    background-color: #3a85e6;
+    color: #fff;
+    border: 1px solid #3a85e6;
+    cursor: pointer;
+    transition: all .2s ease 0s;
+    outline: none;
 }
 
 .yt-pagebutton > div {

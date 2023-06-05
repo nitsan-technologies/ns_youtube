@@ -19,13 +19,12 @@ $EM_CONF[$_EXTKEY] = [
   'author_company' => 'NITSAN Technologies Pvt Ltd',
   'state' => 'stable',
   'uploadfolder' => true,
-  'clearCacheOnLoad' => 0,
-  'version' => '2.1.1',
+  'version' => '12.0.0',
   'constraints' =>
   [
     'depends' =>
     [
-      'typo3' => '6.0.0-11.5.99',
+      'typo3' => '12.0.0-12.9.99',
     ],
     'conflicts' =>
     [
@@ -34,5 +33,4 @@ $EM_CONF[$_EXTKEY] = [
     [
     ],
   ],
-  'clearcacheonload' => true,
 ];
