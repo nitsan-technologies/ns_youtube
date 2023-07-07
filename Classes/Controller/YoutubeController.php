@@ -29,23 +29,24 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     /**
      * @var array<mixed> $badentities
      */
-    public $badentities = ['&#215;', '×', '&#8211;', '–', '&amp;', '&#038;', '&#38;'];
+    public array $badentities = ['&#215;', '×', '&#8211;', '–', '&amp;', '&#038;', '&#38;'];
 
     /**
      * @var array<mixed> $goodliterals
      */
-    public $goodliterals = ['x', 'x', '--', '--', '&', '&', '&'];
+    public array $goodliterals = ['x', 'x', '--', '--', '&', '&', '&'];
 
 
     /**
      * @var string $finalsrc
      */    
-    public $finalsrc = '';
+    public string $finalsrc = '';
 
     /**
      * @var string $link
      */  
-    public $link = '';
+    public string $link = '';
+
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
      *
@@ -75,7 +76,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $showcontrol = 0;
         $showrelatedvideo = 0;
         $contentObj = $this->configurationManager->getContentObject();
-        $totalPages = 0;
+        
         // Get link
         if ($this->settings['listType'] == 'single') {
             $this->link = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['videourl']));
@@ -247,8 +248,9 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      *
      * @return void
      */
-    public function ajaxAction()
+    public function ajaxAction(): void
     {
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('test',__FILE__.''.__LINE__);die;
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             $options           = (object) $_POST;
             $options->apiKey   = $this->settings['apiKey'];
@@ -281,7 +283,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     }
 
     // Get keyValue
-    public function keyvalue(string $qry,bool $includev)
+    public function keyvalue(string $qry,bool $includev): array
     {
         $ytvars = GeneralUtility::trimExplode('&', $qry);
         $ytkvp  = [];
@@ -316,6 +318,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     public function getChannelVideo(Object $options): Object
     {
         try {
+            $channelId = '';
             if ($this->settings['channeltype'] == 'username' && isset($this->settings['channelname']) && $this->settings['channelname'] != '') {
                 $api = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=' . str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
                 $result     = $this->connectAPI($api, 'GET', null, true, null);
@@ -340,8 +343,9 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     }
 
     // Get Video Id
-    public function getVideo(Object $jsonResult,array $options)
+    public function getVideo(Object $jsonResult,array $options): Object
     {
+        $totalPages = 0;
         $obj            = new \stdClass();
         $resultsPerPage = $jsonResult->pageInfo->resultsPerPage; // $jsonResult->pageInfo->resultsPerPage;
         $totalResults   = $jsonResult->pageInfo->totalResults;
@@ -428,6 +432,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     // Get Plyalist Id
     public function getPlaylistId(string $channelId): string
     {
+        $playlistId = '';
         $apiEndpoint = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&key=' . $this->settings['apiKey'] . '&id=' . $channelId;
         $apiResult   = $this->connectAPI($apiEndpoint, 'GET', null, true, null);
         $jsonResult  = json_decode($apiResult->getBody());
@@ -441,7 +446,10 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     // Exception
     public function catchException($e)
     {
-        $response = '';
+        if(property_exists($e,'response')){
+            $response = $e->getResponse();
+        }
+        $response = isset($response) ? $response : null;
         if (empty($response) && $response == null) {
             $error = $e->getMessage();
         } else {
@@ -466,6 +474,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 
         $partialRootPaths = $extbaseFrameworkConfiguration['view']['partialRootPaths'];
+        $templatePathAndFilename = '';
         foreach (array_reverse($partialRootPaths) as $partialRootPath) {
             $templatePathAndFilename = GeneralUtility::getFileAbsFileName($partialRootPath . $controllerName . '/' . $templateName . '.html');
 
