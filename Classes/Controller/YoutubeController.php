@@ -1,7 +1,6 @@
 <?php
 namespace Nitsan\NsYoutube\Controller;
 
-use TYPO3\CMS\Core\Http\HttpRequest;
 
 /***
  *
@@ -20,10 +19,11 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 /**
  * YoutubeController
  */
-class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class YoutubeController extends ActionController
 {
 
     /**
@@ -48,7 +48,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     public string $link = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @var ConfigurationManagerInterface
      *
      */
     protected $configurationManager;
@@ -56,7 +56,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     /**
      * action list
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function listAction(): ResponseInterface
     {
@@ -141,6 +141,16 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         if ($jsonResult) {
                             $video   = $this->getVideo($jsonResult, $finalparams);
                             $videoid = isset($video->init_id) ? $video->init_id : '';
+                            $this->view->assignMultiple(
+                                [
+                                    'totalPages' => $video->totalPages,
+                                    'nextPageToken' => $video->nextPageToken,
+                                    'prevPageToken' => $video->prevPageToken,
+                                    'options' => $options,
+                                    'jsonResult' => $jsonResult,
+                                    'subscibe' => $video->channelTitle
+                                ]
+                            );
                         } else {
                             if ($linkparams['v'] != '' && !empty($linkparams['v'])) {
                                 $videoid = $linkparams['v'];
@@ -170,9 +180,11 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             $video   = $this->getVideo($jsonResult, []);
                             $this->view->assignMultiple(
                                 [
+                                    'jsonResult' => $jsonResult,
                                     'totalPages' => $video->totalPages,
                                     'nextPageToken' => $video->nextPageToken,
                                     'prevPageToken' => $video->prevPageToken,
+                                    'options' => $options,
                                     'subscibe' => $video->channelTitle
                                 ]
                             );
@@ -250,10 +262,27 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function ajaxAction(): void
     {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('test',__FILE__.''.__LINE__);die;
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            $playlistParamsTemp = '';
             $options           = (object) $_POST;
             $options->apiKey   = $this->settings['apiKey'];
+
+            // Get Playlist Id
+            if ($this->settings['listType'] == 'playlist') {
+                $playlistLink = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['playlisturl']));
+                $playlistLink     = preg_replace('/\s/', '', $playlistLink);
+                if(!empty($playlistLink)){
+                    $playlistParamsTemp = GeneralUtility::trimExplode('?', $playlistLink);
+                }
+                
+                if (count($playlistParamsTemp) > 1) {
+                    $playlistParams = $this->keyvalue($playlistParamsTemp[1], true);
+                }
+                if (isset($playlistParams['list'])) {
+                    $finalPlaylistParams = $playlistParams + $this->settings;
+                    $options->playlistId = $finalPlaylistParams['list'];
+                }
+            }
             $options->pageSize = isset($this->settings['pagesize']) ? $this->settings['pagesize'] : 5;
             $gallery           = new \stdClass();
             if ($this->settings['listType'] == 'channel') {
@@ -263,7 +292,6 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             }
             $gallery   = $this->getVideo($jsonResult, $options);
             $nextvideo = $gallery->html;
-
             echo $nextvideo;
             die();
         }
@@ -298,7 +326,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     }
 
     // Get Videos from list parameter
-    public function getVideoFromList(Object $options): Object
+    public function getVideoFromList(Object|array $options): Object|array
     {
         $apiEndpoint = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,status&playlistId=' . $options->playlistId . '&maxResults=' . $options->pageSize . '&key=' . $options->apiKey;
         if ($options->pageToken != null) {
@@ -343,7 +371,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     }
 
     // Get Video Id
-    public function getVideo(Object $jsonResult,array $options): Object
+    public function getVideo(Object $jsonResult,array|Object $options): Object
     {
         $totalPages = 0;
         $obj            = new \stdClass();
@@ -394,8 +422,9 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 $html      = $this->getTemplateHtml('Youtube', 'Gallery', $gallery);
                 $obj->html = $html;
             }
-            return $obj;
+
         }
+        return $obj;
     }
 
     // Get Plylist View
@@ -436,6 +465,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $apiEndpoint = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&key=' . $this->settings['apiKey'] . '&id=' . $channelId;
         $apiResult   = $this->connectAPI($apiEndpoint, 'GET', null, true, null);
         $jsonResult  = json_decode($apiResult->getBody());
+        $items = [];
         $items       = $jsonResult->items;
         foreach ($jsonResult->items as $item) {
             $playlistId = $item->contentDetails->relatedPlaylists->uploads;
@@ -444,7 +474,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     }
 
     // Exception
-    public function catchException($e)
+    public function catchException($e): string
     {
         if(property_exists($e,'response')){
             $response = $e->getResponse();

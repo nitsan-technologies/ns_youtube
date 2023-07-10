@@ -5,12 +5,16 @@
             //Video Element
             if($('.splash-button').length) {
                 $('.splash-button').on('click', function () {
+                    //ns_video-gdpr__notice-btn
                     $(this).parent('.ns_cover-image').addClass('video-played');
+                    var gdprOption = $(this).attr('data-gdpr');
                     var autoplay = $(this).attr('data-url');
                     var iframeautoplay = autoplay.replace('autoplay=','autoplay=1');
-                    setTimeout(() => {
-                        $(this).siblings(".ns_video-block").find('iframe').attr('src', iframeautoplay);
-                    }, 100);
+                    if(gdprOption != '1'){
+                        setTimeout(() => {
+                            $(this).siblings(".ns_video-block").find('iframe').attr('src', iframeautoplay);
+                        }, 100);
+                    }
                 });
             }
 
@@ -18,10 +22,13 @@
             if ($('.ns_lightbox-button').length) {
                 $('.ns_lightbox-button').on('click', function () {
                     var iframeUrl = $(this).attr('data-url');
+                    var gdprOption = $(this).attr('data-gdpr');
                     var iframePlayurl = iframeUrl.replace('autoplay=','autoplay=1');
-                    setTimeout(() => {
-                        $('.fancybox-iframe').attr('src', iframePlayurl);
-                    }, 100);
+                    if(gdprOption != '1'){
+                        setTimeout(() => {
+                            $('.fancybox-iframe').attr('src', iframePlayurl);
+                        }, 100);
+                    }
                 });   
             }
 
@@ -101,14 +108,12 @@
                 +'&showTitle='+$(this).data('showtitle')
                 +'&showPaging='+$(this).data('showpaging')
                 +'&thumbplay='+$(this).data('thumbplay');
-
                 $.ajax({
                     type: "POST",
                     url: ajaxURL,
                     data: dataString,
                     contentType: "application/x-www-form-urlencoded;charset=UTF-8",
                     success: function(response){
-
                         $container.find('.yt-gallery-list').html(response);
                         $container.find('.yt-current').each(function () {
                             $(this).text($container.data('currpage'));
