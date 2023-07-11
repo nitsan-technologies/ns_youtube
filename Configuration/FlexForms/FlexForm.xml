@@ -568,6 +568,13 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.setting_feuser</sheetTitle>
+					<displayCond>FIELD:sDEF.settings.videotype:=:list</displayCond>
+					<displayCond>
+						<and>
+							<value1>FIELD:sDEF.settings.videotype:!=:lightbox</value1>
+							<value2>FIELD:sDEF.settings.videotype:!=:text</value2>
+						</and>
+					</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>

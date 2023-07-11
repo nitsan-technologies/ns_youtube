@@ -22,13 +22,10 @@
             if ($('.ns_lightbox-button').length) {
                 $('.ns_lightbox-button').on('click', function () {
                     var iframeUrl = $(this).attr('data-url');
-                    var gdprOption = $(this).attr('data-gdpr');
                     var iframePlayurl = iframeUrl.replace('autoplay=','autoplay=1');
-                    if(gdprOption != '1'){
-                        setTimeout(() => {
-                            $('.fancybox-iframe').attr('src', iframePlayurl);
-                        }, 100);
-                    }
+                    setTimeout(() => {
+                        $('.fancybox-iframe').attr('src', iframePlayurl);
+                    }, 100);
                 });   
             }
 
