@@ -1,42 +1,31 @@
 <?php
-if (!defined('TYPO3_MODE')) {
+if (!defined('TYPO3')) {
     die('Access denied.');
 }
+use TYPO3\CMS\Core\Imaging\IconRegistry;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use Nitsan\NsYoutube\Controller\YoutubeController;
+use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 
-if (version_compare(TYPO3_branch, '11.0', '>=')) {
-    $moduleClass = \Nitsan\NsYoutube\Controller\YoutubeController::class;
-} else {
-    $moduleClass = 'Youtube';
-}
-
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Nitsan.NsYoutube',
+ExtensionUtility::configurePlugin(
+    'NsYoutube',
     'Youtube',
     [
-        $moduleClass => 'list,ajax'
+       YoutubeController::class => 'list,ajax'
     ],
     // non-cacheable actions
     [
-        $moduleClass => 'list,ajax'
+       YoutubeController::class => 'list,ajax'
     ]
 );
+$iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
 
+$iconRegistry->registerIcon(
+    'ext-ns-youtube-icon',
+    SvgIconProvider::class,
+    ['source' => 'EXT:ns_youtube/Resources/Public/Icons/user_plugin_youtube.svg']
+);
 
-if (version_compare(TYPO3_branch, '7.0', '>')) {
-    if (TYPO3_MODE === 'BE') {
-        $icons = [
-            'ext-ns-youtube-icon' => 'user_plugin_youtube.svg',
-        ];
-        $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-        foreach ($icons as $identifier => $path) {
-            $iconRegistry->registerIcon(
-                $identifier,
-                \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-                ['source' => 'EXT:ns_youtube/Resources/Public/Icons/' . $path]
-            );
-        }
-    }
-}
-
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['tt_content_drawItem']['ns_youtube']
-        = \Nitsan\NsYoutube\Hooks\PageLayoutView::class;
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['security.backend.enforceContentSecurityPolicy'] = false;
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['security.frontend.enforceContentSecurityPolicy'] = false;

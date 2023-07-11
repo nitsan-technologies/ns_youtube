@@ -1,6 +1,4 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-	{namespace m=NS\NsYoutube\ViewHelpers}
-
 	<f:layout name="Default" />
 
 	<f:section name="main">
@@ -18,16 +16,18 @@
 								<f:format.raw>{iframe}</f:format.raw>
 								<f:if condition="{settings.enableGdpr} == '1' || {constant.enableGdpr} == '1'">
 									<f:then>
-										<f:if condition="{settings.bgImage}">
+										<f:if condition="{backImage} && {settings.enableGdpr} == '1'">
 											<f:then>
-												<f:variable name="bgimg" value="{f:uri.image(src: '{settings.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+												<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
 											</f:then>
 											<f:else>
-												<f:variable name="bgimg" value="{constant.bgImage}" />
+												<f:if condition="{constant.bgImage} !== '' ">
+													<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+												</f:if>
 											</f:else>
 										</f:if>
 										<f:variable name="bgColor">{f:if(condition: '{settings.bgColor}', then: '{settings.bgColor}', else: '{constant.bgColor}')};</f:variable>
-										<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+										<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{bgimg}', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.enableGdpr} && {settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
 											<div class="ns_video-gdpr__notice-inner">
 												<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
 												<div class="ns_video-gdpr__notice-btn-wrap">
@@ -44,7 +44,7 @@
 									<f:if condition="{settings.channelsubtext}">
 										<div class="yt-gallery-subscribe">
 											<f:link.external uri="https://www.youtube.com/channel/{subscibe}?sub_confirmation=1" target="_blank" class="yt-gallery-subbutton">
-												<f:image src="typo3conf/ext/ns_youtube/Resources/Public/Images/play-subscribe.png" alt="subscribe" />{settings.channelsubtext}
+												<f:image src="{f:uri.resource(path:'Images/play-subscribe.png', extensionName: 'NsYoutube')}" alt="subscribe" />{settings.channelsubtext}
 											</f:link.external>
 										</div>
 									</f:if>
@@ -65,20 +65,22 @@
 						<f:else>
 							<f:if condition="{iframe}">
 								<f:then>
-									<div class="ns_video-gdpr ">
+									<div class="ns_video-gdpr ns_video-gdpr--play-list">
 										<f:format.raw>{iframe}</f:format.raw>
 										<f:if condition="{settings.enableGdpr} == '1' || {constant.enableGdpr} == '1'">
 											<f:then>
-												<f:if condition="{settings.bgImage}">
+												<f:if condition="{backImage} && {settings.enableGdpr} == '1'">
 													<f:then>
-														<f:variable name="bgimg" value="{f:uri.image(src: '{settings.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+														<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
 													</f:then>
 													<f:else>
-														<f:variable name="bgimg" value="{constant.bgImage}" />
+														<f:if condition="{constant.bgImage} !== '' ">
+															<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+														</f:if>
 													</f:else>
 												</f:if>
 												<f:variable name="bgColor">{f:if(condition: '{settings.bgColor}', then: '{settings.bgColor}', else: '{constant.bgColor}')};</f:variable>
-												<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+												<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{bgimg}', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.enableGdpr} && {settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
 													<div class="ns_video-gdpr__notice-inner">
 														<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
 														<div class="ns_video-gdpr__notice-btn-wrap">
@@ -104,8 +106,8 @@
 					</f:if>
 				</f:then>
 				<f:else>
-					<f:if condition="{settings.image}">
-						<f:variable name="img" value="{f:uri.image(src: '{settings.image}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+					<f:if condition="{youtubeImage}">
+						<f:variable name="img" value="{f:uri.image(image: '{youtubeImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
 					</f:if>
 					<f:if condition="{settings.videotype}!='default'">
 						<f:then>
@@ -113,7 +115,7 @@
 								<f:case value="lightbox">
 									<div class="video">
 										<div class="ns_cover-image {f:if(condition: '{img}', then: 'bg-image')}" style="{f:if(condition: '{img}', then: 'background-image: url({img})')}">
-											<a href="{popupLink}" class="ns_play-button ns_lightbox-button" data-url="{popupLink}" data-fancybox="fancybox{settings.image}">
+											<a href="{popupLink}" class="ns_play-button ns_lightbox-button" data-url="{popupLink}" data-fancybox="fancybox{youtubeImage.originalFile.properties.uid}">
 												<svg enable-background="new 0 0 512 512" height="80" viewBox="0 0 512 512" width="80" xmlns="http://www.w3.org/2000/svg">
 													<path d="m437.02 74.98c-48.353-48.351-112.64-74.98-181.02-74.98s-132.667 26.629-181.02 74.98c-48.351 48.353-74.98 112.64-74.98 181.02s26.629 132.667 74.98 181.02c48.353 48.351 112.64 74.98 181.02 74.98s132.667-26.629 181.02-74.98c48.351-48.353 74.98-112.64 74.98-181.02s-26.629-132.667-74.98-181.02zm-181.02 407.02c-124.617 0-226-101.383-226-226s101.383-226 226-226 226 101.383 226 226-101.383 226-226 226z" />
 													<path d="m374.782 243.84-180-130c-4.566-3.298-10.596-3.759-15.611-1.195s-8.171 7.722-8.171 13.355v260c0 5.633 3.156 10.791 8.171 13.355 2.154 1.102 4.495 1.645 6.827 1.645 3.097 0 6.179-.958 8.784-2.84l180-130c3.904-2.82 6.218-7.344 6.218-12.16s-2.312-9.34-6.218-12.16zm-173.782 112.824v-201.328l139.381 100.664z" />
@@ -133,11 +135,11 @@
 											</div>
 										</div>
 									</div>
-								</f:case>
+								</f:case>			
 								<f:case value="splash">
 									<div class="video">
 										<div class="ns_cover-image {f:if(condition: '{img}', then: 'bg-image')}" style="{f:if(condition: '{img}', then: 'background-image: url({img})')}">
-											<a href="javascript:;" class="ns_play-button splash-button" data-url="{popupLink}">
+											<a href="javascript:;" class="ns_play-button splash-button" data-url="{popupLink}" data-gdpr="{f:if(condition: '{settings.enableGdpr}||{constant.enableGdpr}', then: '1')}">
 												<svg enable-background="new 0 0 512 512" height="80" viewBox="0 0 512 512" width="80" xmlns="http://www.w3.org/2000/svg">
 													<path d="m437.02 74.98c-48.353-48.351-112.64-74.98-181.02-74.98s-132.667 26.629-181.02 74.98c-48.351 48.353-74.98 112.64-74.98 181.02s26.629 132.667 74.98 181.02c48.353 48.351 112.64 74.98 181.02 74.98s132.667-26.629 181.02-74.98c48.351-48.353 74.98-112.64 74.98-181.02s-26.629-132.667-74.98-181.02zm-181.02 407.02c-124.617 0-226-101.383-226-226s101.383-226 226-226 226 101.383 226 226-101.383 226-226 226z" />
 													<path d="m374.782 243.84-180-130c-4.566-3.298-10.596-3.759-15.611-1.195s-8.171 7.722-8.171 13.355v260c0 5.633 3.156 10.791 8.171 13.355 2.154 1.102 4.495 1.645 6.827 1.645 3.097 0 6.179-.958 8.784-2.84l180-130c3.904-2.82 6.218-7.344 6.218-12.16s-2.312-9.34-6.218-12.16zm-173.782 112.824v-201.328l139.381 100.664z" />
@@ -155,19 +157,20 @@
 												<f:defaultCase><div class="ns_video-gdpr ns_video-block"></f:defaultCase>
 											</f:switch>
 												<f:format.raw>{iframe}</f:format.raw>
-												
 												<f:if condition="{settings.enableGdpr} == '1' || {constant.enableGdpr} == '1'">
 													<f:then>
-														<f:if condition="{settings.bgImage}">
+														<f:if condition="{backImage} && {settings.enableGdpr} == '1'">
 															<f:then>
-																<f:variable name="bgimg" value="{f:uri.image(src: '{settings.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+																<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
 															</f:then>
 															<f:else>
-																<f:variable name="bgimg" value="{constant.bgImage}" />
+																<f:if condition="{constant.bgImage} !== '' ">
+																	<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+																</f:if>
 															</f:else>
 														</f:if>
 														<f:variable name="bgColor">{f:if(condition: '{settings.bgColor}', then: '{settings.bgColor}', else: '{constant.bgColor}')};</f:variable>
-														<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+														<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{bgimg}', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.enableGdpr} && {settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
 															<div class="ns_video-gdpr__notice-inner">
 																<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
 																<div class="ns_video-gdpr__notice-btn-wrap">
@@ -192,7 +195,7 @@
 								<f:defaultCase>
 									<div class="video">
 										<div class="ns_cover-image {f:if(condition: '{img}', then: 'bg-image')}" style="{f:if(condition: '{img}', then: 'background-image: url({img})')}">
-											<f:link.typolink parameter="{settings.videourl}" additionalAttributes="{data-fancybox:'fancybox{settings.image}', data-url='{popupLink}'}" class="ns_play-button ns_lightbox-button">
+											<f:link.typolink parameter="{settings.videourl}" additionalAttributes="{data-fancybox:'fancybox{youtubeImage.originalFile.properties.uid}', data-url='{popupLink}'}" class="ns_play-button">
 												<svg enable-background="new 0 0 512 512" height="80" viewBox="0 0 512 512" width="80" xmlns="http://www.w3.org/2000/svg">
 													<path d="m437.02 74.98c-48.353-48.351-112.64-74.98-181.02-74.98s-132.667 26.629-181.02 74.98c-48.351 48.353-74.98 112.64-74.98 181.02s26.629 132.667 74.98 181.02c48.353 48.351 112.64 74.98 181.02 74.98s132.667-26.629 181.02-74.98c48.351-48.353 74.98-112.64 74.98-181.02s-26.629-132.667-74.98-181.02zm-181.02 407.02c-124.617 0-226-101.383-226-226s101.383-226 226-226 226 101.383 226 226-101.383 226-226 226z" />
 													<path d="m374.782 243.84-180-130c-4.566-3.298-10.596-3.759-15.611-1.195s-8.171 7.722-8.171 13.355v260c0 5.633 3.156 10.791 8.171 13.355 2.154 1.102 4.495 1.645 6.827 1.645 3.097 0 6.179-.958 8.784-2.84l180-130c3.904-2.82 6.218-7.344 6.218-12.16s-2.312-9.34-6.218-12.16zm-173.782 112.824v-201.328l139.381 100.664z" />
@@ -232,16 +235,18 @@
 										<f:format.raw>{iframe}</f:format.raw>
 										<f:if condition="{settings.enableGdpr} == '1' || {constant.enableGdpr} == '1'">
 											<f:then>
-												<f:if condition="{settings.bgImage}">
+												<f:if condition="{backImage} && {settings.enableGdpr} == '1'">
 													<f:then>
-														<f:variable name="bgimg" value="{f:uri.image(src: '{settings.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+														<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
 													</f:then>
 													<f:else>
-														<f:variable name="bgimg" value="{constant.bgImage}" />
+														<f:if condition="{constant.bgImage} !== '' ">
+															<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+														</f:if>
 													</f:else>
 												</f:if>
 												<f:variable name="bgColor">{f:if(condition: '{settings.bgColor}', then: '{settings.bgColor}', else: '{constant.bgColor}')};</f:variable>
-												<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{settings.wantBgImage} == 1', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
+												<div class="ns_video-gdpr__notice {f:if(condition: '{bgimg}', then: 'ns_video-gdpr__notice-bg-img')}" style="{f:if(condition: '{bgimg}', then: 'background-image: url({bgimg})', else: 'background-color: {bgColor}')};color:{f:if(condition: '{settings.enableGdpr} && {settings.noticeColor}', then: '{settings.noticeColor}', else: '{constant.noticeColor}')};">
 													<div class="ns_video-gdpr__notice-inner">
 														<p>{f:if(condition: '{settings.noticeDescription}', then: '{settings.noticeDescription}', else: '{constant.description}')}</p>
 														<div class="ns_video-gdpr__notice-btn-wrap">

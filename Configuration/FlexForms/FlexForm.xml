@@ -174,7 +174,7 @@
 						</TCEforms>
 					</settings.lightboxtext>
 
-					<settings.image>
+					<youtubeImage>
 						<TCEforms>
 							 <label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.image</label>
 							 <displayCond>
@@ -238,7 +238,7 @@
 								</overrideChildTca>
 							</config>
 						</TCEforms>
-					</settings.image>
+					</youtubeImage>
 
 					<settings.showcontrol>
 						<TCEforms>
@@ -568,6 +568,12 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.setting_feuser</sheetTitle>
+					<displayCond>
+						<and>
+							<value1>FIELD:sDEF.settings.videotype:!=:lightbox</value1>
+							<value2>FIELD:sDEF.settings.videotype:!=:text</value2>
+						</and>
+					</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -616,7 +622,7 @@
 						</TCEforms>
 					</settings.wantBgImage>
 
-					<settings.bgImage>
+					<backImage>
 						<TCEforms>
 							 <label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgImage</label>
 							 <displayCond>
@@ -680,7 +686,7 @@
 								</overrideChildTca>
 							</config>
 						</TCEforms>
-					</settings.bgImage>
+					</backImage>
 
 					<settings.bgColor>
 						<TCEforms>

@@ -8,10 +8,9 @@ plugin.tx_nsyoutube {
     layoutRootPaths.0 = EXT:ns_youtube/Resources/Private/Layouts/
     layoutRootPaths.1 = {$plugin.tx_nsyoutube.view.layoutRootPath}
   }
- 
     settings {
         javascript{
-          jquery = 0
+          jquery = {$plugin.tx_nsyoutube.settings.javascript.jquery}
         }
         apiKey = {$plugin.tx_nsyoutube.settings.apiKey}
         enableGdpr = {$plugin.tx_nsyoutube.settings.enableGdpr}
@@ -37,5 +36,5 @@ page.includeJSFooter{
 }
 page.includeJSLibs {
     nsfjquery = EXT:ns_youtube/Resources/Public/Js/jquery.min.js
-    nsfjquery.if.isTrue = {$plugin.tx_nsguestbook_form.settings.jQuery}
+    nsfjquery.if.isTrue = {$plugin.tx_nsyoutube.settings.javascript.jquery}
 }

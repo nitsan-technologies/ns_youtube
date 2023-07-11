@@ -5,7 +5,6 @@
 
 <div class="yt-gallery-allthumbs yt-cols-{settings.columns}">
 	<f:for each="{jsonResult.items}" as="item" iteration="i">
-		
 		<f:render section="GalleryListing" arguments="{_all}"/>
 
 		<f:if condition="{settings.columns}">
@@ -16,18 +15,17 @@
 			</f:if>
 		</f:if>
 	</f:for>
-</div>
+</div>	
 
 <f:if condition="{settings.insertBelow}">
 	<f:render section="Pagination" arguments="{_all}"/>
 </f:if>
 <!-- Main Partial section Ends -->
 
-
 <!-- Pagination Section-->
 <f:section name="Pagination">
 	<div class="yt-pagination {f:if(condition:'{settings.showpaging}==0', then:'hide')}">
-		<div tabindex="0" role="button" class="yt-pagebutton yt-prev {f:if(condition:prevPageToken,then:'',else:'hide')}" 
+		<div tabindex="0" role="button" class="yt-pagebutton yt-prev {f:if(condition:'{prevPageToken}',then:'',else:'hide')}" 
 		data-playlistid="{options.playlistId}" 
 		data-pagesize="{options.pageSize}" 
 		data-pagetoken="{prevPageToken}" 
@@ -38,8 +36,10 @@
 			<div class="arrow">&laquo;</div> 
 			<div><f:translate key='LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:prev' /></div>
 		</div>
-		<div class="yt-current">1</div><div class="yt-pageseparator"> / </div><div class="yt-totalpages">{totalPages}</div>
-		<div tabindex="0" role="button" class="yt-pagebutton yt-next {f:if(condition:nextPageToken,then:'',else:'hide')}" 
+		<div class="yt-current">1</div>
+		<div class="yt-pageseparator"> / </div>
+		<div class="yt-totalpages">{totalPages}</div>
+		<div tabindex="0" role="button" class="yt-pagebutton yt-next {f:if(condition:'{nextPageToken}',then:'',else:'hide')}" 
 		data-playlistid="{options.playlistId}" 
 		data-pagesize="{options.pageSize}" 
 		data-pagetoken="{nextPageToken}" 
@@ -60,7 +60,8 @@
 		<div class="yt-gallery-img-box">
 			<f:if condition="{item.status.privacyStatus} == 'private'">
 				<f:then>
-					<div class="yt-gallery-img" style="background-image: url('typo3conf/ext/ns_youtube/Resources/Public/Images/private.png')">	
+					<f:variable name="privateVideo" value="{f:uri.resource(path:'Images/private.png', extensionName: 'NsYoutube')}" />
+					<div class="yt-gallery-img" style="background-image: url({privateVideo})">	
 				</f:then>
 				<f:else>
 					<f:if condition="{item.snippet.thumbnails.high.url}">
@@ -77,7 +78,8 @@
 										<div class="yt-gallery-img" style="background-image: url('{item.snippet.thumbnails.medium.url}')">
 									</f:then>
 									<f:else>
-										<div class="yt-gallery-img" style="background-image: url('typo3conf/ext/ns_youtube/Resources/Public/Images/deleted-video-thumb.png')">
+										<f:variable name="deletedVideo" value="{f:uri.resource(path:'Images/deleted-video-thumb.png', extensionName: 'NsYoutube')}" />
+										<div class="yt-gallery-img" style="background-image: url({deletedVideo})">	
 									</f:else>
 								</f:if>
 							</f:else>
