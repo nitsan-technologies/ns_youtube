@@ -23,6 +23,12 @@ use TYPO3\CMS\Extbase\Annotation\Inject as inject;
  */
 class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
+    /**
+     * finalsrc
+     * @var string
+     */
+    public string $finalsrc = '';
+
     public $badentities = ['&#215;', '×', '&#8211;', '–', '&amp;', '&#038;', '&#38;'];
     public $goodliterals = ['x', 'x', '--', '--', '&', '&', '&'];
 
@@ -39,6 +45,22 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction()
     {
+        // Delcare variables
+        $youtubebaseurl = 'youtube';
+        $video   = (object)[];
+        $options = (object) [];
+        $error = '';
+        $videoid = '';
+        $jsonResult = [];
+        $linkparamstemp = [];
+        $linkparams     = [];
+        $constant = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_nsyoutube.']['settings.'];
+        $centercode = '';
+        $usenocookie = 0;
+        $hidelogo = 0;
+        $showcontrol = 0;
+        $showrelatedvideo = 0;
+        $link = '';
         $youtubebaseurl = 'youtube';
         // Get link
         if ($this->settings['listType'] == 'single') {
@@ -91,14 +113,17 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                     } else {
                         if ($this->settings['layout'] == 'playlist') {
                             $finalparams = $linkparams + $this->settings;
-                            if ($finalparams['list'] != '' && isset($finalparams['list'])) {
-                                $finalsrc = $this->getPlaylistView($finalparams);
-                            } else {
-                                if ($finalparams['v'] != '' && isset($finalparams['v'])) {
-                                    $videoid = $finalparams['v'];
-                                    $error   = 1;
+                            if(isset($finalparams['list'])){
+                                if ($finalparams['list'] != '' && isset($finalparams['list'])) {
+                                    $this->finalsrc = $this->getPlaylistView($finalparams); //103
+                                } else {
+                                    if ($finalparams['v'] != '' && isset($finalparams['v'])) {
+                                        $videoid = $finalparams['v'];
+                                        $error   = 1;
+                                    }
                                 }
                             }
+
                         } else {
                             $error = 1;
                         }
@@ -127,7 +152,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             }
                             $finalparams = $linkparams + $this->settings;
                             if ($finalparams['list'] != '' && isset($finalparams['list'])) {
-                                $finalsrc = $this->getPlaylistView($finalparams);
+                                $this->finalsrc = $this->getPlaylistView($finalparams);
                             } else {
                                 if ($finalparams['v'] != '' && isset($finalparams['v'])) {
                                     $videoid = isset($finalparams['v']) ? $finalparams['v'] : '';
@@ -141,16 +166,17 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         }
 
         $centercode = '';
+        $thumbplay = $this->settings['thumbplay'] ?? '';
         $youtubebaseurl = ($usenocookie == 1) ? 'youtube-nocookie' : 'youtube';
         $constant = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_nsyoutube.']['settings.'];
-        if (!empty($videoid) || isset($finalsrc)) {
-            $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $this->settings['thumbplay'] . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
+        if (!empty($videoid) || isset($this->finalsrc)) {
+            $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' .   $thumbplay . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
             if($this->settings['enableGdpr'] || $constant['enableGdpr']){
-                $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" data-src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $this->settings['thumbplay'] . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
+                $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" data-src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' .   $thumbplay . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
             }
-            $code2 = '" class="__youtube_prefs__' . $autoplay . '" allowfullscreen ' . $centercode . '"></iframe>';
-            $code  = $code1 . $finalsrc . $code2;
-            $popupLink = 'https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $this->settings['thumbplay'] . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
+            $code2 = '" class="__youtube_prefs__" allowfullscreen ' . $centercode . '"></iframe>';
+            $code  = $code1 . $this->finalsrc . $code2;
+            $popupLink = 'https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
         }
 
         if (empty($this->settings['apiKey'])) {
@@ -159,16 +185,16 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             }
         }
 
-        $this->view->assign('constant', $constant);
-        $this->view->assign('totalPages', $video->totalPages);
-        $this->view->assign('options', $options);
-        $this->view->assign('nextPageToken', $video->nextPageToken);
-        $this->view->assign('prevPageToken', $video->prevPageToken);
-        $this->view->assign('subscibe', $video->channelTitle);
-        $this->view->assign('iframe', $code);
-        $this->view->assign('error', $error);
-        $this->view->assign('jsonResult', $jsonResult);
-        $this->view->assign('popupLink', $popupLink);
+        $this->view->assign('constant', isset($constant) ? $constant : '');
+        $this->view->assign('totalPages', isset($video->totalPages) ? $video->totalPages : '');
+        $this->view->assign('options', isset($options) ? $options : '');
+        $this->view->assign('nextPageToken', isset($video->nextPageToken) ? $video->nextPageToken : '');
+        $this->view->assign('prevPageToken', isset($video->prevPageToken) ? $video->prevPageToken : '');
+        $this->view->assign('subscibe', isset($video->channelTitle) ? $video->channelTitle : '');
+        $this->view->assign('iframe', isset($code) ? $code : '');
+        $this->view->assign('error', isset($error) ? $error : '');
+        $this->view->assign('jsonResult', isset($jsonResult) ? $jsonResult : '');
+        $this->view->assign('popupLink', isset($popupLink) ? $popupLink : '');
     }
 
     /**
@@ -199,8 +225,8 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     // Get Options
     public function getOptions($options)
     {
-        $opt             = new \stdClass();
-        $opt->playlistId = $options['list'];
+        $opt = new \stdClass();
+        $opt->playlistId = (isset($options['list'])) ? $options['list'] : '';
         $opt->pageToken  = null;
         $opt->pageSize   = empty($options['pagesize']) ? 5 : $options['pagesize'];
         $opt->apiKey     = $this->settings['apiKey'];
@@ -230,16 +256,12 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $apiEndpoint .= '&pageToken=' . $options->pageToken;
         }
         try {
-            $apiResult                            = $this->connectAPI($apiEndpoint, 'GET', null, null, null);
-            $jsonResult                           = json_decode($apiResult->getBody());
-            $checkValue = $jsonResult->error->message;
-            if (empty($checkValue)) {
-                $jsonResult->pageInfo->resultsPerPage = $options->pageSize;
-            }
+            $apiResult  = $this->connectAPI($apiEndpoint, 'GET', null, true, null);
+            $jsonResult = json_decode($apiResult->getBody());
             return $jsonResult;
         } catch (\Exception $e) {
             $error = $this->catchException($e);
-            $this->addFlashMessage($error, '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+            return $this->addFlashMessage($error, '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
         }
     }
 
@@ -252,19 +274,22 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                 $result     = $this->connectAPI($api, 'GET', null, null, null);
                 $jsonresult = json_decode($result->getBody());
-                foreach ($jsonresult->items as $item) {
-                    $channelId = $item->id;
+                if (isset($jsonresult->items)) {
+                    foreach ($jsonresult->items as $item) {
+                        $channelId = $item->id;
+                    }
                 }
             } elseif ($this->settings['channelid'] != '' && isset($this->settings['channelid'])) {
                 $channelId = $this->settings['channelid'];
             }
+            $channelId = (isset($channelId)) ? $channelId : '';
             $apiEndpoint = 'https://www.googleapis.com/youtube/v3/search?part=snippet,id&type=video&order=date&channelId=' . $channelId . '&maxResults=' . $options->pageSize . '&key=' . $this->settings['apiKey'];
             if ($options->pageToken != null) {
                 $apiEndpoint .= '&pageToken=' . $options->pageToken;
             }
             $apiResult                            = $this->connectAPI($apiEndpoint, 'GET', null, null, null);
             $jsonResult                           = json_decode($apiResult->getBody());
-            $checkValue = $jsonResult->error->message;
+            // $checkValue = $jsonResult->error->message;
             if (empty($checkValue)) {
                 $jsonResult->pageInfo->resultsPerPage = $options->pageSize;
             }
@@ -303,11 +328,13 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                 $thumb->id            = isset($item->snippet->resourceId->videoId) ? $item->snippet->resourceId->videoId : null;
                 $thumb->id            = $thumb->id ? $thumb->id : $item->id->videoId;
-                $thumb->title         = $options->showTitle ? $item->snippet->title : '';
+                $thumb->title         = isset($options->showTitle) ? $item->snippet->title : '';
                 $thumb->privacyStatus = isset($item->status->privacyStatus) ? $item->status->privacyStatus : null;
                 $thumb->subscibe      = $item->snippet->channelId;
 
-                if ($cnt == 0 && $options->pageToken == null) {
+                $optionspageToken = isset($options->pageToken) ? $options->pageToken : '';
+
+                if ($cnt == 0 && $optionspageToken == null) {
                     $init_id = $thumb->id;
                 }
                 $cnt++;
@@ -318,7 +345,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $obj->prevPageToken = $prevPageToken;
             $obj->nextPageToken = $nextPageToken;
             $obj->channelTitle  = $thumb->subscibe;
-            $obj->init_id       = $init_id;
+            $obj->init_id       = isset($init_id) ?  $init_id : '' ;
             $obj->settings      = $this->settings;
             $obj->options       = $options;
             $obj->totalPages    = $totalPages;
@@ -335,8 +362,9 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     // Get Plylist View
     public function getPlaylistView($finalparams)
     {
+        $autoplay= (isset($this->settings['autoplay'])) ? $this->settings['autoplay'] : '' ;
         $yt_options = [
-            $this->settings['autoplay'],
+            $autoplay,
             $this->settings['listType'],
             'index',
             'list',
@@ -346,19 +374,19 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         if ($finalparams['listType'] == 'channel') {
             $playlistId = $this->getPlaylistId($finalparams['list']);
-            $finalsrc .= 'listType=playlist&';
-            $finalsrc .= 'list=' . $playlistId;
+            $this->finalsrc .= 'listType=playlist&';
+            $this->finalsrc .= 'list=' . $playlistId;
         } else {
             foreach ($finalparams as $key => $value) {
                 if (in_array($key, $yt_options)) {
-                    $finalsrc .= htmlspecialchars($key) . '=' . htmlspecialchars($value) . '&';
+                    $this->finalsrc .= htmlspecialchars($key) . '=' . htmlspecialchars($value) . '&';
                     if ($value == 1 && !isset($finalparams['list'])) {
-                        $finalsrc .= 'playlist=' . $finalparams['list'] . '&';
+                        $this->finalsrc .= 'playlist=' . $finalparams['list'] . '&';
                     }
                 }
             }
         }
-        return $finalsrc;
+        return $this->finalsrc;
     }
 
     // Get Plyalist Id
@@ -377,22 +405,15 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     // Exception
     public function catchException($e)
     {
-        $version = GeneralUtility::makeInstance(VersionNumberUtility::class);
-        $versionNum = $version->getNumericTypo3Version();
-        $explode    = explode('.', $versionNum);
-
-        if ($explode[0] == 7 || $explode[0] < 7) {
+        if(property_exists($e,'response')){
             $response = $e->getResponse();
-            $jsonBody = json_decode($response->getBody()->getContents(), 1);
-            $error    = $jsonBody['error']['errors']['message'];
+        }
+        $response = isset($response) ? $response : null;
+        if (empty($response) && $response == null) {
+            $error = $e->getMessage();
         } else {
-            $response = $e->getResponse();
-            if (empty($response) && $response == null) {
-                $error = $e->getMessage();
-            } else {
-                $jsonBody = json_decode($response->getBody()->getContents(), 1);
-                $error    = $jsonBody['error']['message'];
-            }
+            $jsonBody = json_decode($response->getBody()->getContents(), 1);
+            $error    = $jsonBody['error']['message'];
         }
         return $error;
     }

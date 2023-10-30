@@ -5,12 +5,16 @@
             //Video Element
             if($('.splash-button').length) {
                 $('.splash-button').on('click', function () {
+                    //ns_video-gdpr__notice-btn
                     $(this).parent('.ns_cover-image').addClass('video-played');
+                    var gdprOption = $(this).attr('data-gdpr');
                     var autoplay = $(this).attr('data-url');
                     var iframeautoplay = autoplay.replace('autoplay=','autoplay=1');
-                    setTimeout(() => {
-                        $(this).siblings(".ns_video-block").find('iframe').attr('src', iframeautoplay);
-                    }, 100);
+                    if(gdprOption != '1'){
+                        setTimeout(() => {
+                            $(this).siblings(".ns_video-block").find('iframe').attr('src', iframeautoplay);
+                        }, 100);
+                    }
                 });
             }
 
@@ -30,8 +34,8 @@
             var $iframe = $(this).find('iframe').first();
             var pageId = $('.pId').val();
 
-            var initSrc = $iframe[0].dataset.src;
-            // var initSrc = $iframe.attr('src');
+            // var initSrc = $iframe[0].dataset.src;
+            var initSrc = $iframe.attr('src');
             if (!initSrc) {
                 initSrc = $iframe.data('ep-src');
             }
@@ -101,14 +105,12 @@
                 +'&showTitle='+$(this).data('showtitle')
                 +'&showPaging='+$(this).data('showpaging')
                 +'&thumbplay='+$(this).data('thumbplay');
-
                 $.ajax({
                     type: "POST",
                     url: ajaxURL,
                     data: dataString,
                     contentType: "application/x-www-form-urlencoded;charset=UTF-8",
                     success: function(response){
-
                         $container.find('.yt-gallery-list').html(response);
                         $container.find('.yt-current').each(function () {
                             $(this).text($container.data('currpage'));

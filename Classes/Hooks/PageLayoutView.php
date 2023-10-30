@@ -46,15 +46,6 @@ class PageLayoutView implements \TYPO3\CMS\Backend\View\PageLayoutViewDrawItemHo
                                     </tr>';
                 }
 
-                if ($ffXml['data']['sDEF']['lDEF']['settings.videotype']['vDEF']!=='text') {
-                    $imagestatus = ($ffXml['data']['sDEF']['lDEF']['settings.image']['vDEF']==null) ? 'No' : 'Yes';
-                    $itemContent .= "<tr>
-                                        <th style='text-align:left'>" . LocalizationUtility::translate('backend.splashimage', 'ns_youtube') . "</th>
-                                            <td style='padding-left: 10px;'>" . $imagestatus . '</td>
-                                        </tr>';
-
-                }
-
                 $showcontrol = ($ffXml['data']['sDEF']['lDEF']['settings.showcontrol']['vDEF'] == 1) ? 'Yes' : 'No';
                 $itemContent .= "<tr>
                                     <th style='text-align:left'>" . LocalizationUtility::translate('backend.control', 'ns_youtube') . "</th>
