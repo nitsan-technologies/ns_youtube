@@ -11,12 +11,14 @@
  ***************************************************************/
 
 $EM_CONF['ns_youtube'] = [
-  'title' => '[NITSAN] YouTube Plugin',
-  'description' => 'One of the only TYPO3 extension which provides to integrate all the features of Youtube.com like Simple Video, Channel, Playlist and Live-stream to your TYPO3 site. Live-Demo: https://demo.t3planet.com/t3t-extensions/youtube/ You can download PRO version for more-features & free-support at https://t3planet.com/typo3-youtube-extension',
+  'title' => 'YouTube',
+  'description' => 'Using Youtube TYPO3 Extension you can display your YouTube videos directly on your TYPO3 site within a video box, allowing visitors to view them without being redirected to www.youtube.com. It easily integrates all YouTube features, such as Simple Video, Channel and Playlist management, Live-streaming, and engagement options such as likes and subscribe. 
+  
+  *** Live-Demo: https://demo.t3planet.com/t3-extensions/youtube *** Documentation & Free Support: https://t3planet.com/typo3-youtube-extension',
   'category' => 'plugin',
-  'author' => 'NITSAN Technologies Pvt Ltd',
+  'author' => 'T3: Nilesh Malankiya, T3: Jay Bhalgamiya, QA: Krishna Dhapa',
   'author_email' => 'sanjay@nitsan.in',
-  'author_company' => 'NITSAN Technologies Pvt Ltd',
+  'author_company' => 'T3Planet // NITSAN',
   'state' => 'stable',
   'uploadfolder' => true,
   'version' => '12.0.0',
