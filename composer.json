@@ -1,7 +1,7 @@
 {
   "name": "nitsan/ns-youtube",
   "type": "typo3-cms-extension",
-  "description": "Using Youtube TYPO3 Extension you can display your YouTube videos directly on your TYPO3 site within a video box, allowing visitors to view them without being redirected to www.youtube.com. It easily integrates all YouTube features, such as Simple Video, Channel and Playlist management, Live-streaming, and engagement options such as likes and subscribe. *** Live-Demo: https://demo.t3planet.com/t3-extensions/youtube *** Documentation & Free Support: https://t3planet.com/typo3-youtube-extension",
+  "description": "Using Youtube TYPO3 Extension you can display your YouTube videos directly on your TYPO3 site within a video box, allowing visitors to view them without being redirected to www.youtube.com. It easily integrates all YouTube features, such as Simple Video, Channel and Playlist management, Live-streaming, and engagement options such as likes and subscribe.",
   "homepage": "https://extensions.typo3.org/extension/ns_youtube/",
   "license": "GPL-2.0+",
   "keywords": [
