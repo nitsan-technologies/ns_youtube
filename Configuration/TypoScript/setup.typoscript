@@ -1,40 +1,47 @@
-
 plugin.tx_nsyoutube {
   view {
-    templateRootPaths.0 = EXT:ns_youtube/Resources/Private/Templates/
-    templateRootPaths.1 = {$plugin.tx_nsyoutube.view.templateRootPath}
-    partialRootPaths.0 = EXT:ns_youtube/Resources/Private/Partials/
-    partialRootPaths.1 = {$plugin.tx_nsyoutube.view.partialRootPath}
-    layoutRootPaths.0 = EXT:ns_youtube/Resources/Private/Layouts/
-    layoutRootPaths.1 = {$plugin.tx_nsyoutube.view.layoutRootPath}
-  }
-    settings {
-        javascript{
-          jquery = {$plugin.tx_nsyoutube.settings.javascript.jquery}
-        }
-        apiKey = {$plugin.tx_nsyoutube.settings.apiKey}
-        enableGdpr = {$plugin.tx_nsyoutube.settings.enableGdpr}
-        description = {$plugin.tx_nsyoutube.settings.description}
-        noticeColor = {$plugin.tx_nsyoutube.settings.noticeColor}
-        bgImage = {$plugin.tx_nsyoutube.settings.bgImage}
-        bgColor = {$plugin.tx_nsyoutube.settings.bgColor}
-        buttonText = {$plugin.tx_nsyoutube.settings.buttonText}
-        activeAllButtonText = {$plugin.tx_nsyoutube.settings.activeAllButtonText}
-        buttonTextColor = {$plugin.tx_nsyoutube.settings.buttonTextColor}
-        buttonColor = {$plugin.tx_nsyoutube.settings.buttonColor}
+    templateRootPaths {
+        0 = EXT:ns_youtube/Resources/Private/Templates/
+        1 = {$plugin.tx_nsyoutube.view.templateRootPath}
     }
+    partialRootPaths {
+        0 = EXT:ns_youtube/Resources/Private/Partials/
+        1 = {$plugin.tx_nsyoutube.view.partialRootPath}
+    }
+    layoutRootPaths {
+        0 = EXT:ns_youtube/Resources/Private/Layouts/
+        1 = {$plugin.tx_nsyoutube.view.layoutRootPath}
+    }
+  }
+	settings {
+	    javascript{
+	      jquery = {$plugin.tx_nsyoutube.settings.javascript.jquery}
+	    }
+	    apiKey = {$plugin.tx_nsyoutube.settings.apiKey}
+	    enableGdpr = {$plugin.tx_nsyoutube.settings.enableGdpr}
+	    description = {$plugin.tx_nsyoutube.settings.description}
+	    noticeColor = {$plugin.tx_nsyoutube.settings.noticeColor}
+	    bgImage = {$plugin.tx_nsyoutube.settings.bgImage}
+	    bgColor = {$plugin.tx_nsyoutube.settings.bgColor}
+	    buttonText = {$plugin.tx_nsyoutube.settings.buttonText}
+	    activeAllButtonText = {$plugin.tx_nsyoutube.settings.activeAllButtonText}
+	    buttonTextColor = {$plugin.tx_nsyoutube.settings.buttonTextColor}
+	    buttonColor = {$plugin.tx_nsyoutube.settings.buttonColor}
+	}
 }
-page.includeCSS{
-    youtube = EXT:ns_youtube/Resources/Public/Css/jquery.fancybox.css
-    youtube1 = EXT:ns_youtube/Resources/Public/Css/style.css
-    youtubegdpr = EXT:ns_youtube/Resources/Public/Css/youtube-gdpr.css
-}
-page.includeJSFooter{
-    youtube = EXT:ns_youtube/Resources/Public/Js/jquery.fancybox.min.js
-    youtube1 = EXT:ns_youtube/Resources/Public/Js/script.js
-    youtubegdpr = EXT:ns_youtube/Resources/Public/Js/youtube-gdpr.js
-}
-page.includeJSLibs {
-    nsfjquery = EXT:ns_youtube/Resources/Public/Js/jquery.min.js
-    nsfjquery.if.isTrue = {$plugin.tx_nsyoutube.settings.javascript.jquery}
+page {
+    includeCSS {
+        youtube = EXT:ns_youtube/Resources/Public/Css/jquery.fancybox.css
+        youtube1 = EXT:ns_youtube/Resources/Public/Css/style.css
+        youtubegdpr = EXT:ns_youtube/Resources/Public/Css/youtube-gdpr.css
+    }
+    includeJSFooter{
+        youtube = EXT:ns_youtube/Resources/Public/Js/jquery.fancybox.min.js
+        youtube1 = EXT:ns_youtube/Resources/Public/Js/script.js
+        youtubegdpr = EXT:ns_youtube/Resources/Public/Js/youtube-gdpr.js
+    }
+    includeJSLibs {
+        nsfjquery = EXT:ns_youtube/Resources/Public/Js/jquery.min.js
+        nsfjquery.if.isTrue = {$plugin.tx_nsyoutube.settings.javascript.jquery}
+    }
 }

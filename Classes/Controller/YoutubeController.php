@@ -17,6 +17,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Resource\FileRepository;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -39,7 +40,7 @@ class YoutubeController extends ActionController
 
     /**
      * @var string $finalsrc
-     */    
+     */
     public string $finalsrc = '';
 
     /**
@@ -60,49 +61,26 @@ class YoutubeController extends ActionController
      */
     public function listAction(): ResponseInterface
     {
-        // Delcare variables
         $youtubebaseurl = 'youtube';
-        $video   = (object)[];
         $options = (object) [];
-        $error = '';
-        $videoid = '';
-        $jsonResult = [];
-        $linkparamstemp = [];
-        $linkparams     = [];
+        $error = $videoid = $centercode = '';
+        $jsonResult = $linkparamstemp = $linkparams = [];
         $constant = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_nsyoutube.']['settings.'];
-        $centercode = '';
-        $usenocookie = 0;
-        $hidelogo = 0;
-        $showcontrol = 0;
-        $showrelatedvideo = 0;
-        $contentObj = $this->configurationManager->getContentObject();
-        
+        $usenocookie = $showcontrol = $showrelatedvideo = 0;
+        $contentObj = $this->request->getAttribute('currentContentObject');
+
         // Get link
         if ($this->settings['listType'] == 'single') {
             $this->link = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['videourl']));
             $showcontrol = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['showcontrol']));
-            $hidelogo = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['hidelogo']));
             $showrelatedvideo = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['showrelatedvideo']));
             $usenocookie = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['nocookie']));
-        } else {
-            if ($this->settings['listType'] == 'playlist') {
-                $this->link = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['playlisturl']));
-                $usenocookie = 0;
-                $showcontrol = 0;
-                $hidelogo = 0;
-                $showrelatedvideo = 0;
-            }
-            if ($this->settings['listType'] == 'channel') {
-                $this->link = '';
-                $usenocookie = 0;
-                $showcontrol = 0;
-                $hidelogo = 0;
-                $showrelatedvideo = 0;
-            }
-        }  
+        } elseif ($this->settings['listType'] == 'playlist') {
+            $this->link = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['playlisturl']));
+        }
 
         if ($this->settings['listType'] == 'single' || $this->settings['listType'] == 'playlist') {
-            $this->link     = preg_replace('/\s/', '', $this->link);
+            $this->link = preg_replace('/\s/', '', $this->link);
             if(!empty($this->link)){
                 $linkparamstemp = GeneralUtility::trimExplode('?', $this->link);
             }
@@ -110,6 +88,7 @@ class YoutubeController extends ActionController
             if (count($linkparamstemp) > 1) {
                 $linkparams = $this->keyvalue($linkparamstemp[1], true);
             }
+
             $youtubebaseurl = ($usenocookie == 1) ? 'youtube-nocookie' : 'youtube';
             if($this->settings['listType'] == 'single'){
                 $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
@@ -122,13 +101,11 @@ class YoutubeController extends ActionController
         if ($this->settings['listType'] == 'single') {
             if ($linkparams['v'] != '' && isset($linkparams['v'])) {
                 $videoid = $linkparams['v'];
-            } else {
-                if (isset($linkparams['list'])) {
-                    $finalparams = $linkparams + $this->settings;
-                    $options     = $this->getOptions($finalparams);
-                    $jsonResult  = $this->getVideoFromList($options);
-                    $videoid     = $this->getVideo($jsonResult, $finalparams)->videoid;
-                }
+            } elseif (isset($linkparams['list'])) {
+                $finalparams = $linkparams + $this->settings;
+                $options     = $this->getOptions($finalparams);
+                $jsonResult  = $this->getVideoFromList($options);
+                $videoid     = $this->getVideo($jsonResult)->videoid;
             }
         } else {
             if (!empty($this->settings['apiKey'])) {
@@ -139,8 +116,8 @@ class YoutubeController extends ActionController
                         $options     = $this->getOptions($finalparams);
                         $jsonResult  = $this->getVideoFromList($options);
                         if ($jsonResult) {
-                            $video   = $this->getVideo($jsonResult, $finalparams);
-                            $videoid = isset($video->init_id) ? $video->init_id : '';
+                            $video   = $this->getVideo($jsonResult);
+                            $videoid = $video->init_id ?? '';
                             $this->view->assignMultiple(
                                 [
                                     'totalPages' => $video->totalPages,
@@ -151,21 +128,17 @@ class YoutubeController extends ActionController
                                     'subscibe' => $video->channelTitle
                                 ]
                             );
-                        } else {
-                            if ($linkparams['v'] != '' && !empty($linkparams['v'])) {
-                                $videoid = $linkparams['v'];
-                            }
+                        } elseif ($linkparams['v'] != '' && !empty($linkparams['v'])) {
+                            $videoid = $linkparams['v'];
                         }
                     } else {
                         if ($this->settings['layout'] == 'playlist') {
                             $finalparams = $linkparams + $this->settings;
                             if ($finalparams['list'] != '' && isset($finalparams['list'])) {
-                                $this->finalsrc = $this->getPlaylistView($finalparams); //103
-                            } else {
-                                if ($finalparams['v'] != '' && isset($finalparams['v'])) {
-                                    $videoid = $finalparams['v'];
-                                    $error   = 1;
-                                }
+                                $this->finalsrc = $this->getPlaylistView($finalparams);
+                            } elseif ($finalparams['v'] != '' && isset($finalparams['v'])) {
+                                $videoid = $finalparams['v'];
+                                $error = 1;
                             }
                         } else {
                             $error = 1;
@@ -176,27 +149,25 @@ class YoutubeController extends ActionController
                     $options     = $this->getOptions($finalparams);
                     $jsonResult  = $this->getChannelVideo($options);
                     if ($this->settings['layout'] == 'gallery') {
-                        if ($jsonResult) {
-                            $video   = $this->getVideo($jsonResult, []);
-                            $this->view->assignMultiple(
-                                [
-                                    'jsonResult' => $jsonResult,
-                                    'totalPages' => $video->totalPages,
-                                    'nextPageToken' => $video->nextPageToken,
-                                    'prevPageToken' => $video->prevPageToken,
-                                    'options' => $options,
-                                    'subscibe' => $video->channelTitle
-                                ]
-                            );
-                            $videoid = isset($video->init_id) ? $video->init_id : '';
-                        }
+                        $video   = $this->getVideo($jsonResult);
+                        $this->view->assignMultiple(
+                            [
+                                'jsonResult' => $jsonResult,
+                                'totalPages' => $video->totalPages,
+                                'nextPageToken' => $video->nextPageToken,
+                                'prevPageToken' => $video->prevPageToken,
+                                'options' => $options,
+                                'subscibe' => $video->channelTitle
+                            ]
+                        );
+                        $videoid = $video->init_id ?? '';
                     } else {
                         $cnt = 0;
                         if (isset($jsonResult->items) && $jsonResult->items != null && is_array($jsonResult->items)) {
                             foreach ($jsonResult->items as $item) {
                                 $param       = new \stdClass();
-                                $param->id   = isset($item->id->videoId) ? $item->id->videoId : null;
-                                $param->list = isset($item->snippet->channelId) ? $item->snippet->channelId : null;
+                                $param->id   = $item->id->videoId ?? null;
+                                $param->list = $item->snippet->channelId ?? null;
                                 if ($cnt == 0 && $options->pageToken == null) {
                                     $linkparams['v']    = $param->id;
                                     $linkparams['list'] = $param->list;
@@ -206,11 +177,9 @@ class YoutubeController extends ActionController
                             $finalparams = $linkparams + $this->settings;
                             if ($finalparams['list'] != '' && isset($finalparams['list'])) {
                                 $this->finalsrc = $this->getPlaylistView($finalparams);
-                            } else {
-                                if ($finalparams['v'] != '' && isset($finalparams['v'])) {
-                                    $videoid = isset($finalparams['v']) ? $finalparams['v'] : '';
-                                    $error   = 1;
-                                }
+                            } elseif ($finalparams['v'] != '' && isset($finalparams['v'])) {
+                                $videoid = isset($finalparams['v']) ? $finalparams['v'] : '';
+                                $error   = 1;
                             }
                         }
                     }
@@ -219,30 +188,34 @@ class YoutubeController extends ActionController
         }
         $thumbplay = $this->settings['thumbplay'] ?? '';
         if (!empty($videoid) || isset($this->finalsrc)) {
-            $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
+            $ifram_src = '';
             if($this->settings['enableGdpr'] || $constant['enableGdpr']){
-                $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" data-src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
+                $ifram_src = 'data-';
             }
-            $code2 = '" class="__youtube_prefs__" allowfullscreen ' . $centercode . '"></iframe>';
-            $code  = $code1 . $this->finalsrc . $code2;
-            $popupLink = 'https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls=' . $showcontrol . '&modestbranding=' . $hidelogo . '&rel=' . $showrelatedvideo;
-            $this->view->assign('iframe', $code);
-            $this->view->assign('popupLink', $popupLink);
-
+            $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" '.$ifram_src.'src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls=' . $showcontrol . '&rel=' . $showrelatedvideo;
+            $code  = $code1 . $this->finalsrc . '" class="__youtube_prefs__" allowfullscreen ' . $centercode . '"></iframe>';
+            $popupLink = 'https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls=' . $showcontrol . '&rel=' . $showrelatedvideo;
+            $this->view->assignMultiple([
+                'iframe' => $code,
+                'popupLink' => $popupLink
+            ]);
         }
-        if (empty($this->settings['apiKey'])) {
-            if ($this->settings['listType'] == 'playlist' || $this->settings['listType'] == 'channel') {
-                $this->addFlashMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('add_api_key', 'ns_youtube'), '', ContextualFeedbackSeverity::ERROR);
-            }
+        if (empty($this->settings['apiKey']) && ($this->settings['listType'] == 'playlist' || $this->settings['listType'] == 'channel')) {
+            $this->addFlashMessage(
+                LocalizationUtility::translate('add_api_key', 'ns_youtube'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
         }
-        $contentObj = $this->configurationManager->getContentObject();
-        if($this->settings['enableGdpr']){
-            if($this->settings['wantBgImage'] && $this->settings['enableGdpr']){
-                $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
-                $fileObjects = $fileRepository->findByRelation('tt_content', 'backImage', $contentObj->data['uid']);
-                $fileObjects[0] = $fileObjects[0] ?? '';
-                $this->view->assign('backImage', $fileObjects[0]);
-            }
+        if($this->settings['enableGdpr'] && $this->settings['wantBgImage'] && $this->settings['enableGdpr']) {
+            $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+            $fileObjects = $fileRepository
+                ->findByRelation(
+                    'tt_content',
+                    'backImage',
+                    $contentObj->data['uid']
+                );
+            $this->view->assign('backImage', $fileObjects[0] ?? '');
         }
         $this->view->assignMultiple(
             [
@@ -283,24 +256,26 @@ class YoutubeController extends ActionController
                     $options->playlistId = $finalPlaylistParams['list'];
                 }
             }
-            $options->pageSize = isset($this->settings['pagesize']) ? $this->settings['pagesize'] : 5;
-            $gallery           = new \stdClass();
+            $options->pageSize = $this->settings['pagesize'] ?? 5;
             if ($this->settings['listType'] == 'channel') {
                 $jsonResult = $this->getChannelVideo($options);
             } else {
                 $jsonResult = $this->getVideoFromList($options);
             }
-            $gallery   = $this->getVideo($jsonResult, $options);
+            $gallery   = $this->getVideo($jsonResult);
             $nextvideo = $gallery->html;
             echo $nextvideo;
             die();
         }
     }
 
-    // Get Options
+    /**
+     * @param array $options
+     * @return Object
+     */
     public function getOptions(array $options): Object
     {
-        $opt             = new \stdClass();
+        $opt = new \stdClass();
         if(array_key_exists("list",$options)){
             $opt->playlistId = $options['list'] ?: '';
         }
@@ -310,18 +285,21 @@ class YoutubeController extends ActionController
         return $opt;
     }
 
-    // Get keyValue
-    public function keyvalue(string $qry,bool $includev): array
+    /**
+     * @param string $qry
+     * @param bool $includev
+     * @return array
+     */
+    public function keyvalue(string $qry, bool $includev): array
     {
         $ytvars = GeneralUtility::trimExplode('&', $qry);
         $ytkvp  = [];
-        foreach ($ytvars as $k => $v) {
+        foreach ($ytvars as $v) {
             $kvp = GeneralUtility::trimExplode('=', $v);
             if (count($kvp) == 2 && ($includev || strtolower($kvp[0]) != 'v')) {
                 $ytkvp[$kvp[0]] = $kvp[1];
             }
         }
-
         return $ytkvp;
     }
 
@@ -333,23 +311,33 @@ class YoutubeController extends ActionController
             $apiEndpoint .= '&pageToken=' . $options->pageToken;
         }
         try {
-            $apiResult  = $this->connectAPI($apiEndpoint, 'GET', null, true, null);
-            $jsonResult = json_decode($apiResult->getBody());
-            return $jsonResult;
+            $apiResult  = $this->connectAPI($apiEndpoint);
+            return json_decode($apiResult->getBody());
         } catch (\Exception $e) {
             $error = $this->catchException($e);
-            return $this->addFlashMessage($error, '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                $error,
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
+            return [];
         }
     }
 
-    // Get Channel Video
+    /**
+     * @param Object $options
+     * @return Object
+     */
     public function getChannelVideo(Object $options): Object
     {
         try {
             $channelId = '';
-            if ($this->settings['channeltype'] == 'username' && isset($this->settings['channelname']) && $this->settings['channelname'] != '') {
-                $api = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=' . str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
-                $result     = $this->connectAPI($api, 'GET', null, true, null);
+            if ($this->settings['channeltype'] == 'username' &&
+                isset($this->settings['channelname']) &&
+                $this->settings['channelname'] != ''
+            ) {
+                $api = 'https://www.googleapis. com/youtube/v3/channels?part=contentDetails&forUsername=' . str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
+                $result     = $this->connectAPI($api);
                 $jsonresult = json_decode($result->getBody());
                 foreach ($jsonresult->items as $item) {
                     $channelId = $item->id;
@@ -361,27 +349,33 @@ class YoutubeController extends ActionController
             if ($options->pageToken != null) {
                 $apiEndpoint .= '&pageToken=' . $options->pageToken;
             }
-            $apiResult   = $this->connectAPI($apiEndpoint, 'GET', null, true, null);
-            $jsonResult  = json_decode($apiResult->getBody());
-            return $jsonResult;
+            $apiResult   = $this->connectAPI($apiEndpoint);
+            return json_decode($apiResult->getBody());
         } catch (\Exception $e) {
             $error = $this->catchException($e);
-            return $this->addFlashMessage($error, '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                $error,
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
+            return (object)[];
         }
     }
 
-    // Get Video Id
-    public function getVideo(Object $jsonResult,array|Object $options): Object
+    /**
+     * @param Object $jsonResult
+     * @return Object
+     */
+    public function getVideo(Object $jsonResult): Object
     {
         $totalPages = 0;
         $obj            = new \stdClass();
-        $resultsPerPage = $jsonResult->pageInfo->resultsPerPage; // $jsonResult->pageInfo->resultsPerPage;
+        $resultsPerPage = $jsonResult->pageInfo->resultsPerPage;
         $totalResults   = $jsonResult->pageInfo->totalResults;
         if (!empty($jsonResult->pageInfo->totalResults)) {
             $totalPages     = ceil($totalResults / $resultsPerPage);
         }
-        $nextPageToken = '';
-        $prevPageToken = '';
+        $nextPageToken = $prevPageToken = '';
         if (isset($jsonResult->nextPageToken)) {
             $nextPageToken = $jsonResult->nextPageToken;
         }
@@ -392,22 +386,19 @@ class YoutubeController extends ActionController
         $cnt = 0;
         if (isset($jsonResult->items) && $jsonResult->items != null && is_array($jsonResult->items)) {
             $results = new \stdClass();
-            foreach ($jsonResult->items as $key => $item) {
+            $thumb = new \stdClass();
+            $init_id = 0;
+            foreach ($jsonResult->items as $item) {
                 $results->key = $item;
-                $thumb        = new \stdClass();
-
-                $thumb->id            = isset($item->snippet->resourceId->videoId) ? $item->snippet->resourceId->videoId : null;
-                $thumb->id            = $thumb->id ? $thumb->id : $item->id->videoId;
+                $thumb->id            = $item->snippet->resourceId->videoId ?? $item->id->videoId;
                 $thumb->title         = $item->snippet->title ?: '';
-                $thumb->privacyStatus = isset($item->status->privacyStatus) ? $item->status->privacyStatus : null;
+                $thumb->privacyStatus = $item->status->privacyStatus ?? null;
                 $thumb->subscibe      = $item->snippet->channelId;
                 if ($cnt == 0) {
                     $init_id = $thumb->id;
                 }
                 $cnt++;
-                if ($results) {
-                    $results->key->snippet->datavideoid = $thumb->id;
-                }
+                $results->key->snippet->datavideoid = $thumb->id;
 
             }
             $obj->prevPageToken = $prevPageToken;
@@ -419,17 +410,20 @@ class YoutubeController extends ActionController
             $obj->jsonResult    = $jsonResult;
             $gallery            = json_decode(json_encode($obj));
             if ($gallery != null) {
-                $html      = $this->getTemplateHtml('Youtube', 'Gallery', $gallery);
+                $html = $this->getTemplateHtml(
+                    'Youtube',
+                    'Gallery',
+                    $gallery
+                );
                 $obj->html = $html;
             }
-
         }
         return $obj;
     }
 
-    // Get Plylist View
     /**
-     * @param array<mixed> $finalparams
+     * @param array $finalparams
+     * @return string
      */
     public function getPlaylistView(array $finalparams): string
     {
@@ -443,8 +437,7 @@ class YoutubeController extends ActionController
         ];
         if ($this->settings['listType'] == 'channel') {
             $playlistId = $this->getPlaylistId($finalparams['list']);
-            $this->finalsrc .= 'listType=playlist&';
-            $this->finalsrc .= 'list=' . $playlistId;
+            $this->finalsrc .= 'listType=playlist&list=' . $playlistId;
         } else {
             foreach ($finalparams as $key => $value) {
                 if (in_array($key, $yt_options)) {
@@ -458,28 +451,32 @@ class YoutubeController extends ActionController
         return $this->finalsrc;
     }
 
-    // Get Plyalist Id
+    /**
+     * @param string $channelId
+     * @return string
+     */
     public function getPlaylistId(string $channelId): string
     {
         $playlistId = '';
         $apiEndpoint = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&key=' . $this->settings['apiKey'] . '&id=' . $channelId;
-        $apiResult   = $this->connectAPI($apiEndpoint, 'GET', null, true, null);
+        $apiResult   = $this->connectAPI($apiEndpoint);
         $jsonResult  = json_decode($apiResult->getBody());
-        $items = [];
-        $items       = $jsonResult->items;
         foreach ($jsonResult->items as $item) {
             $playlistId = $item->contentDetails->relatedPlaylists->uploads;
         }
         return $playlistId;
     }
 
-    // Exception
-    public function catchException($e): string
+    /**
+     * @param mixed $e
+     * @return string
+     */
+    public function catchException(mixed $e): string
     {
         if(property_exists($e,'response')){
             $response = $e->getResponse();
         }
-        $response = isset($response) ? $response : null;
+        $response = $response ?? null;
         if (empty($response) && $response == null) {
             $error = $e->getMessage();
         } else {
@@ -489,35 +486,42 @@ class YoutubeController extends ActionController
         return $error;
     }
 
-    // Connect API
-    public function connectAPI(string $url,string $method = 'GET',string $params = null,bool $json = true,string $headers = null): ResponseInterface
+    /**
+     * @param string $url
+     * @return ResponseInterface
+     */
+    public function connectAPI(string $url): ResponseInterface
     {
         $request = GeneralUtility::makeInstance(RequestFactory::class);
-        $response = $request->request($url, 'GET');
-        return $response;
+        return $request->request($url, 'GET');
     }
 
-    // Get HTML
-    public function getTemplateHtml(string $controllerName,string $templateName, Object $variables): string
+    /**
+     * @param string $controllerName
+     * @param string $templateName
+     * @param Object $variables
+     * @return string
+     */
+    public function getTemplateHtml(string $controllerName, string $templateName, Object $variables): string
     {
         $tempView = GeneralUtility::makeInstance(StandaloneView::class);
-        $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $extbaseFrameworkConfiguration = $this->configurationManager
+            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 
         $partialRootPaths = $extbaseFrameworkConfiguration['view']['partialRootPaths'];
         $templatePathAndFilename = '';
         foreach (array_reverse($partialRootPaths) as $partialRootPath) {
-            $templatePathAndFilename = GeneralUtility::getFileAbsFileName($partialRootPath . $controllerName . '/' . $templateName . '.html');
-
+            $templatePathAndFilename = GeneralUtility::getFileAbsFileName(
+                $partialRootPath . $controllerName . '/' . $templateName . '.html'
+            );
             if (file_exists($templatePathAndFilename)) {
                 break;
             }
         }
 
         $tempView->setTemplatePathAndFilename($templatePathAndFilename);
-
         // Set layout and partial root paths
         $tempView->assignMultiple((array)$variables);
-        $tempHtml = $tempView->render();
-        return $tempHtml;
+        return $tempView->render();
     }
 }

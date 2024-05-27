@@ -250,16 +250,6 @@
 						</TCEforms>
 					</settings.showcontrol>
 
-					<settings.hidelogo>
-						<TCEforms>
-							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.hidelogo</label>
-							<displayCond>FIELD:settings.listType:=:single</displayCond>
-							<config>
-								<type>check</type>
-							</config>
-						</TCEforms>
-					</settings.hidelogo>
-
 					<settings.showrelatedvideo>
 						<TCEforms>
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.showrelatedvideo</label>
