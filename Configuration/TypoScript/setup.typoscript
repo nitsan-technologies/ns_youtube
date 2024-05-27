@@ -1,33 +1,33 @@
 plugin.tx_nsyoutube {
-  view {
-    templateRootPaths {
-        0 = EXT:ns_youtube/Resources/Private/Templates/
-        1 = {$plugin.tx_nsyoutube.view.templateRootPath}
+    view {
+        templateRootPaths {
+            0 = EXT:ns_youtube/Resources/Private/Templates/
+            1 = {$plugin.tx_nsyoutube.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:ns_youtube/Resources/Private/Partials/
+            1 = {$plugin.tx_nsyoutube.view.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:ns_youtube/Resources/Private/Layouts/
+            1 = {$plugin.tx_nsyoutube.view.layoutRootPath}
+        }
     }
-    partialRootPaths {
-        0 = EXT:ns_youtube/Resources/Private/Partials/
-        1 = {$plugin.tx_nsyoutube.view.partialRootPath}
+    settings {
+        javascript {
+            jquery = {$plugin.tx_nsyoutube.settings.javascript.jquery}
+        }
+        apiKey = {$plugin.tx_nsyoutube.settings.apiKey}
+        enableGdpr = {$plugin.tx_nsyoutube.settings.enableGdpr}
+        description = {$plugin.tx_nsyoutube.settings.description}
+        noticeColor = {$plugin.tx_nsyoutube.settings.noticeColor}
+        bgImage = {$plugin.tx_nsyoutube.settings.bgImage}
+        bgColor = {$plugin.tx_nsyoutube.settings.bgColor}
+        buttonText = {$plugin.tx_nsyoutube.settings.buttonText}
+        activeAllButtonText = {$plugin.tx_nsyoutube.settings.activeAllButtonText}
+        buttonTextColor = {$plugin.tx_nsyoutube.settings.buttonTextColor}
+        buttonColor = {$plugin.tx_nsyoutube.settings.buttonColor}
     }
-    layoutRootPaths {
-        0 = EXT:ns_youtube/Resources/Private/Layouts/
-        1 = {$plugin.tx_nsyoutube.view.layoutRootPath}
-    }
-  }
-	settings {
-	    javascript{
-	      jquery = {$plugin.tx_nsyoutube.settings.javascript.jquery}
-	    }
-	    apiKey = {$plugin.tx_nsyoutube.settings.apiKey}
-	    enableGdpr = {$plugin.tx_nsyoutube.settings.enableGdpr}
-	    description = {$plugin.tx_nsyoutube.settings.description}
-	    noticeColor = {$plugin.tx_nsyoutube.settings.noticeColor}
-	    bgImage = {$plugin.tx_nsyoutube.settings.bgImage}
-	    bgColor = {$plugin.tx_nsyoutube.settings.bgColor}
-	    buttonText = {$plugin.tx_nsyoutube.settings.buttonText}
-	    activeAllButtonText = {$plugin.tx_nsyoutube.settings.activeAllButtonText}
-	    buttonTextColor = {$plugin.tx_nsyoutube.settings.buttonTextColor}
-	    buttonColor = {$plugin.tx_nsyoutube.settings.buttonColor}
-	}
 }
 page {
     includeCSS {
@@ -35,7 +35,7 @@ page {
         youtube1 = EXT:ns_youtube/Resources/Public/Css/style.css
         youtubegdpr = EXT:ns_youtube/Resources/Public/Css/youtube-gdpr.css
     }
-    includeJSFooter{
+    includeJSFooter {
         youtube = EXT:ns_youtube/Resources/Public/Js/jquery.fancybox.min.js
         youtube1 = EXT:ns_youtube/Resources/Public/Js/script.js
         youtubegdpr = EXT:ns_youtube/Resources/Public/Js/youtube-gdpr.js

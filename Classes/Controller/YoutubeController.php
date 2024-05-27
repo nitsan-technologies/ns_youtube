@@ -1,6 +1,6 @@
 <?php
-namespace Nitsan\NsYoutube\Controller;
 
+namespace Nitsan\NsYoutube\Controller;
 
 /***
  *
@@ -21,12 +21,12 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
 /**
  * YoutubeController
  */
 class YoutubeController extends ActionController
 {
-
     /**
      * @var array<mixed> $badentities
      */
@@ -45,7 +45,7 @@ class YoutubeController extends ActionController
 
     /**
      * @var string $link
-     */  
+     */
     public string $link = '';
 
     /**
@@ -81,16 +81,16 @@ class YoutubeController extends ActionController
 
         if ($this->settings['listType'] == 'single' || $this->settings['listType'] == 'playlist') {
             $this->link = preg_replace('/\s/', '', $this->link);
-            if(!empty($this->link)){
+            if(!empty($this->link)) {
                 $linkparamstemp = GeneralUtility::trimExplode('?', $this->link);
             }
-            
+
             if (count($linkparamstemp) > 1) {
                 $linkparams = $this->keyvalue($linkparamstemp[1], true);
             }
 
             $youtubebaseurl = ($usenocookie == 1) ? 'youtube-nocookie' : 'youtube';
-            if($this->settings['listType'] == 'single'){
+            if($this->settings['listType'] == 'single') {
                 $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
                 $fileObjects = $fileRepository->findByRelation('tt_content', 'youtubeImage', $contentObj->data['uid']);
                 $fileObjects[0] = $fileObjects[0] ?? '';
@@ -166,6 +166,7 @@ class YoutubeController extends ActionController
                         if (isset($jsonResult->items) && $jsonResult->items != null && is_array($jsonResult->items)) {
                             foreach ($jsonResult->items as $item) {
                                 $param       = new \stdClass();
+                                //@extensionScannerIgnoreLine
                                 $param->id   = $item->id->videoId ?? null;
                                 $param->list = $item->snippet->channelId ?? null;
                                 if ($cnt == 0 && $options->pageToken == null) {
@@ -189,7 +190,7 @@ class YoutubeController extends ActionController
         $thumbplay = $this->settings['thumbplay'] ?? '';
         if (!empty($videoid) || isset($this->finalsrc)) {
             $ifram_src = '';
-            if($this->settings['enableGdpr'] || $constant['enableGdpr']){
+            if($this->settings['enableGdpr'] || $constant['enableGdpr']) {
                 $ifram_src = 'data-';
             }
             $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" '.$ifram_src.'src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls=' . $showcontrol . '&rel=' . $showrelatedvideo;
@@ -244,10 +245,10 @@ class YoutubeController extends ActionController
             if ($this->settings['listType'] == 'playlist') {
                 $playlistLink = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['playlisturl']));
                 $playlistLink     = preg_replace('/\s/', '', $playlistLink);
-                if(!empty($playlistLink)){
+                if(!empty($playlistLink)) {
                     $playlistParamsTemp = GeneralUtility::trimExplode('?', $playlistLink);
                 }
-                
+
                 if (count($playlistParamsTemp) > 1) {
                     $playlistParams = $this->keyvalue($playlistParamsTemp[1], true);
                 }
@@ -276,7 +277,7 @@ class YoutubeController extends ActionController
     public function getOptions(array $options): Object
     {
         $opt = new \stdClass();
-        if(array_key_exists("list",$options)){
+        if(array_key_exists("list", $options)) {
             $opt->playlistId = $options['list'] ?: '';
         }
         $opt->pageToken  = null;
@@ -303,8 +304,11 @@ class YoutubeController extends ActionController
         return $ytkvp;
     }
 
-    // Get Videos from list parameter
-    public function getVideoFromList(Object|array $options): Object|array
+    /**
+     * @param Object $options
+     * @return Object
+     */
+    public function getVideoFromList(Object $options): Object
     {
         $apiEndpoint = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,status&playlistId=' . $options->playlistId . '&maxResults=' . $options->pageSize . '&key=' . $options->apiKey;
         if ($options->pageToken != null) {
@@ -320,7 +324,7 @@ class YoutubeController extends ActionController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            return [];
+            return (object)[];
         }
     }
 
@@ -370,6 +374,7 @@ class YoutubeController extends ActionController
     {
         $totalPages = 0;
         $obj            = new \stdClass();
+        //@extensionScannerIgnoreLine
         $resultsPerPage = $jsonResult->pageInfo->resultsPerPage;
         $totalResults   = $jsonResult->pageInfo->totalResults;
         if (!empty($jsonResult->pageInfo->totalResults)) {
@@ -473,7 +478,7 @@ class YoutubeController extends ActionController
      */
     public function catchException(mixed $e): string
     {
-        if(property_exists($e,'response')){
+        if(property_exists($e, 'response')) {
             $response = $e->getResponse();
         }
         $response = $response ?? null;
