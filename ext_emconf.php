@@ -22,7 +22,7 @@ $EM_CONF['ns_youtube'] = [
   'state' => 'stable',
   'uploadfolder' => true,
   'clearCacheOnLoad' => 0,
-  'version' => '2.1.2',
+  'version' => '2.2.0',
   'constraints' =>
   [
     'depends' =>
