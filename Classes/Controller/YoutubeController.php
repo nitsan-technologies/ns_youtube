@@ -250,12 +250,13 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         return $ytkvp;
     }
 
+
     // Get Videos from list parameter
     public function getVideoFromList($options)
     {
+        $apiEndpoint = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,status&playlistId='
+            .$options->playlistId . '&maxResults=' . $options->pageSize . '&key=' . $options->apiKey;
 
-        $apiEndpoint = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,status&playlistId=
-        ' . $options->playlistId . '&maxResults=' . $options->pageSize . '&key=' . $options->apiKey;
         if ($options->pageToken != null) {
             $apiEndpoint .= '&pageToken=' . $options->pageToken;
         }
@@ -281,8 +282,8 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 isset($this->settings['channelname']) &&
                 $this->settings['channelname'] != ''
             ) {
-                $api = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=
-                ' . str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
+                $api = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=' .
+                    str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
 
                 $result     = $this->connectAPI($api);
                 $jsonresult = json_decode($result->getBody());
