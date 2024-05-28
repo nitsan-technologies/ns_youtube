@@ -296,8 +296,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 $channelId = $this->settings['channelid'];
             }
             $channelId = (isset($channelId)) ? $channelId : '';
-            $apiEndpoint = 'https://www.googleapis.com/youtube/v3/search
-            ?part=snippet,id&type=video&order=date&channelId='
+            $apiEndpoint = 'https://www.googleapis.com/youtube/v3/search?part=snippet,id&type=video&order=date&channelId='
                 . $channelId . '&maxResults=' . $options->pageSize . '&key=' . $this->settings['apiKey'];
             if ($options->pageToken != null) {
                 $apiEndpoint .= '&pageToken=' . $options->pageToken;
