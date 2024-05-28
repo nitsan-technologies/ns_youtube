@@ -92,7 +92,11 @@ class YoutubeController extends ActionController
             $youtubebaseurl = ($usenocookie == 1) ? 'youtube-nocookie' : 'youtube';
             if($this->settings['listType'] == 'single') {
                 $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
-                $fileObjects = $fileRepository->findByRelation('tt_content', 'youtubeImage', $contentObj->data['uid']);
+                $fileObjects = $fileRepository->findByRelation(
+                    'tt_content',
+                    'youtubeImage',
+                    $contentObj->data['uid']
+                );
                 $fileObjects[0] = $fileObjects[0] ?? '';
                 $this->view->assign('youtubeImage', $fileObjects[0]);
             }
@@ -108,6 +112,7 @@ class YoutubeController extends ActionController
                 $videoid     = $this->getVideo($jsonResult)->videoid;
             }
         } else {
+
             if (!empty($this->settings['apiKey'])) {
                 if ($this->settings['listType'] == 'playlist') {
                     if ($this->settings['layout'] == 'gallery') {
@@ -131,6 +136,7 @@ class YoutubeController extends ActionController
                         } elseif ($linkparams['v'] != '' && !empty($linkparams['v'])) {
                             $videoid = $linkparams['v'];
                         }
+
                     } else {
                         if ($this->settings['layout'] == 'playlist') {
                             $finalparams = $linkparams + $this->settings;
@@ -193,15 +199,20 @@ class YoutubeController extends ActionController
             if($this->settings['enableGdpr'] || $constant['enableGdpr']) {
                 $ifram_src = 'data-';
             }
-            $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" '.$ifram_src.'src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls=' . $showcontrol . '&rel=' . $showrelatedvideo;
+            $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" '.$ifram_src.'src="https://www.'
+                . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls='
+                . $showcontrol . '&rel=' . $showrelatedvideo;
             $code  = $code1 . $this->finalsrc . '" class="__youtube_prefs__" allowfullscreen ' . $centercode . '"></iframe>';
-            $popupLink = 'https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls=' . $showcontrol . '&rel=' . $showrelatedvideo;
+            $popupLink = 'https://www.' . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay .
+                '&controls=' . $showcontrol . '&rel=' . $showrelatedvideo;
             $this->view->assignMultiple([
                 'iframe' => $code,
                 'popupLink' => $popupLink
             ]);
         }
-        if (empty($this->settings['apiKey']) && ($this->settings['listType'] == 'playlist' || $this->settings['listType'] == 'channel')) {
+        if (empty($this->settings['apiKey']) &&
+            ($this->settings['listType'] == 'playlist' || $this->settings['listType'] == 'channel')
+        ) {
             $this->addFlashMessage(
                 LocalizationUtility::translate('add_api_key', 'ns_youtube'),
                 '',
@@ -310,7 +321,8 @@ class YoutubeController extends ActionController
      */
     public function getVideoFromList(Object $options): Object
     {
-        $apiEndpoint = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,status&playlistId=' . $options->playlistId . '&maxResults=' . $options->pageSize . '&key=' . $options->apiKey;
+        $apiEndpoint = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,status&playlistId='
+            . $options->playlistId . '&maxResults=' . $options->pageSize . '&key=' . $options->apiKey;
         if ($options->pageToken != null) {
             $apiEndpoint .= '&pageToken=' . $options->pageToken;
         }
@@ -340,7 +352,8 @@ class YoutubeController extends ActionController
                 isset($this->settings['channelname']) &&
                 $this->settings['channelname'] != ''
             ) {
-                $api = 'https://www.googleapis. com/youtube/v3/channels?part=contentDetails&forUsername=' . str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
+                $api = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername='
+                    . str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
                 $result     = $this->connectAPI($api);
                 $jsonresult = json_decode($result->getBody());
                 foreach ($jsonresult->items as $item) {
@@ -349,7 +362,8 @@ class YoutubeController extends ActionController
             } elseif ($this->settings['channelid'] != '' && isset($this->settings['channelid'])) {
                 $channelId = $this->settings['channelid'];
             }
-            $apiEndpoint = 'https://www.googleapis.com/youtube/v3/search?part=snippet,id&type=video&order=date&channelId=' . $channelId . '&maxResults=' . $options->pageSize . '&key=' . $this->settings['apiKey'];
+            $apiEndpoint = 'https://www.googleapis.com/youtube/v3/search?part=snippet,id&type=video&order=date&channelId='
+                . $channelId . '&maxResults=' . $options->pageSize . '&key=' . $this->settings['apiKey'];
             if ($options->pageToken != null) {
                 $apiEndpoint .= '&pageToken=' . $options->pageToken;
             }
@@ -463,7 +477,8 @@ class YoutubeController extends ActionController
     public function getPlaylistId(string $channelId): string
     {
         $playlistId = '';
-        $apiEndpoint = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&key=' . $this->settings['apiKey'] . '&id=' . $channelId;
+        $apiEndpoint = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&key=' .
+            $this->settings['apiKey'] . '&id=' . $channelId;
         $apiResult   = $this->connectAPI($apiEndpoint);
         $jsonResult  = json_decode($apiResult->getBody());
         foreach ($jsonResult->items as $item) {
