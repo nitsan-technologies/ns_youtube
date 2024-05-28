@@ -2,7 +2,7 @@
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
-
+//@extensionScannerIgnoreLine
 if (version_compare(TYPO3_branch, '11.0', '>=')) {
     $moduleClass = \Nitsan\NsYoutube\Controller\YoutubeController::class;
 } else {
@@ -21,7 +21,7 @@ if (version_compare(TYPO3_branch, '11.0', '>=')) {
     ]
 );
 
-
+//@extensionScannerIgnoreLine
 if (version_compare(TYPO3_branch, '7.0', '>')) {
     if (TYPO3_MODE === 'BE') {
         $icons = [

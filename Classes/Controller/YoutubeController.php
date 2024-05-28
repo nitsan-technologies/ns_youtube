@@ -34,6 +34,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @extensionScannerIgnoreLine
      * @inject
      */
     protected $configurationManager;
@@ -132,6 +133,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         if (isset($jsonResult->items) && $jsonResult->items != null && is_array($jsonResult->items)) {
                             foreach ($jsonResult->items as $item) {
                                 $param       = new \stdClass();
+                                //@extensionScannerIgnoreLine
                                 $param->id   = $item->id->videoId ?? null;
                                 $param->list = $item->snippet->channelId ?? null;
                                 if ($cnt == 0 && $options->pageToken == null) {
@@ -303,9 +305,8 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             }
             $apiResult                            = $this->connectAPI($apiEndpoint);
             $jsonResult                           = json_decode($apiResult->getBody());
-            if (empty($checkValue)) {
-                $jsonResult->pageInfo->resultsPerPage = $options->pageSize;
-            }
+            //@extensionScannerIgnoreLine
+            $jsonResult->pageInfo->resultsPerPage = $options->pageSize;
             return $jsonResult;
         } catch (\Exception $e) {
             $error = $this->catchException($e);
@@ -322,9 +323,12 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     public function getVideo($jsonResult, $options)
     {
         $obj            = new \stdClass();
+        //@extensionScannerIgnoreLine
         $resultsPerPage = $jsonResult->pageInfo->resultsPerPage;
+        //@extensionScannerIgnoreLine
         $totalResults   = $jsonResult->pageInfo->totalResults;
         $totalPages = 0;
+        //@extensionScannerIgnoreLine
         if (!empty($jsonResult->pageInfo->totalResults)) {
             $totalPages     = ceil($totalResults / $resultsPerPage);
         }
@@ -343,6 +347,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             foreach ($jsonResult->items as $item) {
                 $results->key = $item;
                 $thumb->id            = $item->snippet->resourceId->videoId ?? $item->id->videoI;
+                //@extensionScannerIgnoreLine
                 $thumb->title         = isset($options->showTitle) ? $item->snippet->title : '';
                 $thumb->privacyStatus = $item->status->privacyStatus ?? null;
                 $thumb->subscibe      = $item->snippet->channelId;

@@ -6,51 +6,51 @@
 # customsubcategory=110=Gallery Cofiguration
 
 plugin.tx_nsyoutube {
-  view {
-    # cat=plugin.tx_nsyoutube/file; type=string; label=Path to template root (FE)
-    templateRootPath = EXT:ns_youtube/Resources/Private/Templates/
-    # cat=plugin.tx_nsyoutube/file; type=string; label=Path to template partials (FE)
-    partialRootPath = EXT:ns_youtube/Resources/Private/Partials/
-    # cat=plugin.tx_nsyoutube/file; type=string; label=Path to template layouts (FE)
-    layoutRootPath = EXT:ns_youtube/Resources/Private/Layouts/
-  }
-  
-  settings {
-
-    javascript {
-      # cat=plugin.tx_nsyoutube/a; type=boolean; label= LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.jquery
-      jquery = 0
+    view {
+        # cat=plugin.tx_nsyoutube/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:ns_youtube/Resources/Private/Templates/
+        # cat=plugin.tx_nsyoutube/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:ns_youtube/Resources/Private/Partials/
+        # cat=plugin.tx_nsyoutube/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:ns_youtube/Resources/Private/Layouts/
     }
 
-    # cat=plugin.tx_nsyoutube/100/0; type=boolean; label= LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.enableGdpr
-    enableGdpr = 0
+    settings {
 
-    # cat=plugin.tx_nsyoutube/100/1; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.api_key
-    apiKey = 
+        javascript {
+            # cat=plugin.tx_nsyoutube/a; type=boolean; label= LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.jquery
+            jquery = 0
+        }
 
-    # cat=plugin.tx_nsyoutube/100/2; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeDescription
-		description = We've embedded content from YouTube here. As YouTube may collect personal data and track your viewing behaviour, we'll only load the video after you consent to their use of cookies and similar technologies as described in their privacy policy.
+        # cat=plugin.tx_nsyoutube/100/0; type=boolean; label= LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.enableGdpr
+        enableGdpr = 0
 
-    # cat=plugin.tx_nsyoutube/100/3; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeColor
-		noticeColor = #000000
+        # cat=plugin.tx_nsyoutube/100/1; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.api_key
+        apiKey =
 
-    # cat=plugin.tx_nsyoutube/100/4; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgImage
-		bgImage = 
+        # cat=plugin.tx_nsyoutube/100/2; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeDescription
+        description = We've embedded content from YouTube here. As YouTube may collect personal data and track your viewing behaviour, we'll only load the video after you consent to their use of cookies and similar technologies as described in their privacy policy.
 
-    # cat=plugin.tx_nsyoutube/100/5; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgColor
-		bgColor = #cfcfcf
+        # cat=plugin.tx_nsyoutube/100/3; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeColor
+        noticeColor = #000000
 
-    # cat=plugin.tx_nsyoutube/100/6; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonText
-		buttonText = Active
+        # cat=plugin.tx_nsyoutube/100/4; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgImage
+        bgImage =
 
-    # cat=plugin.tx_nsyoutube/100/7; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.activeAllButtonText
-		activeAllButtonText = Active All 
+        # cat=plugin.tx_nsyoutube/100/5; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgColor
+        bgColor = #cfcfcf
 
-    # cat=plugin.tx_nsyoutube/100/8; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonTextColor
-		buttonTextColor = #ffffff
+        # cat=plugin.tx_nsyoutube/100/6; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonText
+        buttonText = Active
 
-    # cat=plugin.tx_nsyoutube/100/9; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonColor
-		buttonColor = #333030
-  }
+        # cat=plugin.tx_nsyoutube/100/7; type=string; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.activeAllButtonText
+        activeAllButtonText = Active All
+
+        # cat=plugin.tx_nsyoutube/100/8; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonTextColor
+        buttonTextColor = #ffffff
+
+        # cat=plugin.tx_nsyoutube/100/9; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonColor
+        buttonColor = #333030
+    }
 
 }
