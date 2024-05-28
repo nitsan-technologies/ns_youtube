@@ -117,81 +117,79 @@
                 </f:if>
             </f:defaultCase>
         </f:switch>
-		<f:if condition="{pi_flexform_transformed.settings.listType} != single">
-			<f:if condition="{pi_flexform_transformed.settings.layout} == gallery">
-				<tr>
-					<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.pagesize" /></th>
-					<td style='padding-left: 10px;'>{pi_flexform_transformed.settings.pagesize}</td>
-				</tr>	
-				<tr>
-					<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.columns" /></th>
-					<td style='padding-left: 10px;'>{pi_flexform_transformed.settings.columns}</td>
-				</tr>				
-				
-				<f:if condition="{pi_flexform_transformed.settings.showtitle}">
-					<f:then>
-						<tr>
-							<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.showtitle" /></th>
-							<td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.yes" /></td>
-						</tr>	
-					</f:then>
-					<f:else>
-						<tr>
-							<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.showtitle" /></th>
-							<td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.no" /></td>
-						</tr>							
-					</f:else>
-				</f:if>
+		<f:if condition="{pi_flexform_transformed.settings.listType} != single && {pi_flexform_transformed.settings.layout} == gallery">
+            <tr>
+                <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.pagesize" /></th>
+                <td style='padding-left: 10px;'>{pi_flexform_transformed.settings.pagesize}</td>
+            </tr>
+            <tr>
+                <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.columns" /></th>
+                <td style='padding-left: 10px;'>{pi_flexform_transformed.settings.columns}</td>
+            </tr>
 
-				<f:if condition="{pi_flexform_transformed.settings.thumbplay}">
-					<f:then>
-						<tr>
-							<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.thumbplay" /></th>
-							<td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.yes" /></td>
-						</tr>	
-					</f:then>
-					<f:else>
-						<tr>
-							<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.thumbplay" /></th>
-							<td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.no" /></td>
-						</tr>							
-					</f:else>
-				</f:if>
+            <f:if condition="{pi_flexform_transformed.settings.showtitle}">
+                <f:then>
+                    <tr>
+                        <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.showtitle" /></th>
+                        <td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.yes" /></td>
+                    </tr>
+                </f:then>
+                <f:else>
+                    <tr>
+                        <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.showtitle" /></th>
+                        <td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.no" /></td>
+                    </tr>
+                </f:else>
+            </f:if>
 
-				<f:if condition="{pi_flexform_transformed.settings.showpaging}">
-					<f:then>
-						<tr>
-							<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.showpaging" /></th>
-							<td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.yes" /></td>
-						</tr>	
-						<f:if condition="{pi_flexform_transformed.settings.insertAbove}">
-							<tr>
-								<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.insertAbove" /></th>
-								<td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.yes" /></td>
-							</tr>	
-						</f:if>
-						<f:if condition="{pi_flexform_transformed.settings.insertBelow}">
-							<tr>
-								<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.insertBelow" /></th>
-								<td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.yes" /></td>
-							</tr>	
-						</f:if>
-					</f:then>
-					<f:else>
-						<tr>
-							<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.showpaging" /></th>
-							<td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.no" /></td>
-						</tr>							
-					</f:else>
-				</f:if>
+            <f:if condition="{pi_flexform_transformed.settings.thumbplay}">
+                <f:then>
+                    <tr>
+                        <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.thumbplay" /></th>
+                        <td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.yes" /></td>
+                    </tr>
+                </f:then>
+                <f:else>
+                    <tr>
+                        <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.thumbplay" /></th>
+                        <td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.no" /></td>
+                    </tr>
+                </f:else>
+            </f:if>
 
-				<f:if condition="{pi_flexform_transformed.settings.channelsubtext}">
-					<tr>
-						<th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.subscribation_button_text" /></th>
-						<td style='padding-left: 10px;'>{pi_flexform_transformed.settings.channelsubtext}</td>
-					</tr>	
-				</f:if>	
-			</f:if>
-		</f:if>
+            <f:if condition="{pi_flexform_transformed.settings.showpaging}">
+                <f:then>
+                    <tr>
+                        <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.showpaging" /></th>
+                        <td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.yes" /></td>
+                    </tr>
+                    <f:if condition="{pi_flexform_transformed.settings.insertAbove}">
+                        <tr>
+                            <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.insertAbove" /></th>
+                            <td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.yes" /></td>
+                        </tr>
+                    </f:if>
+                    <f:if condition="{pi_flexform_transformed.settings.insertBelow}">
+                        <tr>
+                            <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.insertBelow" /></th>
+                            <td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.yes" /></td>
+                        </tr>
+                    </f:if>
+                </f:then>
+                <f:else>
+                    <tr>
+                        <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.showpaging" /></th>
+                        <td style='padding-left: 10px;'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.no" /></td>
+                    </tr>
+                </f:else>
+            </f:if>
+
+            <f:if condition="{pi_flexform_transformed.settings.channelsubtext}">
+                <tr>
+                    <th style='text-align:left'><f:translate key="LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:backend.subscribation_button_text" /></th>
+                    <td style='padding-left: 10px;'>{pi_flexform_transformed.settings.channelsubtext}</td>
+                </tr>
+            </f:if>
+        </f:if>
 	</tbody>
 </table>
