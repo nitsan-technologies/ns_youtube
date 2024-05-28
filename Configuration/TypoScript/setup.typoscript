@@ -1,16 +1,22 @@
 
 plugin.tx_nsyoutube {
   view {
-    templateRootPaths.0 = EXT:ns_youtube/Resources/Private/Templates/
-    templateRootPaths.1 = {$plugin.tx_nsyoutube.view.templateRootPath}
-    partialRootPaths.0 = EXT:ns_youtube/Resources/Private/Partials/
-    partialRootPaths.1 = {$plugin.tx_nsyoutube.view.partialRootPath}
-    layoutRootPaths.0 = EXT:ns_youtube/Resources/Private/Layouts/
-    layoutRootPaths.1 = {$plugin.tx_nsyoutube.view.layoutRootPath}
+    templateRootPaths {
+        0 = EXT:ns_youtube/Resources/Private/Templates/
+        1 = {$plugin.tx_nsyoutube.view.templateRootPath}
+    }
+    partialRootPaths {
+        0 = EXT:ns_youtube/Resources/Private/Partials/
+        1 = {$plugin.tx_nsyoutube.view.partialRootPath}
+    }
+    layoutRootPaths {
+        0 = EXT:ns_youtube/Resources/Private/Layouts/
+        1 = {$plugin.tx_nsyoutube.view.layoutRootPath}
+    }
   }
  
     settings {
-        javascript{
+        javascript {
           jquery = 0
         }
         apiKey = {$plugin.tx_nsyoutube.settings.apiKey}
@@ -25,17 +31,19 @@ plugin.tx_nsyoutube {
         buttonColor = {$plugin.tx_nsyoutube.settings.buttonColor}
     }
 }
-page.includeCSS{
-    youtube = EXT:ns_youtube/Resources/Public/Css/jquery.fancybox.css
-    youtube1 = EXT:ns_youtube/Resources/Public/Css/style.css
-    youtubegdpr = EXT:ns_youtube/Resources/Public/Css/youtube-gdpr.css
-}
-page.includeJSFooter{
-    youtube = EXT:ns_youtube/Resources/Public/Js/jquery.fancybox.min.js
-    youtube1 = EXT:ns_youtube/Resources/Public/Js/script.js
-    youtubegdpr = EXT:ns_youtube/Resources/Public/Js/youtube-gdpr.js
-}
-page.includeJSLibs {
-    nsfjquery = EXT:ns_youtube/Resources/Public/Js/jquery.min.js
-    nsfjquery.if.isTrue = {$plugin.tx_nsguestbook_form.settings.jQuery}
+page {
+    includeCSS {
+        youtube = EXT:ns_youtube/Resources/Public/Css/jquery.fancybox.css
+        youtube1 = EXT:ns_youtube/Resources/Public/Css/style.css
+        youtubegdpr = EXT:ns_youtube/Resources/Public/Css/youtube-gdpr.css
+    }
+    includeJSFooter {
+        youtube = EXT:ns_youtube/Resources/Public/Js/jquery.fancybox.min.js
+        youtube1 = EXT:ns_youtube/Resources/Public/Js/script.js
+        youtubegdpr = EXT:ns_youtube/Resources/Public/Js/youtube-gdpr.js
+    }
+    includeJSLibs {
+        nsfjquery = EXT:ns_youtube/Resources/Public/Js/jquery.min.js
+        nsfjquery.if.isTrue = {$plugin.tx_nsguestbook_form.settings.jQuery}
+    }
 }

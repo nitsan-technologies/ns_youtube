@@ -17,7 +17,7 @@ plugin.tx_nsyoutube {
   
   settings {
 
-    javascript{
+    javascript {
       # cat=plugin.tx_nsyoutube/a; type=boolean; label= LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.jquery
       jquery = 0
     }
