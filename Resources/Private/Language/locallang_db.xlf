@@ -180,9 +180,6 @@
 			<trans-unit id="settings.showcontrol" xml:space="preserve">
 				<source>Show Controls</source>
 			</trans-unit>
-			<trans-unit id="settings.hidelogo" xml:space="preserve">
-				<source>Hide Logo</source>
-			</trans-unit>
 			<trans-unit id="settings.showrelatedvideo" xml:space="preserve">
 				<source>Show Related videos</source>
 			</trans-unit>
