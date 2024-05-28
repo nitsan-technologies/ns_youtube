@@ -33,9 +33,6 @@
 			<trans-unit id="backend.control">
 				<source>Show Control</source>
 			</trans-unit>
-			<trans-unit id="backend.hidelogo">
-				<source>Hide Logo</source>
-			</trans-unit>
 			<trans-unit id="backend.showrelatedvideo">
 				<source>Show Related video</source>
 			</trans-unit>

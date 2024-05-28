@@ -21,12 +21,12 @@ $EM_CONF['ns_youtube'] = [
   'author_company' => 'T3Planet // NITSAN',
   'state' => 'stable',
   'uploadfolder' => true,
-  'version' => '12.0.1',
-	'constraints' => [
-		'depends' => [
-			'typo3' => '12.0.0-12.4.99',
-		],
-		'conflicts' => [],
-		'suggests' => [],
-	],
+  'version' => '12.1.0',
+    'constraints' => [
+        'depends' => [
+            'typo3' => '12.0.0-12.4.99',
+        ],
+        'conflicts' => [],
+        'suggests' => [],
+    ],
 ];

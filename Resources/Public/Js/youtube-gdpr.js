@@ -35,7 +35,6 @@ function attachEvents() {
 
   const noticesBlocks = document.querySelectorAll('.ns_video-gdpr__notice-btn');
   noticesBlocks.forEach((noticesBlock) => {
-    // var cookieCheck = getCookie(noticesBlock.parentNode.children[0].dataset.src);
     var cookieCheck = getCookie(noticesBlock.closest('.ns_video-gdpr').querySelector('iframe').dataset.src);
     if(cookieCheck != 1){
       noticesBlock.addEventListener('click', (event) => {
@@ -62,6 +61,5 @@ function getCookie(cname) {
     }
   }
   return "";
-} 
-
+}
 attachEvents();
