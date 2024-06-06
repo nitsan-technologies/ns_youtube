@@ -73,7 +73,7 @@
 				<source>Add text for lightbox link</source>
 			</trans-unit>
 			<trans-unit id="flexform.channelname" xml:space="preserve">
-				<source>Add Username</source>
+				<source>Add Channel Name</source>
 			</trans-unit>
 			<trans-unit id="flexform.videourl.placeholder" xml:space="preserve">
 				<source>E.g : https://www.youtube.com/watch?v=eXTbnMbnEfU</source>
@@ -94,13 +94,13 @@
 				<source>Select channel type</source>
 			</trans-unit>
 			<trans-unit id="flexform.channeltype.1" xml:space="preserve">
-				<source>By User (e.g. TEDtalksDirector)</source>
+				<source>By Channel Name (e.g. TEDtalksDirector)</source>
 			</trans-unit>
 			<trans-unit id="flexform.channeltype.2" xml:space="preserve">
 				<source>By Channel Id (e.g. UC6riU7xaRItrH_8_P6rYsfQ)</source>
 			</trans-unit>
 			<trans-unit id="flexform.channeltype.channelname" xml:space="preserve">
-				<source>Add username</source>
+				<source>Add Channel Name</source>
 			</trans-unit>
 			<trans-unit id="flexform.placeholder.channeltype.channelname" xml:space="preserve">
 				<source>E.g : TEDtalksDirector </source>
