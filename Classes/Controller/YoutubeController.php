@@ -357,7 +357,7 @@ class YoutubeController extends ActionController
                 isset($this->settings['channelname']) &&
                 $this->settings['channelname'] != ''
             ) {
-                $api = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername='
+                $api = 'https://www.googleapis.com/youtube/v3/channels?part=snippet&forHandle='
                     . str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
                 $result = $this->connectAPI($api);
                 $jsonresult = json_decode($result->getBody());
@@ -369,8 +369,17 @@ class YoutubeController extends ActionController
             } elseif ($this->settings['channelid'] != '' && isset($this->settings['channelid'])) {
                 $channelId = $this->settings['channelid'];
             }
-            $apiEndpoint = 'https://www.googleapis.com/youtube/v3/search?part=snippet,id&type=video&order=date&channelId='
-                . $channelId . '&maxResults=' . $options->pageSize . '&key=' . $this->settings['apiKey'];
+            if ($channelId != null) {
+                $apiEndpoint = 'https://www.googleapis.com/youtube/v3/search?part=snippet,id&type=video&order=date&channelId='
+                    . $channelId . '&maxResults=' . $options->pageSize . '&key=' . $this->settings['apiKey'];
+            } else {
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('add_user_name', 'ns_youtube'),
+                    '',
+                    ContextualFeedbackSeverity::ERROR
+                );
+                return (object) [];
+            }
             if ($options->pageToken != null) {
                 $apiEndpoint .= '&pageToken=' . $options->pageToken;
             }
