@@ -491,6 +491,7 @@
 							<config>
 								<type>check</type>
 							</config>
+							<onChange>reload</onChange>
 						</TCEforms>
 					</settings.showpaging>
 
@@ -500,6 +501,7 @@
 							<displayCond>
 								<and>
 									<value1>FIELD:settings.layout:=:gallery</value1>
+									<value2>FIELD:settings.showpaging:=:1</value2>
 									<or>
 								      	<value1>FIELD:settings.listType:=:channel</value1>
 								      	<value2>FIELD:settings.listType:=:playlist</value2>
@@ -518,6 +520,7 @@
 							<displayCond>
 								<and>
 									<value1>FIELD:settings.layout:=:gallery</value1>
+									<value2>FIELD:settings.showpaging:=:1</value2>
 									<or>
 								      	<value1>FIELD:settings.listType:=:channel</value1>
 								      	<value2>FIELD:settings.listType:=:playlist</value2>
@@ -558,12 +561,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.setting_feuser</sheetTitle>
-					<displayCond>
-						<and>
-							<value1>FIELD:sDEF.settings.videotype:!=:lightbox</value1>
-							<value2>FIELD:sDEF.settings.videotype:!=:text</value2>
-						</and>
-					</displayCond>
+					<displayCond>FIELD:sDEF.settings.videotype:=:default</displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>

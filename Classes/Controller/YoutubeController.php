@@ -251,6 +251,9 @@ class YoutubeController extends ActionController
      */
     public function ajaxAction(): void
     {
+        if($this->request->hasArgument('settings')) {
+            $this->settings = $this->request->getArgument('settings');
+        }
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             $playlistParamsTemp = '';
             $options = (object) $_POST;
@@ -279,7 +282,7 @@ class YoutubeController extends ActionController
                 $jsonResult = $this->getVideoFromList($options);
             }
             $gallery = $this->getVideo($jsonResult);
-            $nextvideo = $gallery->html;
+            $nextvideo = $gallery->html ?? '';
             echo $nextvideo;
             die();
         }
@@ -386,7 +389,7 @@ class YoutubeController extends ActionController
             $apiResult = $this->connectAPI($apiEndpoint);
             return json_decode($apiResult->getBody());
         } catch (\Exception $e) {
-            $error = $this->catchException($e);
+            $error = LocalizationUtility::translate('invalid_api_key', 'ns_youtube');
             $this->addFlashMessage(
                 $error,
                 '',
