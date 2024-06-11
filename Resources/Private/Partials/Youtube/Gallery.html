@@ -21,42 +21,42 @@
 <f:if condition="{settings.insertBelow}">
 	<f:render section="Pagination" arguments="{_all}"/>
 </f:if>
-<!-- Main Partial section Ends -->
 
-
-<!-- Pagination Section-->
 <f:section name="Pagination">
-	<div class="yt-pagination {f:if(condition:'{settings.showpaging}==0', then:'hide')}">
-		<div tabindex="0" role="button" class="yt-pagebutton yt-prev {f:if(condition:prevPageToken,then:'',else:'hide')}" 
-		data-playlistid="{options.playlistId}" 
-		data-pagesize="{options.pageSize}" 
-		data-pagetoken="{prevPageToken}" 
-		data-columns="{settings.columns}" 
-		data-showtitle="{settings.showtitle}" 
-		data-showpaging="{settings.showpaging}" 
-		data-thumbplay="{settings.thumbplay}">
-			<div class="arrow">&laquo;</div> 
-			<div><f:translate key='LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:prev' /></div>
+	<!-- Pagination Section-->
+	<f:if condition="{settings.showpaging} == 1">
+		<div class="yt-pagination {f:if(condition:'{settings.showpaging}==0', then:'hide')}">
+			<div tabindex="0" role="button" class="yt-pagebutton yt-prev {f:if(condition:prevPageToken,then:'',else:'hide')}" 
+			data-playlistid="{options.playlistId}" 
+			data-pagesize="{options.pageSize}" 
+			data-pagetoken="{prevPageToken}" 
+			data-columns="{settings.columns}" 
+			data-showtitle="{settings.showtitle}" 
+			data-showpaging="{settings.showpaging}" 
+			data-thumbplay="{settings.thumbplay}">
+				<div class="arrow">&laquo;</div> 
+				<div><f:translate key='LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:prev' /></div>
+			</div>
+			<div class="yt-current">1</div>
+			<div class="yt-pageseparator"> / </div>
+			<div class="yt-totalpages">{totalPages}</div>
+			<div tabindex="0" role="button" class="yt-pagebutton yt-next {f:if(condition:nextPageToken,then:'',else:'hide')}" 
+			data-playlistid="{options.playlistId}" 
+			data-pagesize="{options.pageSize}" 
+			data-pagetoken="{nextPageToken}" 
+			data-columns="{settings.columns}" 
+			data-showtitle="{settings.showtitle}" 
+			data-showpaging="{settings.showpaging}" 
+			data-thumbplay="{settings.thumbplay}">
+				<div><f:translate key='LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:next' /></div>
+				<div class="arrow">&raquo;</div> 
+			</div>
 		</div>
-		<div class="yt-current">1</div>
-		<div class="yt-pageseparator"> / </div>
-		<div class="yt-totalpages">{totalPages}</div>
-		<div tabindex="0" role="button" class="yt-pagebutton yt-next {f:if(condition:nextPageToken,then:'',else:'hide')}" 
-		data-playlistid="{options.playlistId}" 
-		data-pagesize="{options.pageSize}" 
-		data-pagetoken="{nextPageToken}" 
-		data-columns="{settings.columns}" 
-		data-showtitle="{settings.showtitle}" 
-		data-showpaging="{settings.showpaging}" 
-		data-thumbplay="{settings.thumbplay}">
-			<div><f:translate key='LLL:EXT:ns_youtube/Resources/Private/Language/locallang.xlf:next' /></div>
-			<div class="arrow">&raquo;</div> 
-		</div>
-	</div>
+	</f:if>
 </f:section>
 
-<!-- Gallery Listing Section-->
 <f:section name="GalleryListing">
+	<!-- Gallery Listing Section-->
 	<div tabindex="0" role="button" 
 			data-videoid="{item.snippet.datavideoid}" class="yt-gallery-thumb">
 		<div class="yt-gallery-img-box">

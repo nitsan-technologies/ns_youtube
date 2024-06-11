@@ -209,6 +209,9 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function ajaxAction()
     {
+        if($this->request->hasArgument('settings')) {
+            $this->settings = $this->request->getArgument('settings');
+        }
         if (
             !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
             strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
@@ -222,7 +225,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 $jsonResult = $this->getVideoFromList($options);
             }
             $gallery = $this->getVideo($jsonResult, $options);
-            $nextvideo = $gallery->html;
+            $nextvideo = $gallery->html ?? '';
             echo $nextvideo;
             die();
         }
@@ -328,7 +331,10 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $jsonResult->pageInfo->resultsPerPage = $options->pageSize;
             return $jsonResult;
         } catch (\Exception $e) {
-            $error = $this->catchException($e);
+            $error =  \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                'invalid_api_key',
+                'ns_youtube'
+            );
             $this->addFlashMessage(
                 $error,
                 '',
