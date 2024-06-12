@@ -103,7 +103,7 @@ class YoutubeController extends ActionController
         }
 
         if ($this->settings['listType'] == 'single') {
-            if ($linkparams['v'] != '' && isset($linkparams['v'])) {
+            if (isset($linkparams['v']) && $linkparams['v'] != '') {
                 $videoid = $linkparams['v'];
             } elseif (isset($linkparams['list'])) {
                 $finalparams = $linkparams + $this->settings;

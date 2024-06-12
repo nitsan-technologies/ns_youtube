@@ -124,13 +124,13 @@
 				<source>Gallery Page Size :  Enter how many thumbnails per page should be shown at once (YouTube allows a maximum of 50 per page).</source>
 			</trans-unit>
 			<trans-unit id="settings.columns" xml:space="preserve">
-				<source>Number of Columns : Enter how many thumbnails can fit per row.</source>
+				<source>Number of Columns : Enter how many thumbnails can fit per row. (max:20)</source>
 			</trans-unit>
 			<trans-unit id="settings.showtitle" xml:space="preserve">
 				<source>Show Thumbnail Title : Show titles with each thumbnail.</source>
 			</trans-unit>
 			<trans-unit id="settings.thumbplay" xml:space="preserve">
-				<source>Thumbnail Click Plays Video : Clicking on a gallery thumbnail autoplays the video. Uncheck this and visitors must also click the video's play button after clicking the thumbnail.</source>
+				<source>Thumbnail Click Plays Video : keep this option checked to enable autoplay. For more user control over playback, uncheck this option.</source>
 			</trans-unit>
 			<trans-unit id="settings.autonext" xml:space="preserve">
 				<source>Automatic Continuous Play : Automatically play the next video in the gallery as soon as the current video finished.</source>
