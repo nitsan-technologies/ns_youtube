@@ -389,7 +389,7 @@ class YoutubeController extends ActionController
             $apiResult = $this->connectAPI($apiEndpoint);
             return json_decode($apiResult->getBody());
         } catch (\Exception $e) {
-            $error = LocalizationUtility::translate('invalid_api_key', 'ns_youtube');
+            $error = $this->catchException($e);
             $this->addFlashMessage(
                 $error,
                 '',

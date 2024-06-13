@@ -130,7 +130,7 @@
 				<source>Show Thumbnail Title : Show titles with each thumbnail.</source>
 			</trans-unit>
 			<trans-unit id="settings.thumbplay" xml:space="preserve">
-				<source>Thumbnail Click Plays Video : keep this option checked to enable autoplay. For more user control over playback, uncheck this option.</source>
+				<source>Thumbnail Click Plays Video : Clicking on a gallery thumbnail autoplays the video. Uncheck this and visitors must also click the video's play button after clicking the thumbnail.</source>
 			</trans-unit>
 			<trans-unit id="settings.autonext" xml:space="preserve">
 				<source>Automatic Continuous Play : Automatically play the next video in the gallery as soon as the current video finished.</source>
