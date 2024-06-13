@@ -96,6 +96,8 @@
                 currpage += forward ? 1 : -1;
                 $container.data('currpage', currpage);
                 $container.find('.yt-gallery-list').addClass('yt-loading');
+                $container.find('.yt-next').click(false);
+                $container.find('.yt-prev').click(false);
                 
                 var ajaxURL = $('.ajaxURL').val();
                 var dataString = 'playlistId='+$(this).data('playlistid')

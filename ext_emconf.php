@@ -19,22 +19,19 @@ $EM_CONF['ns_youtube'] = [
     'author' => 'T3: Nilesh Malankiya, T3: Jay Bhalgamiya, QA: Krishna Dhapa',
     'author_email' => 'sanjay@nitsan.in',
     'author_company' => 'T3Planet // NITSAN',
-  'state' => 'stable',
-  'uploadfolder' => true,
-  'clearCacheOnLoad' => 0,
-  'version' => '2.2.0',
-  'constraints' =>
-  [
-    'depends' =>
-    [
-      'typo3' => '6.0.0-11.5.99',
-    ],
-    'conflicts' =>
-    [
-    ],
-    'suggests' =>
-    [
-    ],
-  ],
-  'clearcacheonload' => true,
+    'state' => 'stable',
+    'uploadfolder' => true,
+    'clearCacheOnLoad' => 0,
+    'version' => '2.2.1',
+    'constraints' =>
+        [
+            'depends' => [
+                'typo3' => '6.0.0-11.5.99',
+            ],
+            'conflicts' => [
+            ],
+            'suggests' => [
+            ],
+        ],
+    'clearcacheonload' => true,
 ];

@@ -6,6 +6,12 @@
 			<trans-unit id="add_api_key">
 				<source>Please add YouTube API key from Google at constant.</source>
 			</trans-unit>
+			<trans-unit id="add_user_name">
+				<source>Username is incorrect.</source>
+			</trans-unit>
+			<trans-unit id="invalid_api_key">
+				<source>API key not valid. Please pass a valid API key.</source>
+			</trans-unit>
 			<trans-unit id="pi1_title">
 				<source>Ns Youtube</source>
 			</trans-unit>
@@ -90,7 +96,6 @@
 			<trans-unit id="backend.insertBelow">
 				<source>Insert Pagination Below Thumbnails</source>
 			</trans-unit>
-
 			<trans-unit id="backend.lightboxtext" xml:space="preserve">
 				<source>Lightbox link text</source>
 			</trans-unit>
@@ -118,7 +123,6 @@
 			<trans-unit id="backend.width_type.7" xml:space="preserve">
 				<source>Width 21:9 Aspect Ratio</source>
 			</trans-unit>
-
 			<trans-unit id="backend.default" xml:space="preserve">
 				<source>Default</source>
 			</trans-unit>
@@ -131,7 +135,6 @@
 			<trans-unit id="backend.text" xml:space="preserve">
 				<source>Text Popup Video</source>
 			</trans-unit>
-
 			<trans-unit id="tx_ns_youtube_domain_model_youtube">
 				<source>Youtube</source>
 			</trans-unit>
