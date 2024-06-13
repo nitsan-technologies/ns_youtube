@@ -178,14 +178,14 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             ($this->settings['listType'] == 'playlist' ||
                 $this->settings['listType'] == 'channel')
         ) {
-            $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                    'add_api_key',
-                    'ns_youtube'
-                ),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-            );
+                $this->addFlashMessage(
+                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                        'add_api_key',
+                        'ns_youtube'
+                    ),
+                    '',
+                    \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                );
         }
 
         $this->view->assignMultiple([
@@ -331,10 +331,7 @@ class YoutubeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $jsonResult->pageInfo->resultsPerPage = $options->pageSize;
             return $jsonResult;
         } catch (\Exception $e) {
-            $error =  \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                'invalid_api_key',
-                'ns_youtube'
-            );
+            $error = $this->catchException($e);
             $this->addFlashMessage(
                 $error,
                 '',

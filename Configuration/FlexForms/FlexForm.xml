@@ -179,6 +179,7 @@
 							 <label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.image</label>
 							 <displayCond>
 								<and>
+									<value10>FIELD:settings.listType:=:single</value10>
 									<value1>FIELD:settings.videotype:!=:default</value1>
 									<value5>FIELD:settings.videotype:!=:text</value5>
 								</and>
