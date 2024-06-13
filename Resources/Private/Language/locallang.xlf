@@ -6,6 +6,12 @@
 			<trans-unit id="add_api_key">
 				<source>Please add YouTube API key from Google at constant.</source>
 			</trans-unit>
+			<trans-unit id="add_user_name">
+				<source>Username is incorrect.</source>
+			</trans-unit>
+			<trans-unit id="invalid_api_key">
+				<source>API key not valid. Please pass a valid API key.</source>
+			</trans-unit>
 			<trans-unit id="pi1_title">
 				<source>Ns Youtube</source>
 			</trans-unit>
