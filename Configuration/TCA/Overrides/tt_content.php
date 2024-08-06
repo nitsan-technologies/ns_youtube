@@ -23,5 +23,3 @@ ExtensionManagementUtility::addPiFlexFormValue(
     $pluginSignature,
     'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml'
 );
-
-
