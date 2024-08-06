@@ -4,7 +4,7 @@ mod {
             wizardItems{
                 plugins {
                     elements {
-                        youtube {
+                      nsyoutube_youtube{
                             iconIdentifier = ext-ns-youtube-icon
                             title = LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:tx_ns_youtube_domain_model_youtube
                             description = LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:tx_ns_youtube_domain_model_youtube.description

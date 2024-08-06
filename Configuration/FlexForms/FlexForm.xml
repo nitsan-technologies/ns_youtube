@@ -11,13 +11,11 @@
 		-->
 		<sDEF>
 			<ROOT>
-				<TCEforms>
-					<sheetTitle>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.sheet_title</sheetTitle>
-				</TCEforms>
+				
 				<type>array</type>
 				<el>
 					<settings.listType>
-						<TCEforms>
+						
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.list_type</label>
 							<onChange>reload</onChange>
 							<config>
@@ -40,11 +38,11 @@
 								<default>single</default>
 								<eval>trim</eval>
 							</config>
-						</TCEforms>
+						
 					</settings.listType>
 
 					<settings.videourl>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.videourl</label>
 							<displayCond>
 							   <and>
@@ -58,11 +56,11 @@
 								<eval>trim,required</eval>
 								<placeholder>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.videourl.placeholder</placeholder>
 							</config>
-						</TCEforms>
+					
 					</settings.videourl>
 
 					<settings.videotype>
-						<TCEforms>
+						
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.video_type</label>
 							<onChange>reload</onChange>
 							<displayCond>
@@ -95,11 +93,11 @@
 								<default>default</default>
 								<eval>trim</eval>
 							</config>
-						</TCEforms>
+						
 					</settings.videotype>
 
 					<settings.widthtype>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.width_type</label>
 							<onChange>reload</onChange>
 							<displayCond>
@@ -149,11 +147,11 @@
 								<default>0</default>
 								<eval>trim</eval>
 							</config>
-						</TCEforms>
+						
 					</settings.widthtype>
 					
 					<settings.lightboxtext>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.lightboxtext</label>
 							<onChange>reload</onChange>
 							<displayCond>
@@ -171,11 +169,11 @@
 								<cols>30</cols>
 								<eval>trim,required</eval>
 							</config>
-						</TCEforms>
+						
 					</settings.lightboxtext>
 
 					<youtubeImage>
-						<TCEforms>
+				
 							 <label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.image</label>
 							 <displayCond>
 								<and>
@@ -238,42 +236,42 @@
 									</columns>
 								</overrideChildTca>
 							</config>
-						</TCEforms>
+					
 					</youtubeImage>
 
 					<settings.showcontrol>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.showcontrol</label>
 							<displayCond>FIELD:settings.listType:=:single</displayCond>
 							<config>
 								<type>check</type>
 							</config>
-						</TCEforms>
+						
 					</settings.showcontrol>
 
 					<settings.showrelatedvideo>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.showrelatedvideo</label>
 							<displayCond>FIELD:settings.listType:=:single</displayCond>
 							<config>
 								<type>check</type>
 							</config>
-						</TCEforms>
+					
 					</settings.showrelatedvideo>
 
 					<settings.nocookie>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.nocookie</label>
 							<displayCond>FIELD:settings.listType:=:single</displayCond>
 							<config>
 								<type>check</type>
 								<default>1</default>
 							</config>
-						</TCEforms>
+					
 					</settings.nocookie>
 					
 					<settings.playlisturl>
-						<TCEforms>	
+				
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.videourl</label>
 							<displayCond>FIELD:settings.listType:=:playlist</displayCond>
 							<config>
@@ -282,11 +280,11 @@
 								<eval>trim,required</eval>
 								<placeholder>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.playlisturl.placeholder</placeholder>
 							</config>
-						</TCEforms>
+						
 					</settings.playlisturl>
 					
 					<settings.channeltype>
-						<TCEforms>
+				
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.channeltype</label>
 							<displayCond>FIELD:settings.listType:=:channel</displayCond>
 							<onChange>reload</onChange>
@@ -304,11 +302,11 @@
 								</items>
 								<default>username</default>
 							</config>
-						</TCEforms>
+				
 					</settings.channeltype>
 					
 					<settings.channelname>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.channeltype.channelname</label>
 							<displayCond>
 							   <and>
@@ -322,11 +320,11 @@
 								<eval>trim,required</eval>
 								<placeholder>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.placeholder.channeltype.channelname</placeholder>
 							</config>
-						</TCEforms>
+					
 					</settings.channelname>
 					
 					<settings.channelid>
-						<TCEforms>
+				
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.channeltype.channelid</label>
 							<displayCond>
 							   <and>
@@ -340,11 +338,11 @@
 								<eval>trim,required</eval>
 								<placeholder>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.placeholder.channeltype.channelid</placeholder>
 							</config>
-						</TCEforms>
+					
 					</settings.channelid>
 					
 					<settings.layout>
-						<TCEforms>
+						
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.layout</label>
 							<displayCond>FIELD:settings.listType:IN:playlist,channel</displayCond>
 							<onChange>reload</onChange>
@@ -362,11 +360,11 @@
 								</items>
 								<default>playlist</default>
 							</config>
-						</TCEforms>
+					
 					</settings.layout>
 
 					<settings.showtitle>
-						<TCEforms>
+						
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.showtitle</label>
 							<displayCond>
 								<and>
@@ -380,11 +378,10 @@
 							<config>
 								<type>check</type>
 							</config>
-						</TCEforms>
+					
 					</settings.showtitle>
 					
 					<settings.titlecrop>
-						<TCEforms>
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.titlecrop</label>
 							<displayCond>
 								<and>
@@ -406,11 +403,11 @@
 								<default>35</default>
 								<size>5</size>
 							</config>
-						</TCEforms>
+					
 					</settings.titlecrop>
 
 					<settings.thumbplay>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.thumbplay</label>
 							<displayCond>
 								<and>
@@ -424,11 +421,11 @@
 							<config>
 								<type>check</type>
 							</config>
-						</TCEforms>
+						
 					</settings.thumbplay>
 
 					<settings.pagesize>
-						<TCEforms>
+						
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.pagesize</label>
 							<displayCond>
 							   <and>
@@ -449,11 +446,11 @@
 								</range>
 								<default>12</default>
 							</config>
-						</TCEforms>
+				
 					</settings.pagesize>
 
 					<settings.columns>
-						<TCEforms>
+						
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.columns</label>
 							<displayCond>
 							   <and>
@@ -474,11 +471,11 @@
 								</range>
 								<default>4</default>
 							</config>
-						</TCEforms>
+					
 					</settings.columns>
 
 					<settings.showpaging>
-						<TCEforms>
+						
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.showpaging</label>
 							<displayCond>
 								<and>
@@ -493,11 +490,11 @@
 								<type>check</type>
 							</config>
 							<onChange>reload</onChange>
-						</TCEforms>
+						
 					</settings.showpaging>
 
 					<settings.insertAbove>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.insert_above</label>
 							<displayCond>
 								<and>
@@ -512,11 +509,11 @@
 							<config>
 								<type>check</type>
 							</config>
-						</TCEforms>
+					
 					</settings.insertAbove>
 
 					<settings.insertBelow>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.insert_below</label>
 							<displayCond>
 								<and>
@@ -531,11 +528,10 @@
 							<config>
 								<type>check</type>
 							</config>
-						</TCEforms>
 					</settings.insertBelow>
 
 					<settings.channelsubtext>
-						<TCEforms>
+				
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.channelsubtext</label>
 							<displayCond>
 							   <and>
@@ -552,7 +548,7 @@
 								<eval>trim</eval>
 								<default>Subscribe to my channel</default>
 							</config>
-						</TCEforms>
+						
 					</settings.channelsubtext>
 
 				</el>
@@ -560,24 +556,24 @@
 		</sDEF>
 		<userSettings>
 			<ROOT>
-				<TCEforms>
+				
 					<sheetTitle>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.setting_feuser</sheetTitle>
 					<displayCond>FIELD:sDEF.settings.videotype:=:default</displayCond>
-				</TCEforms>
+				
 				<type>array</type>
 				<el>
 					<settings.enableGdpr>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.enableGdpr</label>
 							<onChange>reload</onChange>
 							<config>
 								<type>check</type>
 							</config>
-						</TCEforms>
+					
 					</settings.enableGdpr>
 
 					<settings.noticeDescription>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeDescription</label>
 							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
 							<config>
@@ -586,33 +582,33 @@
 								<cols>30</cols>
 								<eval>trim</eval>
 							</config>
-						</TCEforms>
+					
 					</settings.noticeDescription>
 
 					<settings.noticeColor>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeColor</label>
 							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
 							<config>
 								<type>input</type>
 								<renderType>colorpicker</renderType>
 							</config>
-						</TCEforms>
+						
 					</settings.noticeColor>
 
 					<settings.wantBgImage>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.wantBgImage</label>
 							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
 							<onChange>reload</onChange>
 							<config>
 								<type>check</type>
 							</config>
-						</TCEforms>
+				
 					</settings.wantBgImage>
 
 					<backImage>
-						<TCEforms>
+						
 							 <label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgImage</label>
 							 <displayCond>
 								<and>
@@ -674,11 +670,11 @@
 									</columns>
 								</overrideChildTca>
 							</config>
-						</TCEforms>
+						
 					</backImage>
 
 					<settings.bgColor>
-						<TCEforms>
+				
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgColor</label>
 							<displayCond>
 								<and>
@@ -690,51 +686,51 @@
 								<type>input</type>
 								<renderType>colorpicker</renderType>
 							</config>
-						</TCEforms>
+						
 					</settings.bgColor>
 
 					<settings.buttonText>
-						<TCEforms>
+						
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonText</label>
 							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
 							<config>
 								<type>input</type>
 								<eval>trim</eval>
 							</config>
-						</TCEforms>
+						
 					</settings.buttonText>
 
 					<settings.activeAllButtonText>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.activeAllButtonText</label>
 							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
 							<config>
 								<type>input</type>
 								<eval>trim</eval>
 							</config>
-						</TCEforms>
+					
 					</settings.activeAllButtonText>
 
 					<settings.buttonTextColor>
-						<TCEforms>
+					
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonTextColor</label>
 							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
 							<config>
 								<type>input</type>
 								<renderType>colorpicker</renderType>
 							</config>
-						</TCEforms>
+					
 					</settings.buttonTextColor>
 
 					<settings.buttonColor>
-						<TCEforms>
+						
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonColor</label>
 							<displayCond>FIELD:settings.enableGdpr:=:1</displayCond>
 							<config>
 								<type>input</type>
 								<renderType>colorpicker</renderType>
 							</config>
-						</TCEforms>
+					
 					</settings.buttonColor>
 				</el>
 			</ROOT>

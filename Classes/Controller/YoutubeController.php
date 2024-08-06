@@ -49,12 +49,6 @@ class YoutubeController extends ActionController
     public string $link = '';
 
     /**
-     * @var ConfigurationManagerInterface
-     *
-     */
-    protected $configurationManager;
-
-    /**
      * action list
      *
      * @return ResponseInterface
@@ -65,7 +59,8 @@ class YoutubeController extends ActionController
         $options = (object) [];
         $error = $videoid = $centercode = '';
         $jsonResult = $linkparamstemp = $linkparams = [];
-        $constant = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_nsyoutube.']['settings.'];
+        $fullTypoScript = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+        $constant = $fullTypoScript['plugin.']['tx_nsyoutube.']['settings.'] ;
         $usenocookie = $showcontrol = $showrelatedvideo = 0;
         $contentObj = $this->request->getAttribute('currentContentObject');
 
