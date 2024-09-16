@@ -12,7 +12,7 @@ $pluginSignature = ExtensionUtility::registerPlugin(
     'NsYoutube',
     'Youtube',
     'Youtube',
-    '',
+    'ext-ns-youtube-icon',
     'plugins'
 );
 

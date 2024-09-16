@@ -13,11 +13,11 @@ ExtensionUtility::configurePlugin(
     'NsYoutube',
     'Youtube',
     [
-       YoutubeController::class => 'list,ajax'
+        YoutubeController::class => 'list,ajax'
     ],
     // non-cacheable actions
     [
-       YoutubeController::class => 'list,ajax'
+        YoutubeController::class => 'list,ajax'
     ]
 );
 $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
