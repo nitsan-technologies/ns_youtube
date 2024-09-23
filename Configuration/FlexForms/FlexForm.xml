@@ -11,11 +11,11 @@
 		-->
 		<sDEF>
 			<ROOT>
-				
+				<sheetTitle>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.sheet_title</sheetTitle>
 				<type>array</type>
 				<el>
 					<settings.listType>
-						
+
 							<label>LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:flexform.list_type</label>
 							<onChange>reload</onChange>
 							<config>
