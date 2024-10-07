@@ -442,7 +442,7 @@
 								<eval>trim,int</eval>
 								<range>
 									<lower>1</lower>
-									<upper>1000</upper>
+									<upper>50</upper>
 								</range>
 								<default>12</default>
 							</config>

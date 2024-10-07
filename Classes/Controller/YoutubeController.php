@@ -218,7 +218,7 @@ class YoutubeController extends ActionController
                 ContextualFeedbackSeverity::ERROR
             );
         }
-        if ($this->settings['enableGdpr'] && $this->settings['wantBgImage'] && $this->settings['enableGdpr']) {
+        if ($this->settings['enableGdpr'] && isset($this->settings['wantBgImage']) && $this->settings['wantBgImage']) {
             $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
             $fileObjects = $fileRepository
                 ->findByRelation(
