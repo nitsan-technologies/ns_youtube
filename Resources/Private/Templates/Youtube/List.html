@@ -18,11 +18,11 @@
 									<f:then>
 										<f:if condition="{backImage} && {settings.enableGdpr} == '1'">
 											<f:then>
-												<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+												<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200', treatIdAsReference: 1,absolute:'1')}" />
 											</f:then>
 											<f:else>
 												<f:if condition="{constant.bgImage} !== '' ">
-													<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+													<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200', treatIdAsReference: 1,absolute:'1')}" />
 												</f:if>
 											</f:else>
 										</f:if>
@@ -71,11 +71,11 @@
 											<f:then>
 												<f:if condition="{backImage} && {settings.enableGdpr} == '1'">
 													<f:then>
-														<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+														<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200', treatIdAsReference: 1,absolute:'1')}" />
 													</f:then>
 													<f:else>
 														<f:if condition="{constant.bgImage} !== '' ">
-															<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+															<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200', treatIdAsReference: 1,absolute:'1')}" />
 														</f:if>
 													</f:else>
 												</f:if>
@@ -92,7 +92,7 @@
 											</f:then>
 										</f:if>
 									</div>
-									
+
 								</f:then>
 								<f:else>
 									<div class="error">
@@ -107,7 +107,7 @@
 				</f:then>
 				<f:else>
 					<f:if condition="{youtubeImage}">
-						<f:variable name="img" value="{f:uri.image(image: '{youtubeImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+						<f:variable name="img" value="{f:uri.image(image: '{youtubeImage}', maxHeight:'1200', treatIdAsReference: 1,absolute:'1')}" />
 					</f:if>
 					<f:if condition="{settings.videotype}!='default'">
 						<f:then>
@@ -135,7 +135,7 @@
                                             </div>
                                         </div>
                                     </div>
-								</f:case>			
+								</f:case>
 								<f:case value="splash">
 									<div class="video">
 										<div class="ns_cover-image {f:if(condition: '{img}', then: 'bg-image')}" style="{f:if(condition: '{img}', then: 'background-image: url({img})')}">
@@ -161,11 +161,11 @@
 													<f:then>
 														<f:if condition="{backImage} && {settings.enableGdpr} == '1'">
 															<f:then>
-																<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+																<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200', treatIdAsReference: 1,absolute:'1')}" />
 															</f:then>
 															<f:else>
 																<f:if condition="{constant.bgImage} !== '' ">
-																	<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+																	<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200', treatIdAsReference: 1,absolute:'1')}" />
 																</f:if>
 															</f:else>
 														</f:if>
@@ -237,11 +237,11 @@
 											<f:then>
 												<f:if condition="{backImage} && {settings.enableGdpr} == '1'">
 													<f:then>
-														<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+														<f:variable name="bgimg" value="{f:uri.image(image: '{backImage}', maxHeight:'1200', treatIdAsReference: 1,absolute:'1')}" />
 													</f:then>
 													<f:else>
 														<f:if condition="{constant.bgImage} !== '' ">
-															<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200c', treatIdAsReference: 1,absolute:'1')}" />
+															<f:variable name="bgimg" value="{f:uri.image(src: '{constant.bgImage}', maxHeight:'1200', treatIdAsReference: 1,absolute:'1')}" />
 														</f:if>
 													</f:else>
 												</f:if>
@@ -269,7 +269,7 @@
 							</f:if>
 						</f:else>
 					</f:if>
-				</f:else>	
+				</f:else>
 			</f:if>
 		</div>
 	</f:section>
