@@ -120,12 +120,12 @@ class YoutubeController extends ActionController
                             $videoid = $video->init_id ?? '';
                             $this->view->assignMultiple(
                                 [
-                                    'totalPages' => $video->totalPages,
-                                    'nextPageToken' => $video->nextPageToken,
-                                    'prevPageToken' => $video->prevPageToken,
+                                    'totalPages' => $video->totalPages ?? 0,
+                                    'nextPageToken' => $video->nextPageToken ?? 0,
+                                    'prevPageToken' => $video->prevPageToken ?? 0,
                                     'options' => $options,
                                     'jsonResult' => $jsonResult,
-                                    'subscibe' => $video->channelTitle
+                                    'subscibe' => $video->channelTitle ?? ''
                                 ]
                             );
                         } elseif ($linkparams['v'] != '' && !empty($linkparams['v'])) {
@@ -135,7 +135,7 @@ class YoutubeController extends ActionController
                     } else {
                         if ($this->settings['layout'] == 'playlist') {
                             $finalparams = $linkparams + $this->settings;
-                            if ($finalparams['list'] != '' && isset($finalparams['list'])) {
+                            if (isset($finalparams['list']) && $finalparams['list'] != '') {
                                 $this->finalsrc = $this->getPlaylistView($finalparams);
                             } elseif ($finalparams['v'] != '' && isset($finalparams['v'])) {
                                 $videoid = $finalparams['v'];
@@ -323,6 +323,8 @@ class YoutubeController extends ActionController
      */
     public function getVideoFromList(object $options): object
     {
+        $options->playlistId = isset($options->playlistId) ? $options->playlistId : 0 ;
+        $options->pageSize = isset($options->pageSize) ? $options->pageSize : 0 ;
         $apiEndpoint = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,status&playlistId='
             . $options->playlistId . '&maxResults=' . $options->pageSize . '&key=' . $options->apiKey;
         if ($options->pageToken != null) {
