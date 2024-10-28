@@ -27,6 +27,3 @@ $iconRegistry->registerIcon(
     SvgIconProvider::class,
     ['source' => 'EXT:ns_youtube/Resources/Public/Icons/user_plugin_youtube.svg']
 );
-
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['security.backend.enforceContentSecurityPolicy'] = false;
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['security.frontend.enforceContentSecurityPolicy'] = false;
