@@ -11,7 +11,9 @@ defined('TYPO3') or die();
 $pluginSignature = ExtensionUtility::registerPlugin(
     'NsYoutube',
     'Youtube',
-    'Youtube'
+    'Youtube',
+    'ext-ns-youtube-icon',
+    'plugins'
 );
 
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['nsyoutube_youtube'] = 'recursive,select_key,pages';
