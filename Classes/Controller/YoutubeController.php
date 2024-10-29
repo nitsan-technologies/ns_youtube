@@ -71,7 +71,7 @@ class YoutubeController extends ActionController
             $showrelatedvideo = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['showrelatedvideo']));
             $usenocookie = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['nocookie']));
         } elseif ($this->settings['listType'] == 'playlist') {
-            $this->link = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['playlisturl']));
+            $this->link = trim(str_replace($this->badentities, $this->goodliterals, $this->settings['playlisturl'] ?? ''));
         }
 
         if ($this->settings['listType'] == 'single' || $this->settings['listType'] == 'playlist') {
@@ -110,7 +110,7 @@ class YoutubeController extends ActionController
 
             if (!empty($this->settings['apiKey'])) {
                 if ($this->settings['listType'] == 'playlist') {
-                    if ($this->settings['layout'] == 'gallery') {
+                    if (isset($this->settings['layout']) && $this->settings['layout'] == 'gallery') {
 
                         $finalparams = $linkparams + $this->settings;
                         $options = $this->getOptions($finalparams);
@@ -133,11 +133,11 @@ class YoutubeController extends ActionController
                         }
 
                     } else {
-                        if ($this->settings['layout'] == 'playlist') {
+                        if (isset($this->settings['layout']) && $this->settings['layout'] == 'playlist') {
                             $finalparams = $linkparams + $this->settings;
                             if (isset($finalparams['list']) && $finalparams['list'] != '') {
                                 $this->finalsrc = $this->getPlaylistView($finalparams);
-                            } elseif ($finalparams['v'] != '' && isset($finalparams['v'])) {
+                            } elseif (isset($finalparams['v']) && $finalparams['v'] != '' && isset($finalparams['v'])) {
                                 $videoid = $finalparams['v'];
                                 $error = 1;
                             }
@@ -352,11 +352,7 @@ class YoutubeController extends ActionController
     {
         try {
             $channelId = '';
-            if (
-                $this->settings['channeltype'] == 'username' &&
-                isset($this->settings['channelname']) &&
-                $this->settings['channelname'] != ''
-            ) {
+            if (isset($this->settings['channeltype']) && $this->settings['channeltype'] == 'username' && isset($this->settings['channelname']) &&$this->settings['channelname'] != '') {
                 $api = 'https://www.googleapis.com/youtube/v3/channels?part=snippet&forHandle='
                     . str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
                 $result = $this->connectAPI($api);
@@ -366,7 +362,7 @@ class YoutubeController extends ActionController
                         $channelId = $item->id;
                     }
                 }
-            } elseif ($this->settings['channelid'] != '' && isset($this->settings['channelid'])) {
+            } elseif (isset($this->settings['channelid']) && $this->settings['channelid'] != '' && isset($this->settings['channelid'])) {
                 $channelId = $this->settings['channelid'];
             }
             if ($channelId != null) {

@@ -186,11 +186,9 @@
 									</div>
 								</f:case>
 								<f:case value="text">
-									<f:if condition="{settings.lightboxtext} ">
-										<a href="{popupLink}" data-fancybox class="ns_lightbox-button ns_text-lightbox" data-url="{popupLink}">
-											{settings.lightboxtext}
-										</a>
-									</f:if>
+									<a href="{popupLink}" data-fancybox class="ns_lightbox-button ns_text-lightbox" data-url="{popupLink}">
+										{f:if(condition: settings.lightboxtext, then: '{settings.lightboxtext}', else: 'YouTube Video')}
+									</a>
 								</f:case>
 								<f:defaultCase>
 									<div class="video">
