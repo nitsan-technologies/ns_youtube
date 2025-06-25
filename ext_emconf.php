@@ -11,14 +11,13 @@
  ***************************************************************/
 
 $EM_CONF['ns_youtube'] = [
-    'title' => 'YouTube',
-    'description' => 'Using Youtube TYPO3 Extension you can display your YouTube videos directly on your TYPO3 site within a video box, allowing visitors to view them without being redirected to www.youtube.com. It easily integrates all YouTube features, such as Simple Video, Channel and Playlist management, Live-streaming, and engagement options such as likes and subscribe. 
-  
-  *** Live-Demo: https://demo.t3planet.com/t3-extensions/youtube *** Documentation & Free Support: https://t3planet.com/typo3-youtube-extension',
+    'title' => 'TYPO3 YouTube Integration',
+    'description' => 'Seamlessly embed and manage YouTube videos, playlists, and channels in your TYPO3 website. Includes support for live streaming and full YouTube feature integration — without redirecting users to YouTube.',
+    
     'category' => 'plugin',
-    'author' => 'T3: Nilesh Malankiya, T3: Jay Bhalgamiya, QA: Krishna Dhapa',
-    'author_email' => 'sanjay@nitsan.in',
-    'author_company' => 'T3Planet // NITSAN',
+    'author' => 'Team T3Planet',
+    'author_email' => 'info@t3planet.de',
+    'author_company' => 'T3Planet',
     'state' => 'stable',
     'uploadfolder' => true,
     'version' => '13.0.0',
