@@ -21,6 +21,13 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
+
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\Information\Typo3Version;
+
+use TYPO3\CMS\Core\View\ViewFactory; 
+
 
 /**
  * YoutubeController
@@ -48,6 +55,13 @@ class YoutubeController extends ActionController
      */
     public string $link = '';
 
+        /**
+     * ViewFactory
+     *
+     * @var ViewFactoryInterface|null
+     */
+    protected ?ViewFactoryInterface $viewFactory = null;
+
     /**
      * action list
      *
@@ -60,7 +74,7 @@ class YoutubeController extends ActionController
         $error = $videoid = $centercode = '';
         $jsonResult = $linkparamstemp = $linkparams = [];
         $fullTypoScript = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-        $constant = $fullTypoScript['plugin.']['tx_nsyoutube.']['settings.'] ;
+        $constant = $fullTypoScript['plugin.']['tx_nsyoutube.']['settings.'] ?? [];
         $usenocookie = $showcontrol = $showrelatedvideo = 0;
         $contentObj = $this->request->getAttribute('currentContentObject');
 
@@ -194,9 +208,12 @@ class YoutubeController extends ActionController
         $thumbplay = $this->settings['thumbplay'] ?? '';
         if (!empty($videoid) || isset($this->finalsrc)) {
             $ifram_src = '';
-            if ($this->settings['enableGdpr'] || $constant['enableGdpr']) {
-                $ifram_src = 'data-';
-            }
+            $enableGdprFromSettings = $this->settings['enableGdpr'] ?? false;
+$enableGdprFromConstant = $constant['enableGdpr'] ?? false;
+
+if ($enableGdprFromSettings || $enableGdprFromConstant) {
+    $ifram_src = 'data-';
+}
             $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" ' . $ifram_src . 'src="https://www.'
                 . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls='
                 . $showcontrol . '&rel=' . $showrelatedvideo;
@@ -539,10 +556,8 @@ class YoutubeController extends ActionController
      */
     public function getTemplateHtml(string $controllerName, string $templateName, object $variables): string
     {
-        $tempView = GeneralUtility::makeInstance(StandaloneView::class);
         $extbaseFrameworkConfiguration = $this->configurationManager
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-
         $partialRootPaths = $extbaseFrameworkConfiguration['view']['partialRootPaths'];
         $templatePathAndFilename = '';
         foreach (array_reverse($partialRootPaths) as $partialRootPath) {
@@ -553,10 +568,23 @@ class YoutubeController extends ActionController
                 break;
             }
         }
-
-        $tempView->setTemplatePathAndFilename($templatePathAndFilename);
-        // Set layout and partial root paths
-        $tempView->assignMultiple((array) $variables);
+        $typo3Version = GeneralUtility::makeInstance(Typo3Version::class);
+        if ($typo3Version->getMajorVersion() >= 14) {
+            $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
+            $viewFactoryData = new \TYPO3\CMS\Core\View\ViewFactoryData(
+                templateRootPaths: $extbaseFrameworkConfiguration['view']['templateRootPaths'] ?? [],
+                partialRootPaths: $extbaseFrameworkConfiguration['view']['partialRootPaths'] ?? [],
+                layoutRootPaths: $extbaseFrameworkConfiguration['view']['layoutRootPaths'] ?? [],
+                request: $this->request,
+                templatePathAndFilename: $templatePathAndFilename
+            );
+            $tempView = $viewFactory->create($viewFactoryData);
+            $tempView->assignMultiple((array) $variables);
+        } else {
+            $tempView = GeneralUtility::makeInstance(StandaloneView::class);
+            $tempView->setTemplatePathAndFilename($templatePathAndFilename);
+            $tempView->assignMultiple((array) $variables);
+        }
         return $tempView->render();
     }
 }
