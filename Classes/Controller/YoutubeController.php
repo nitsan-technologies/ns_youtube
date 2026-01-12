@@ -12,22 +12,18 @@ namespace Nitsan\NsYoutube\Controller;
  *  (c) 2023
  *
  ***/
-use TYPO3\CMS\Core\Http\RequestFactory;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Http\RequestFactory;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Resource\FileRepository;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\View\ViewFactory;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Core\View\ViewFactoryInterface;
-
-use TYPO3\CMS\Core\View\ViewFactoryData;
-use TYPO3\CMS\Core\Information\Typo3Version;
-
-use TYPO3\CMS\Core\View\ViewFactory; 
-
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * YoutubeController
@@ -55,7 +51,7 @@ class YoutubeController extends ActionController
      */
     public string $link = '';
 
-        /**
+    /**
      * ViewFactory
      *
      * @var ViewFactoryInterface|null
@@ -209,11 +205,11 @@ class YoutubeController extends ActionController
         if (!empty($videoid) || isset($this->finalsrc)) {
             $ifram_src = '';
             $enableGdprFromSettings = $this->settings['enableGdpr'] ?? false;
-$enableGdprFromConstant = $constant['enableGdpr'] ?? false;
+            $enableGdprFromConstant = $constant['enableGdpr'] ?? false;
 
-if ($enableGdprFromSettings || $enableGdprFromConstant) {
-    $ifram_src = 'data-';
-}
+            if ($enableGdprFromSettings || $enableGdprFromConstant) {
+                $ifram_src = 'data-';
+            }
             $code1 = '<iframe id="_ytid_' . rand(10000, 99999) . '" ' . $ifram_src . 'src="https://www.'
                 . $youtubebaseurl . '.com/embed/' . $videoid . '?autoplay=' . $thumbplay . '&controls='
                 . $showcontrol . '&rel=' . $showrelatedvideo;
@@ -263,7 +259,7 @@ if ($enableGdprFromSettings || $enableGdprFromConstant) {
      */
     public function ajaxAction(): void
     {
-        if($this->request->hasArgument('settings')) {
+        if ($this->request->hasArgument('settings')) {
             $this->settings = $this->request->getArgument('settings');
         }
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
@@ -307,7 +303,7 @@ if ($enableGdprFromSettings || $enableGdprFromConstant) {
     public function getOptions(array $options): object
     {
         $opt = new \stdClass();
-        if (array_key_exists("list", $options)) {
+        if (array_key_exists('list', $options)) {
             $opt->playlistId = $options['list'] ?: '';
         }
         $opt->pageToken = null;
@@ -369,7 +365,7 @@ if ($enableGdprFromSettings || $enableGdprFromConstant) {
     {
         try {
             $channelId = '';
-            if (isset($this->settings['channeltype']) && $this->settings['channeltype'] == 'username' && isset($this->settings['channelname']) &&$this->settings['channelname'] != '') {
+            if (isset($this->settings['channeltype']) && $this->settings['channeltype'] == 'username' && isset($this->settings['channelname']) && $this->settings['channelname'] != '') {
                 $api = 'https://www.googleapis.com/youtube/v3/channels?part=snippet&forHandle='
                     . str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
                 $result = $this->connectAPI($api);
