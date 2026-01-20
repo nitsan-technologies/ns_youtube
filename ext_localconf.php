@@ -32,6 +32,6 @@ if ($versionNumber['version_main'] == '12') {
         [
             YoutubeController::class => 'list,ajax'
         ],
-        null
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 }

@@ -12,7 +12,7 @@ defined('TYPO3') or die();
 $version = VersionNumberUtility::convertVersionStringToArray(
     VersionNumberUtility::getCurrentTypo3Version()
 );
-if ($version['version_main'] < 14) {
+if ($version['version_main'] <= 13) {
     $pluginSignature = ExtensionUtility::registerPlugin(
         'NsYoutube',
         'Youtube',
@@ -23,57 +23,28 @@ if ($version['version_main'] < 14) {
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['nsyoutube_youtube'] = 'recursive,select_key,pages';
 
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['nsyoutube_youtube'] = 'pi_flexform';
+    if ($version['version_main'] == 12) {
     ExtensionManagementUtility::addPiFlexFormValue(
-        $pluginSignature,
-        'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml'
+    'nsyoutube_youtube',
+    'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml'
     );
-} else {
+    } else {
 
+    ExtensionManagementUtility::addPiFlexFormValue(
+        '*',
+        'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml',
+        'nsyoutube_youtube'
+    );
+    }
+} else {
     $pluginSignature = ExtensionUtility::registerPlugin(
         'NsYoutube',
         'Youtube',
         'Youtube',
         'ext-ns-youtube-icon',
-        'plugins'
+        'plugins',
+        '',
+        'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml'
     );
-
-    ExtensionManagementUtility::addToAllTCAtypes(
-        'tt_content',
-        'pi_flexform, pages',
-        $pluginSignature,
-        'after:pi_flexform',
-    );
-    $showitemWithPluginTab = '
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
-                --palette--;;general,
-                --palette--;;headers,
-            --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.plugin,
-                pi_flexform,
-            --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance,
-                --palette--;;frames,
-                --palette--;;appearanceLinks,
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
-                --palette--;;language,
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
-                --palette--;;hidden,
-                --palette--;;access,
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
-                categories,
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes,
-                rowDescription,
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,';
-    $extKey = 'ns_youtube';
-    // Configure Album type
-    $GLOBALS['TCA']['tt_content']['types'][$pluginSignature] = [
-        'showitem' => $showitemWithPluginTab,
-        'columnsOverrides' => [
-            'pi_flexform' => [
-                'config' => [
-                    'ds' => 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/FlexForm.xml',
-                ],
-            ],
-        ],
-    ];
-
 }

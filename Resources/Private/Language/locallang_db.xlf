@@ -247,6 +247,9 @@
 			<trans-unit id="settings.activeAllButtonText" xml:space="preserve">
 				<source>ActiveAll Button Text</source>
 			</trans-unit>
+			<trans-unit id="ns_youtube.apiSettings.applicationApi" resname="ns_youtube.apiSettings.applicationApi">
+				<source>API URL</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
