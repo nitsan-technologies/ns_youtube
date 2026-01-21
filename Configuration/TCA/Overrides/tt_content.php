@@ -1,7 +1,6 @@
 <?php
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die();
@@ -9,10 +8,6 @@ defined('TYPO3') or die();
 /***************
  * Plugin
  */
-$version = VersionNumberUtility::convertVersionStringToArray(
-    VersionNumberUtility::getCurrentTypo3Version()
-);
-if ($version['version_main'] <= 13) {
     $pluginSignature = ExtensionUtility::registerPlugin(
         'NsYoutube',
         'Youtube',
@@ -33,14 +28,5 @@ if ($version['version_main'] <= 13) {
         'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml',
         'nsyoutube_youtube'
     );
-} else {
-    $pluginSignature = ExtensionUtility::registerPlugin(
-        'NsYoutube',
-        'Youtube',
-        'Youtube',
-        'ext-ns-youtube-icon',
-        'plugins',
-        '',
-        'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml'
-    );
-}
+ 
+
