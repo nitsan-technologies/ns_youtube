@@ -21,22 +21,18 @@ if ($version['version_main'] <= 13) {
         'plugins'
     );
 
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['nsyoutube_youtube'] = 'recursive,select_key,pages';
-
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['nsyoutube_youtube'] = 'pi_flexform';
-    if ($version['version_main'] == 12) {
-    ExtensionManagementUtility::addPiFlexFormValue(
-    'nsyoutube_youtube',
-    'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml'
+    ExtensionManagementUtility::addToAllTCAtypes(
+        'tt_content',
+        '--div--;plugin,pi_flexform,',
+        $pluginSignature,
+        'after:subheader',
     );
-    } else {
 
     ExtensionManagementUtility::addPiFlexFormValue(
         '*',
         'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml',
         'nsyoutube_youtube'
     );
-    }
 } else {
     $pluginSignature = ExtensionUtility::registerPlugin(
         'NsYoutube',

@@ -9,8 +9,7 @@ mod {
                             title = LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:tx_ns_youtube_domain_model_youtube
                             description = LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:tx_ns_youtube_domain_model_youtube.description
                             tt_content_defValues {
-                                CType = list
-                                list_type = nsyoutube_youtube
+                                CType = nsyoutube_youtube
                             }
                         }
                     }
