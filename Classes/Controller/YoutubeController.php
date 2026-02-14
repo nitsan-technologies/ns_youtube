@@ -345,7 +345,7 @@ class YoutubeController extends ActionController
         $options->playlistId = isset($options->playlistId) ? $options->playlistId : 0;
         $options->pageSize = isset($options->pageSize) ? $options->pageSize : 0;
         // $apiEndpoint = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,status&playlistId='
-        $apiEndpoint = self::getApiUrl()  . 'playlistItems?part=snippet,status&playlistId='
+        $apiEndpoint = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,status&playlistId='
             . $options->playlistId . '&maxResults=' . $options->pageSize . '&key=' . $options->apiKey;
         if ($options->pageToken != null) {
             $apiEndpoint .= '&pageToken=' . $options->pageToken;
@@ -373,10 +373,8 @@ class YoutubeController extends ActionController
         try {
             $channelId = '';
             if (isset($this->settings['channeltype']) && $this->settings['channeltype'] == 'username' && isset($this->settings['channelname']) && $this->settings['channelname'] != '') {
-                $api = self::getApiUrl() . 'channels?part=snippet&forHandle='
-
+                $api = 'https://www.googleapis.com/youtube/v3/channels?part=snippet&forHandle='
                     . str_replace(' ', '', $this->settings['channelname']) . '&key=' . $this->settings['apiKey'];
-                // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($api,__FILE__.''.__LINE__);die;
                 $result = $this->connectAPI($api);
                 $jsonresult = json_decode($result->getBody());
                 if (isset($jsonresult->items)) {
@@ -388,7 +386,7 @@ class YoutubeController extends ActionController
                 $channelId = $this->settings['channelid'];
             }
             if ($channelId != null) {
-                $apiEndpoint = self::getApiUrl()  . 'search?part=snippet,id&type=video&order=date&channelId='
+                $apiEndpoint = 'https://www.googleapis.com/youtube/v3/search?part=snippet,id&type=video&order=date&channelId='
                     . $channelId . '&maxResults=' . $options->pageSize . '&key=' . $this->settings['apiKey'];
             } else {
                 $this->addFlashMessage(
@@ -513,7 +511,7 @@ class YoutubeController extends ActionController
     public function getPlaylistId(string $channelId): string
     {
         $playlistId = '';
-        $apiEndpoint = self::getApiUrl() . 'channels?part=contentDetails&key=' .
+        $apiEndpoint = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&key=' .
             $this->settings['apiKey'] . '&id=' . $channelId;
 
         $apiResult = $this->connectAPI($apiEndpoint);
@@ -586,6 +584,7 @@ class YoutubeController extends ActionController
             $tempView = $viewFactory->create($viewFactoryData);
             $tempView->assignMultiple((array) $variables);
         } else {
+            // @extensionScannerIgnoreLine
             $tempView = GeneralUtility::makeInstance(StandaloneView::class);
             $tempView->setTemplatePathAndFilename($templatePathAndFilename);
             $tempView->assignMultiple((array) $variables);

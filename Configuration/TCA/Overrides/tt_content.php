@@ -23,6 +23,7 @@ defined('TYPO3') or die();
         'after:subheader',
     );
 
+    // @extensionScannerIgnoreLine
     ExtensionManagementUtility::addPiFlexFormValue(
         '*',
         'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml',
