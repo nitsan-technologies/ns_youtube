@@ -4,7 +4,7 @@
 		<header/>
 		<body>
 			<trans-unit id="add_api_key">
-				<source>Please add YouTube API key from Google at constant.</source>
+				<source>Please add YouTube API key from Google at Constant and Site Sets.</source>
 			</trans-unit>
 			<trans-unit id="add_user_name">
 				<source>Username is incorrect.</source>
