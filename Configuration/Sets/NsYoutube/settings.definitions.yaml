@@ -80,6 +80,12 @@ settings:
     type: color
     default: '#cfcfcf'
 
+  ns_youtube.configuration.buttonText:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonText
+    category: ns_youtube.configuration
+    type: string
+    default: 'Active'
+
   ns_youtube.configuration.activeAllButtonText:
     label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.activeAllButtonText
     category: ns_youtube.configuration

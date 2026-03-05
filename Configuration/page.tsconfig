@@ -19,5 +19,7 @@ mod {
         }
     }
 }
-mod.web_layout.tt_content.preview.list.nsyoutube_youtube = EXT:ns_youtube/Resources/Private/Backend/Backendpreview/Youtube.html
 mod.web_layout.tt_content.preview.nsyoutube_youtube = EXT:ns_youtube/Resources/Private/Backend/Backendpreview/Youtube.html
+[typo3.branch >= "14.0"]
+    mod.web_layout.tt_content.preview.nsyoutube_youtube = EXT:ns_youtube/Resources/Private/Backend/Backendpreview/Youtubev14.html
+[end]
