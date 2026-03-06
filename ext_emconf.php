@@ -13,17 +13,17 @@
 $EM_CONF['ns_youtube'] = [
     'title' => 'TYPO3 YouTube Integration',
     'description' => 'Seamlessly embed and manage YouTube videos, playlists, and channels in your TYPO3 website. Includes support for live streaming and full YouTube feature integration — without redirecting users to YouTube.',
-    
+
     'category' => 'plugin',
     'author' => 'Team T3Planet',
     'author_email' => 'info@t3planet.de',
     'author_company' => 'T3Planet',
     'state' => 'stable',
     'uploadfolder' => true,
-    'version' => '13.0.1',
+    'version' => '14.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.0.0-13.9.99',
+            'typo3' => '12.0.0-14.9.99',
         ],
         'conflicts' => [],
         'suggests' => [],

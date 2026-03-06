@@ -8,18 +8,26 @@ defined('TYPO3') or die();
 /***************
  * Plugin
  */
-$pluginSignature = ExtensionUtility::registerPlugin(
-    'NsYoutube',
-    'Youtube',
-    'Youtube',
-    'ext-ns-youtube-icon',
-    'plugins'
-);
+    $pluginSignature = ExtensionUtility::registerPlugin(
+        'NsYoutube',
+        'Youtube',
+        'Youtube',
+        'ext-ns-youtube-icon',
+        'plugins'
+    );
 
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['nsyoutube_youtube'] = 'recursive,select_key,pages';
+    ExtensionManagementUtility::addToAllTCAtypes(
+        'tt_content',
+        '--div--;plugin,pi_flexform,',
+        $pluginSignature,
+        'after:subheader',
+    );
 
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-ExtensionManagementUtility::addPiFlexFormValue(
-    $pluginSignature,
-    'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml'
-);
+    // @extensionScannerIgnoreLine
+    ExtensionManagementUtility::addPiFlexFormValue(
+        '*',
+        'FILE:EXT:ns_youtube/Configuration/FlexForms/FlexForm.xml',
+        'nsyoutube_youtube'
+    );
+ 
+

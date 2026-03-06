@@ -1,0 +1,33 @@
+@import 'EXT:ns_youtube/Configuration/TypoScript/setup.typoscript'
+plugin.tx_nsyoutube {
+    view {
+        templateRootPaths {
+            0 = EXT:ns_youtube/Resources/Private/Templates/
+            10 = {$ns_youtube.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:ns_youtube/Resources/Private/Partials/
+            10 = {$ns_youtube.view.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:ns_youtube/Resources/Private/Layouts/
+            10 = {$ns_youtube.view.layoutRootPath}
+        }
+    }
+    settings {
+        javascript {
+            jquery = {$ns_youtube.configuration.jquery}
+        }
+        apiKey = {$ns_youtube.configuration.apiKey}
+        enableGdpr = {$ns_youtube.configuration.enableGdpr}
+        description = {$ns_youtube.configuration.description}
+        noticeColor = {$ns_youtube.configuration.noticeColor}
+        bgImage = {$ns_youtube.configuration.bgImage}
+        bgColor = {$ns_youtube.configuration.bgColor}
+        buttonText = {$ns_youtube.configuration.buttonText}
+        activeAllButtonText = {$ns_youtube.configuration.activeAllButtonText}
+        buttonTextColor = {$ns_youtube.configuration.buttonTextColor}
+        buttonColor = {$ns_youtube.configuration.buttonColor}
+    }
+}
+page.includeJSLibs.nsfjquery.if.isTrue = {$ns_youtube.configuration.jquery}

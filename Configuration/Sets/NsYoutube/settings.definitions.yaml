@@ -1,0 +1,105 @@
+categories:
+  ns_youtube:
+    label: YouTube
+
+  ns_youtube.view:
+    label: View Settings
+    parent: ns_youtube
+
+  ns_youtube.configuration:
+    label: Main Configuration
+    parent: ns_youtube
+
+settings:
+
+  ##################################################
+  # View
+  ##################################################
+
+  ns_youtube.view.templateRootPath:
+    label: Template Root Path
+    category: ns_youtube.view
+    type: string
+    default: 'EXT:ns_youtube/Resources/Private/Templates/'
+
+  ns_youtube.view.partialRootPath:
+    label: Partial Root Path
+    category: ns_youtube.view
+    type: string
+    default: 'EXT:ns_youtube/Resources/Private/Partials/'
+
+  ns_youtube.view.layoutRootPath:
+    label: Layout Root Path
+    category: ns_youtube.view
+    type: string
+    default: 'EXT:ns_youtube/Resources/Private/Layouts/'
+
+  ##################################################
+  # Main COnfiguration
+  ##################################################
+
+  ns_youtube.configuration.jquery:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.jquery
+    category: ns_youtube.configuration
+    type: bool
+    default: false
+
+  ns_youtube.configuration.enableGdpr:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.enableGdpr
+    category: ns_youtube.configuration
+    type: bool
+    default: false  
+
+  ns_youtube.configuration.apiKey:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.api_key
+    category: ns_youtube.configuration
+    type: string
+    default: ''
+
+  ns_youtube.configuration.description:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeDescription
+    category: ns_youtube.configuration
+    type: string
+    default: "We've embedded content from YouTube here. As YouTube may collect personal data and track your viewing behaviour, we'll only load the video after you consent to their use of cookies and similar technologies as described in their privacy policy."
+
+  ns_youtube.configuration.noticeColor:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.noticeColor
+    category: ns_youtube.configuration
+    type: color
+    default: '#000000'
+
+  ns_youtube.configuration.bgImage:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgImage
+    category: ns_youtube.configuration
+    type: string
+    default: ''
+
+  ns_youtube.configuration.bgColor:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.bgColor
+    category: ns_youtube.configuration
+    type: color
+    default: '#cfcfcf'
+
+  ns_youtube.configuration.buttonText:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonText
+    category: ns_youtube.configuration
+    type: string
+    default: 'Active'
+
+  ns_youtube.configuration.activeAllButtonText:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.activeAllButtonText
+    category: ns_youtube.configuration
+    type: string
+    default: 'Active All'
+
+  ns_youtube.configuration.buttonTextColor:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonTextColor
+    category: ns_youtube.configuration
+    type: color
+    default: '#ffffff'
+
+  ns_youtube.configuration.buttonColor:
+    label: LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonColor
+    category: ns_youtube.configuration
+    type: color
+    default: '#333030'

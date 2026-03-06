@@ -204,7 +204,7 @@
 									</numIndex>
 								</foreign_types>
 								<foreign_match_fields type="array">
-									<fieldname>image</fieldname>
+									<fieldname>youtubeImage</fieldname>
 								</foreign_match_fields>
 								<appearance type="array">
 									<newRecordLinkAddTitle>1</newRecordLinkAddTitle>
@@ -638,7 +638,7 @@
 									</numIndex>
 								</foreign_types>
 								<foreign_match_fields type="array">
-									<fieldname>image</fieldname>
+									<fieldname>backImage</fieldname>
 								</foreign_match_fields>
 								<appearance type="array">
 									<newRecordLinkAddTitle>1</newRecordLinkAddTitle>

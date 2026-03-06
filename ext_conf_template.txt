@@ -1,0 +1,5 @@
+# API Configuration
+###########################
+
+# cat=Api Settings; type=text; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:ns_youtube.apiSettings.applicationApi
+apiUrl = https://www.googleapis.com/youtube/v3/

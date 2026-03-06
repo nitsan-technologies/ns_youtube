@@ -1,6 +1,6 @@
 ############################
 ### CUSTOM SUBCATEGORIES ###
-###########################
+############################
 # customsubcategory=100=Main Configuration
 # customsubcategory=110=Gallery Cofiguration
 
@@ -51,5 +51,4 @@ plugin.tx_nsyoutube {
         # cat=plugin.tx_nsyoutube/100/9; type=color; label=LLL:EXT:ns_youtube/Resources/Private/Language/locallang_db.xlf:settings.buttonColor
         buttonColor = #333030
     }
-
 }
