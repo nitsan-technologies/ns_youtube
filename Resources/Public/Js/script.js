@@ -40,16 +40,23 @@
                 initSrc = $iframe.data('ep-src');
             }
 
-            // var firstId = $(this).find('.yt-gallery-list .yt-gallery-thumb').first().data('videoid');
-            var src = initSrc.match(/[^/]*$/)[0];
-            var firstId = src.split('?')[0];
+            // Skip player wiring when this CE has no embed src (e.g. validation error CE
+            // earlier on the page). Still bind paging below so later galleries work.
+            if (initSrc && $iframe.length) {
+                // var firstId = $(this).find('.yt-gallery-list .yt-gallery-thumb').first().data('videoid');
+                var src = initSrc.match(/[^/]*$/)[0];
+                var firstId = src.split('?')[0];
 
-            initSrc = initSrc.replace(firstId, 'GALLERYVIDEOID');
-            $iframe.data('ep-gallerysrc', initSrc);
+                initSrc = initSrc.replace(firstId, 'GALLERYVIDEOID');
+                $iframe.data('ep-gallerysrc', initSrc);
+            }
 
             var $listgallery = $container.find('.yt-gallery-list');
 
             $container.on('click', '.yt-gallery-list .yt-gallery-thumb', function() {
+                if (!$iframe.length || !$iframe.data('ep-gallerysrc')) {
+                    return;
+                }
                 $container.find('.yt-gallery-list .yt-gallery-allthumbs .yt-gallery-thumb').removeClass('yt-current-video');
                 $(this).addClass('yt-current-video');
                 var vid = $(this).data('videoid');
@@ -91,27 +98,24 @@
             });
 
              $container.on('click', '.yt-pagebutton', function () {
+                if ($container.data('yt-paging')) {
+                    return;
+                }
                 var forward = $(this).hasClass('yt-next');
                 var currpage = parseInt($container.data('currpage') + "");
                 currpage += forward ? 1 : -1;
                 $container.data('currpage', currpage);
+                $container.data('yt-paging', true);
                 $container.find('.yt-gallery-list').addClass('yt-loading');
-                $container.find('.yt-next').click(false);
-                $container.find('.yt-prev').click(false);
-                
-                var ajaxURL = $('.ajaxURL').val();
-                var dataString = 'playlistId='+$(this).data('playlistid')
-                +'&pageToken='+$(this).data('pagetoken')
-                +'&pageSize='+$(this).data('pagesize')
-                +'&columns='+$(this).data('columns')
-                +'&showTitle='+$(this).data('showtitle')
-                +'&showPaging='+$(this).data('showpaging')
-                +'&thumbplay='+$(this).data('thumbplay');
+
+                var ajaxURL = $container.find('.ajaxURL').val() || $container.find('input.ajaxURL').val();
+                var dataString = 'pageToken=' + encodeURIComponent($(this).data('pagetoken') || '');
                 $.ajax({
                     type: "POST",
                     url: ajaxURL,
                     data: dataString,
                     contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
                     success: function(response){
                         $container.find('.yt-gallery-list').html(response);
                         $container.find('.yt-current').each(function () {
@@ -125,6 +129,7 @@
                         }
                     },
                     complete: function(){
+                        $container.data('yt-paging', false);
                         $container.find('.yt-gallery-list').removeClass('yt-loading');
                         $('html, body').animate({
                             scrollTop: $container.find('.yt-gallery-list').offset().top
