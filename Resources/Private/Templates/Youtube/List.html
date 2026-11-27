@@ -60,7 +60,7 @@
 									</div>
 								</f:else>
 							</f:if>
-							<input type="hidden" value="{f:uri.action(action: 'ajax', controller: 'Youtube', arguments: {settings: settings})}" class="ajaxURL" />
+							<input type="hidden" value="{f:uri.action(action: 'ajax', controller: 'Youtube', arguments: {contentUid: contentUid})}" class="ajaxURL" />
 						</f:then>
 						<f:else>
 							<f:if condition="{iframe}">
